@@ -6,6 +6,7 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -21,6 +22,19 @@ export default {
         blueMiddle: "var(--blueMiddle)",
         fontButton: "var(--fontButton)",
         card: "var(--card)",
+
+        backgroundDark: "var(--backgroundDark)",
+        fontGreyDark: "var(--fontGreyDark)",
+        fontTextDark: "var(--fontTextDark)",
+        fontTitleDark: "var(--fontTitleDark)",
+        buttonActivatedDark: "var(--buttonActivatedDark)",
+        buttonActivatedHoverDark: "var(--buttonActivatedHoverDark)",
+        buttonDesabledDark: "var(--buttonDesabledDark)",
+        backgroundCardDark: "var(--backgroundCardDark)",
+        blueLightDark: "var(--blueLightDark)",
+        blueMiddleDark: "var(--blueMiddleDark)",
+        fontButtonDark: "var(--fontButtonDark)",
+        cardDark: "var(--cardDark)",
       },
     },
   },
