@@ -26,11 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background dark:bg-backgroundDark overflow-x-hidden`}
       >
-        <Menu op1="aaa" op2="bbb" op3="ccc"></Menu>
+        <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
         {children}
       </body>
     </html>
