@@ -27,7 +27,7 @@ export default function Login() {
                     <input type="text" name="senha" className="w-full h-8 border" value={senha} onChange={(event) => {setSenha(event.target.value)}} />
                 </div>
                 <button className="bg-sky-600 p-2 w-32 text-white rounded-md" onClick={() => {Logar()}}>Entrar</button>
-                <Link href={ROUTES.cadastrarUser}> Criar conta</Link>
+                <Link href={ROUTES.cadastrar}> Criar conta</Link>
             </div>
         
         </>

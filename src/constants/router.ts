@@ -1,5 +1,10 @@
 export enum ROUTES {
-    login =  "/",
-    cadastrarUser = "/cadastro",
-    home = "/home"
+    login = "/",
+    home = "/home",
+    cadastrar = "/cadastar",
+    forum = "/forum",
+    discosion = "/discussoes",
+    project = "/project",
+    profile = "/profile",
+    
 }
