@@ -3,9 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ROUTES } from "@/app/constants/routes";
+import { ROUTES } from "@/constants/routes";
 import logoETS from "../../public/logoETS.png";
 import pessoa from "../../public/pessoa.jpeg";
+import coloridinho from "../../public/coloridinho.jpg";
 
 interface IMenu {
     op1: string;
@@ -164,7 +165,8 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
                     </div>
                 )}
             </nav>
-            <div className="h-16"></div>
+            <div className="h-14 mb-1"></div>
+            <Image src={coloridinho} alt="logo" className="w-full h-2 fixed"/>
         </>
     );
 };
