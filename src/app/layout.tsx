@@ -30,7 +30,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background dark:bg-backgroundDark overflow-x-hidden`}
       >
-        <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
         {children}
       </body>
     </html>
