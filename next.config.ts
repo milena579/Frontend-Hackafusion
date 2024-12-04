@@ -4,16 +4,16 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
         {
-            source: "/",
-            destination: "/login",
+          source: "/",
+          destination: "/login",
         },
         {
           source: "/home",
           destination: "/home",
         },
         {
-          source: "/register",
-          destination: "/register"
+          source: "/cadastro",
+          destination: "/cadastro"
         },
         {
           source: "/forum",
