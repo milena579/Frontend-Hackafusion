@@ -10,7 +10,17 @@ export default {
     extend: {
       colors: {
         background: "var(--background)",
-        foreground: "var(--foreground)",
+        fontGrey: "var(--fontGrey)",
+        fontText: "var(--fontText)",
+        fontTitle: "var(--fontTitle)",
+        buttonActivated: "var(--buttonActivated)",
+        buttonActivatedHover: "var(--buttonActivatedHover)",
+        buttonDesabled: "var(--buttonDesabled)",
+        backgroundCard: "var(--backgroundCard)",
+        blueLight: "var(--blueLight)",
+        blueMiddle: "var(--blueMiddle)",
+        fontButton: "var(--fontButton)",
+        card: "var(--card)",
       },
     },
   },

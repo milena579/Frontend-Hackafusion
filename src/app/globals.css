@@ -4,17 +4,37 @@
 
 :root {
   --background: #ffffff;
-
+  --fontGrey: #6C7070;
+  --fontTitle: #000000;
+  --fontText: #000000;
+  --buttonActivated: #007BC0;
+  --buttonActivatedHover: #04649c;
+  --buttonDesabled: #6C7070;
+  --backgroundCard: #EBF3F9;
+  --blueLight: #CEE7FF;
+  --blueMiddle: #8CC8FF;
+  --fontButton: #FFFFFF;
+  --card: #ffffff;
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #2F2F2F;
+    --fontGrey: #D9D9D9;
+    --fontTitle: #ffffff;
+    --fontText: #ffffff;
+    --buttonActivated: #004972;
+    --buttonActivatedHover: #013757;
+    --buttonDesabled: #6C7070;
+    --backgroundCard: #4B6F8A;
+    --blueLight: #386794;
+    --blueMiddle: #11416F;
+    --fontButton: #ffffff;
+    --card: #555555;
   }
 }
 
-body {
+/* body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
