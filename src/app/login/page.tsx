@@ -11,7 +11,6 @@ export default function Login() {
     const [senha, setSenha] =  useState<string>("")
 
     const Logar = async () => {
-
     }
 
     return(
@@ -29,7 +28,7 @@ export default function Login() {
                         <label htmlFor="senha">Senha:</label>
                         <input type="password" name="senha" className="w-full h-8 border p-2" value={senha} onChange={(event) => {setSenha(event.target.value)}} />
                     </div>
-                    <button className="bg-sky-600 p-2 w-32 text-white rounded-md" onClick={() => {Logar()}}>Entrar</button>
+                    <button className="bg-sky-600 p-2 w-32 text-white rounded-md" onClick={() => {Logar()}}> <Link href={ROUTES.forum}>Entrar</Link></button>
                     <Link href={ROUTES.cadastrar}> Criar conta</Link>
                 </div>
             </div>
