@@ -1,4 +1,4 @@
-import { CardForum } from "@/components/cardForum";
+import { Card } from "@/components/card";
 import { Menu } from "@/components/menu";
 import Image from "next/image";
 
@@ -17,26 +17,26 @@ export default function Forum() {
 
             <div className="flex items-center justify-center mt-10 flex-col">
                 <div className="flex w-4/6 flex-wrap gap-4 items-center justify-center">
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo aaaaa mt texto nss aaaa preciso de mais texto pra ver oq acontece mais texto mds quanto texto nss aaaa"></CardForum>
-                    <CardForum redirect="outraCoisa" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
-                    <CardForum redirect="java" cor="bg-blueMiddle" title="Card lindo"></CardForum>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo aaaaa mt texto nss aaaa preciso de mais texto pra ver oq acontece mais texto mds quanto texto nss aaaa"></Card>
+                    <Card redirect="/foruns/outraCoisa" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/outraCoisa2" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
+                    <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
                 </div>
                 <div className="flex gap-5 mt-8 absolute bottom-1/4">
                     <button className="bg-buttonDesabled py-1 px-5 w-28 cursor-default">
