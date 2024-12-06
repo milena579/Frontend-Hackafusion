@@ -6,13 +6,14 @@ import { ROUTES } from "@/constants/routes";
 
 
 interface ICard {
-    cor: string;
+    cor?: string;
     title: string;
     redirect: string; // Id do fórum
     width: string;
     height: string;
     description?: string;
     classTitle?: string;
+    category?: string
 }
 
 export const Card = ({ cor, title, redirect, width, height, description, classTitle } : ICard) => {
