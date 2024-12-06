@@ -7,7 +7,6 @@ import Link from "next/link";
 
 
 export default function Projeto(){
-
     return(
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
@@ -25,11 +24,11 @@ export default function Projeto(){
                         <Link href={ROUTES.project} className="border-b-2" >Projetos Públicos</Link>
                         <Link href={ROUTES.project}>Meus Projetos</Link>
                     </div>
-                    <Link href={ROUTES.novoProjeto}><button className="p-2 bg-emerald-400 rounded text-white" >Novo Projeto</button></Link>
+                    <Link href={ROUTES.novoProjeto}><button className="p-2 bg-emerald-400 rounded text-fontButton" >Novo Projeto</button></Link>
                     
                 </div>
                 <div className="flex flex-col w-full items-center px-14">
-                    <CardProjeto nome="Java" categoria="java"></CardProjeto>
+                    <CardProjeto nome="Projeto site" categoria="java" redirect={`/project/java/Projeto site`}></CardProjeto>
                 </div>
                         
             </div>

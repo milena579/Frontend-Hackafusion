@@ -67,7 +67,7 @@ export default function novoProjeto(){
                 </div>
 
                 <div className="flex justify-around w-full">
-                    <Link href={ROUTES.project}><button className="bg-slate-500 p-2 rounded w-32 text-fontButton">Voltar</button></Link>
+                    <Link href={ROUTES.project}><button className="bg-buttonDesabled p-2 rounded w-32 text-fontButton">Voltar</button></Link>
                     <button className="bg-buttonActivated p-2 w-32 rounded text-fontButton" onClick={() => {CriarProjeto()}}>Criar Projeto</button>
                 </div>
             </div>

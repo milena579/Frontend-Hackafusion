@@ -16,7 +16,7 @@ export default function Login() {
     return(
         <>  
             <div className="bg-cover bg-center flex h-screen items-center justify-center" style={{backgroundImage: "url('/fundo-colorido.png')"}}>
-                <div className="flex flex-col items-center bg-white h-[550px] w-[430px] justify-around p-14 text-black">
+                <div className="flex flex-col items-center bg-background h-[550px] w-[430px] justify-around p-14 text-fontText">
                     <div className="flex ">
                         <Image src={logo} alt="logo" width={200} height={30}></Image>
                     </div>
@@ -28,7 +28,7 @@ export default function Login() {
                         <label htmlFor="senha">Senha:</label>
                         <input type="password" name="senha" className="w-full h-8 border p-2" value={senha} onChange={(event) => {setSenha(event.target.value)}} />
                     </div>
-                    <button className="bg-sky-600 p-2 w-32 text-white rounded-md" onClick={() => {Logar()}}> <Link href={ROUTES.forum}>Entrar</Link></button>
+                    <button className="bg-buttonActivated p-2 w-32 text-fontButton rounded-md" onClick={() => {Logar()}}> <Link href={ROUTES.forum}>Entrar</Link></button>
                     <Link href={ROUTES.cadastrar}> Criar conta</Link>
                 </div>
             </div>
