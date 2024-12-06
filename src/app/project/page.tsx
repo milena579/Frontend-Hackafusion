@@ -29,8 +29,7 @@ export default function Projeto(){
                     
                 </div>
                 <div className="flex flex-col w-full items-center px-14">
-                    <CardProjeto nome="Java">
-                    </CardProjeto>
+                    <CardProjeto nome="Java" categoria="java"></CardProjeto>
                 </div>
                         
             </div>
