@@ -17,18 +17,28 @@ interface IMenu {
 
 export const Menu = ({ op1, op2, op3 }: IMenu) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isOpenSearch, setIsOpenSearch] = useState(false);
+    const [isOpenNotification, setIsOpenNotification] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
-    const modalNotification = () => {
-        alert("Modal de notificação")
-    }
+    const toggleSearch = () => {
+        setIsOpenSearch(!isOpen);
+    };
 
-    const modalSearch = () => {
-        alert("Modal de pesquisa")
-    }
+    const toggleNotification = () => {
+        setIsOpenNotification(!isOpen);
+    };
+
+    // const modalNotification = () => {
+    //     alert("Modal de notificação")
+    // }
+
+    // const modalSearch = () => {
+    //     alert("Modal de pesquisa")
+    // }
 
     return (
         <>
@@ -41,10 +51,10 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
                     <Link className="cursor-pointer hover:text-neutral-400 text-fontTitle text-lg dark:text-fontTitleDark" href={ROUTES.forum}>{op1}</Link>
                     <Link className="cursor-pointer hover:text-neutral-400 text-fontTitle text-lg dark:text-fontTitleDark" href={ROUTES.project}>{op2}</Link>
                     <Link className="cursor-pointer hover:text-neutral-400 text-fontTitle text-lg dark:text-fontTitleDark" href={ROUTES.discosion}>{op3}</Link>
-                    <button onClick={modalNotification}>
+                    <button onClick={toggleNotification}>
                         <svg className="w-8 text-fontTitle dark:text-fontTitleDark" viewBox="-0.96 -0.96 25.92 25.92" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M18.7491 9.70957V9.00497C18.7491 5.13623 15.7274 2 12 2C8.27256 2 5.25087 5.13623 5.25087 9.00497V9.70957C5.25087 10.5552 5.00972 11.3818 4.5578 12.0854L3.45036 13.8095C2.43882 15.3843 3.21105 17.5249 4.97036 18.0229C9.57274 19.3257 14.4273 19.3257 19.0296 18.0229C20.789 17.5249 21.5612 15.3843 20.5496 13.8095L19.4422 12.0854C18.9903 11.3818 18.7491 10.5552 18.7491 9.70957Z" stroke="currentColor" strokeWidth="1.5"></path> <path d="M7.5 19C8.15503 20.7478 9.92246 22 12 22C14.0775 22 15.845 20.7478 16.5 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"></path> </g></svg>
                     </button>
-                    <button onClick={modalSearch}>
+                    <button onClick={toggleSearch}>
                         <svg className="w-9 text-fontTitle dark:text-fontTitleDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
                     </button>
                     <Link href={ROUTES.profile} className="flex items-center gap-2">
@@ -93,7 +103,7 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
             <div className="h-14 mb-2"></div>
             <Image src={coloridinho} alt="logo" className="w-full h-1 fixed z-[51]"/>
 
-            <Modal title="">
+            <Modal title="" isOpen={true} onClose={() => {}}>
                 
             </Modal>
         </>
