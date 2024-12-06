@@ -1,4 +1,5 @@
 import { Card } from "@/components/card";
+import { ChatPrivate } from "@/components/chatPrivate";
 import { Menu } from "@/components/menu";
 import Image from "next/image";
 
@@ -38,7 +39,8 @@ export default function Forum() {
                     <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
                     <Card redirect="/foruns/java" width="72" height="65" cor="bg-blueMiddle" title="Card lindo"></Card>
                 </div>
-                <div className="flex gap-5 mt-8 absolute bottom-1/4">
+                {/* <div className="flex gap-5 mt-8 absolute bottom-1/4"> */}
+                <div className="flex gap-5 mt-8">
                     <button className="bg-buttonDesabled py-1 px-5 w-28 cursor-default">
                         <h2 className="text-fontButton">Voltar</h2>
                     </button>
@@ -48,6 +50,7 @@ export default function Forum() {
                 </div>
             </div>
         </div>
+        <ChatPrivate />
     </>
   );
 }

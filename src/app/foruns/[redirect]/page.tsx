@@ -33,7 +33,7 @@ const ForumId = async ({params: {id}} : IForum) => {
                         <h1>&gt;</h1>
                         {/* <h1>{name}</h1> */}
                         {/* <h1>{redirect}</h1> */}
-                        <h1>Java</h1>
+                        <h1>Nome do fórum</h1>
                 </div>
                 <div className="flex items-center">
                     <div className="flex gap-4 flex-col items-center">

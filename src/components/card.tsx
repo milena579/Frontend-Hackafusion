@@ -26,7 +26,7 @@ export const Card = ({ cor, title, redirect, width, height, description, classTi
                     <div className={`w-4  ${cor} rounded-sm`} style={{ minHeight: `${heightColor}px` }}></div>
                     <div>
                         <h1 className={`text-fontText dark:text-fontTextDark ${classTitle}`}>{title.length > 28 ? `${title.slice(0, 28)}...` : title}</h1>
-                        <p>{description != null && description.length > 140 ? `${description.slice(0, 140)}...` : description}</p>
+                        <p className="text-fontText dark:text-fontTextDark">{description != null && description.length > 140 ? `${description.slice(0, 140)}...` : description}</p>
                     </div>
                 </div>
             </Link>
