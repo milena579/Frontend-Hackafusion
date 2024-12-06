@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ROUTES } from "@/constants/router"
+import { ROUTES } from "@/constants/routes"
 
 interface ICardProjeto {
     nome: string

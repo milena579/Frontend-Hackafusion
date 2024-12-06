@@ -1,5 +1,5 @@
 "use client"
-import { ROUTES } from "@/constants/router"
+import { ROUTES } from "@/constants/routes"
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react";

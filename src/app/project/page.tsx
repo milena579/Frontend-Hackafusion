@@ -2,7 +2,7 @@
 
 import { Menu } from "@/components/menu";
 import { CardProjeto } from "@/components/cardProject";
-import { ROUTES } from "@/constants/router"
+import { ROUTES } from "@/constants/routes"
 import Link from "next/link";
 
 

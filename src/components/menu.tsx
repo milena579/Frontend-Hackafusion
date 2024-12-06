@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ROUTES } from "@/constants/router";
+import { ROUTES } from "@/constants/routes";
 import logoETS from "../../public/logoETS.png";
 import pessoa from "../../public/pessoa.jpeg";
 import coloridinho from "../../public/coloridinho.jpg";

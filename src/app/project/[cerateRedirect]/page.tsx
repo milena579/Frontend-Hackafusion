@@ -1,7 +1,9 @@
 "use client"
 
 import { Menu } from "@/components/menu"
+import Link from "next/link"
 import { useState } from "react"
+import { ROUTES } from "@/constants/routes"
 
 export default function novoProjeto(){
     
@@ -16,7 +18,6 @@ export default function novoProjeto(){
     }
     return(
         <>
-
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
 
             <div className="flex w-full flex-col items-center px-64 py-20 h-screen justify-start gap-20">
@@ -66,7 +67,7 @@ export default function novoProjeto(){
                 </div>
 
                 <div className="flex justify-around w-full">
-                    <button className="bg-slate-500 p-2 rounded w-32 text-fontButton">Voltar</button>
+                    <Link href={ROUTES.project}><button className="bg-slate-500 p-2 rounded w-32 text-fontButton">Voltar</button></Link>
                     <button className="bg-buttonActivated p-2 w-32 rounded text-fontButton" onClick={() => {CriarProjeto()}}>Criar Projeto</button>
                 </div>
             </div>

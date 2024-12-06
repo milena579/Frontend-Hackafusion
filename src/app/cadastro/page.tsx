@@ -1,6 +1,6 @@
 "use client"
 
-import { ROUTES } from "@/constants/router"
+import { ROUTES } from "@/constants/routes"
 
 import Image from "next/image"
 import Link from "next/link"
