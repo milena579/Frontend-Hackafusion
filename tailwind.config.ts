@@ -22,6 +22,10 @@ export default {
         blueMiddle: "var(--blueMiddle)",
         fontButton: "var(--fontButton)",
         card: "var(--card)",
+        purpleCard: "var(--purpleCard)",
+        pinkCard: "var(--pinkCard)",
+        greenCard: "var(--greenCard)",
+        greyOpacity: "var(--greyOpacity)",
 
         backgroundDark: "var(--backgroundDark)",
         fontGreyDark: "var(--fontGreyDark)",
@@ -35,6 +39,11 @@ export default {
         blueMiddleDark: "var(--blueMiddleDark)",
         fontButtonDark: "var(--fontButtonDark)",
         cardDark: "var(--cardDark)",
+        purpleCardDark: "var(--purpleCardDark)",
+        pinkCardDark: "var(--pinkCardDark)",
+        greenCardDark: "var(--greenCardDark)",
+        greyOpacityDark: "var(--greyOpacityDark)",
+
       },
     },
   },

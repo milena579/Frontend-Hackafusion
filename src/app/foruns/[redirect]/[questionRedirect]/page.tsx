@@ -1,6 +1,5 @@
 // "use client"
 
-import { Card } from "@/components/card"
 import { Menu } from "@/components/menu"
 import { ROUTES } from "@/constants/routes"
 import Link from "next/link"
@@ -8,6 +7,7 @@ import { useParams } from "next/navigation"
 import pessoa from "../../../../../public/pessoa.jpeg";
 import Image from "next/image"
 import { Answer } from "@/components/answer"
+import { ChatPrivate } from "@/components/chatPrivate"
 
 interface IForum {
     params: {
@@ -84,6 +84,7 @@ const ForumId = async ({params: {id}} : IForum) => {
                     </div>
                 </div>
             </div>
+            <ChatPrivate />
         </>
     )
 }

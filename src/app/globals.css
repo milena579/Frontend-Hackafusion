@@ -15,6 +15,10 @@
   --blueMiddle: #8CC8FF;
   --fontButton: #FFFFFF;
   --card: #ffffff;
+  --purpleCard: #6E368C;
+  --pinkCard: #cc5dc3;
+  --greenCard: #88BB70;
+  --greyOpacity: rgba(169,169,169,0.5);
 
   --backgroundDark: #2F2F2F;
   --fontGreyDark: #D9D9D9;
@@ -28,6 +32,11 @@
   --blueMiddleDark: #11416F;
   --fontButtonDark: #ffffff;
   --cardDark: #555555;
+  --purpleCardDark: #592277;
+  --pinkCardDark: #691562;
+  --greenCardDark: #508637;
+  --greyOpacityDark: rgba(117, 117, 117, 0.5);
+
 }
 
 /* @media (prefers-color-scheme: dark) {

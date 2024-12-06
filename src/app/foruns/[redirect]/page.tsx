@@ -1,6 +1,7 @@
 // "use client"
 
 import { Card } from "@/components/card"
+import { ChatPrivate } from "@/components/chatPrivate"
 import { Menu } from "@/components/menu"
 import { ROUTES } from "@/constants/routes"
 import Link from "next/link"
@@ -67,6 +68,8 @@ const ForumId = async ({params: {id}} : IForum) => {
                     </button>
                 </div>
             </div>
+            <ChatPrivate />
+
         </>
     )
 }

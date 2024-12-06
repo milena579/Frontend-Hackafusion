@@ -7,6 +7,7 @@ import { ROUTES } from "@/constants/routes";
 import logoETS from "../../public/logoETS.png";
 import pessoa from "../../public/pessoa.jpeg";
 import coloridinho from "../../public/coloridinho.jpg";
+import Modal from "./modal";
 
 interface IMenu {
     op1: string;
@@ -36,7 +37,7 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
                     <Image src={logoETS} alt="logo" width={50} height={30}/>
                     <h1 className="text-lg font-bold text-fontGrey dark:text-fontGreyDark md:flex hidden">Engineering Technical School</h1>
                 </Link>
-                <div className="hidden justify-around w-5/12 md:flex md:items-center">
+                <div className="hidden justify-around w-5/12 lg:flex md:items-center">
                     <Link className="cursor-pointer hover:text-neutral-400 text-fontTitle text-lg dark:text-fontTitleDark" href={ROUTES.forum}>{op1}</Link>
                     <Link className="cursor-pointer hover:text-neutral-400 text-fontTitle text-lg dark:text-fontTitleDark" href={ROUTES.project}>{op2}</Link>
                     <Link className="cursor-pointer hover:text-neutral-400 text-fontTitle text-lg dark:text-fontTitleDark" href={ROUTES.discosion}>{op3}</Link>
@@ -56,7 +57,7 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
                     </Link>
                 </div>
 
-                <div className="md:hidden">
+                <div className="lg:hidden">
                     <button onClick={toggleMenu} className="focus:outline-none text-fontTitle dark:text-fontTitleDark">
                         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -91,6 +92,10 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
             </nav>
             <div className="h-14 mb-2"></div>
             <Image src={coloridinho} alt="logo" className="w-full h-1 fixed z-[51]"/>
+
+            <Modal title="">
+                
+            </Modal>
         </>
     );
 };
