@@ -28,7 +28,7 @@ export default function Projeto(){
                     
                 </div>
                 <div className="flex flex-col w-full items-center px-14">
-                    <CardProjeto nome="Projeto site" categoria="java" redirect={`/project/java/Projeto site`}></CardProjeto>
+                    <CardProjeto nome="Projeto site" categoria="java" redirect={`/project/java/[verProjeto]Projeto site`}></CardProjeto>
                 </div>
                         
             </div>
