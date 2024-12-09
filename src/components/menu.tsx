@@ -8,6 +8,7 @@ import logoETS from "../../public/logoETS.png";
 import pessoa from "../../public/pessoa.jpeg";
 import coloridinho from "../../public/coloridinho.jpg";
 import Modal from "./modal";
+import { Card } from "./card";
 
 interface IMenu {
     op1: string;
@@ -25,11 +26,11 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
     };
 
     const toggleSearch = () => {
-        setIsOpenSearch(!isOpen);
+        setIsOpenSearch(!isOpenSearch);
     };
 
     const toggleNotification = () => {
-        setIsOpenNotification(!isOpen);
+        setIsOpenNotification(!isOpenNotification);
     };
 
     // const modalNotification = () => {
@@ -101,9 +102,51 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
                 )}
             </nav>
             <div className="h-14 mb-2"></div>
-            <Image src={coloridinho} alt="logo" className="w-full h-1 fixed z-[51]"/>
+            <Image src={coloridinho} alt="logo" className="w-full h-1 fixed z-50"/>
 
-            <Modal title="" isOpen={true} onClose={() => {}}>
+            {/* Modal do search */}
+            <Modal title="Pesquisa de usuário" isOpen={isOpenSearch} onClose={toggleSearch}>
+                <div className="flex items-center w-full justify-center flex-col">
+                    <div className="flex h-8 items-center w-full justify-center">
+                        <input type="text" placeholder="Pesquise um usuário" className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 h-9"/>
+                        <button>
+                            <svg className="w-9 text-fontGrey dark:text-fontGreyDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
+                        </button>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 items-center justify-center mt-3 overflow-auto h-[38rem] p-1">
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="50" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                    </div>
+                </div>
+            </Modal>
+
+            {/* Modal do notification */}
+            <Modal title="" isOpen={isOpenNotification} onClose={toggleNotification}>
                 
             </Modal>
         </>
