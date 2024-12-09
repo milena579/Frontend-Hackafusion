@@ -21,14 +21,14 @@ interface ICard {
 }
 
 export const Card = ({ cor, title, redirect, width, height, description, classTitle, image, classExtra } : ICard) => {
-    const heightColor = Number(height) - 1;
-    console.log(width)
+    const heightValue = parseInt(height); // Converte a altura para um número inteiro
+    const heightColor = heightValue - 1;
 
     return (
         <>
             <Link href={`${redirect}`}>
-                <div className={`${classExtra} bg-card dark:bg-cardDark rounded-md shadow-md flex items-center p-2 gap-4 min-h-${height} min-w-${width}`}>
-                    <div className={`w-4  ${cor} dark:${cor}Dark rounded-sm`} style={{ minHeight: `${heightColor}px` }}></div>
+                <div className={`${classExtra} bg-card dark:bg-cardDark rounded-md shadow-md flex items-center p-2 gap-4`} style={{width: `${width}`, minHeight: `${height}`, height: 'auto'}}>
+                    <div className={`w-4 ${cor} dark:${cor}Dark rounded-sm`} style={{ minHeight: `${heightColor}px`, height: `${heightColor}` }}></div>
                     {image != null && (
                         <Image src={pessoa} alt="logo" width={50} height={30} className="rounded-full"/>
                     )}

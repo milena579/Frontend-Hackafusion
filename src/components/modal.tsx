@@ -7,15 +7,16 @@ interface IModal {
     isOpen: boolean;
     children?: React.ReactNode;
     onClose: () => void;
+    height?: string
 }
 
-const Modal = ({ title, isOpen, children, onClose } : IModal) => {
+const Modal = ({ title, isOpen, children, onClose, height = "80%" } : IModal) => {
     if (!isOpen) return null;
 
     return (
         <>
             <div className='fixed inset-0 w-screen h-screen bg-black bg-opacity-75 z-50 flex flex-col items-center justify-center gap-4'>
-                <div className='flex flex-col fixed bg-background dark:bg-backgroundDark md:w-3/6 md:min-h-80 w-11/12 h-5/6 p-3 rounded-lg shadow'>
+                <div className='flex flex-col fixed bg-background dark:bg-backgroundDark md:w-3/6 md:min-h-64 w-11/12 p-3 rounded-lg shadow' style={{height: `${height}`}}>
                     <div className='flex flex-row items-center w-full justify-between'>
                         <h1 className='text-fontText dark:text-fontTextDark text-xl font-semibold mb-2'>{title}</h1>
                         <button onClick={onClose}>
