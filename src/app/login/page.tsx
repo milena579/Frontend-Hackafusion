@@ -9,8 +9,43 @@ import logo from "/public/ets.png"
 export default function Login() {
     const [edv, setEdv] =  useState<string>("")
     const [senha, setSenha] =  useState<string>("")
+    const [error,setError] = useState<boolean>(false)
+
 
     const Logar = async () => {
+
+        try{
+            const response =  await fetch ('http://localhost:8080/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    login: edv,
+                    password: senha
+                })
+            });
+
+            const result = await response.json();
+
+            if(response.status >= 400  && response.status < 500) {
+                setError(true)
+                setEdv("")
+                setSenha("")
+                alert(result.message);
+            } else{
+                sessionStorage.setItem("Token", "Bearer" +  result.token)
+                setError(false);
+                setEdv("")
+                setSenha("")
+
+                if(result.mes)
+            }
+        }
+
+        catch (erro){
+            setError(true)
+        }
     }
 
     return(
