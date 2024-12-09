@@ -1,37 +1,44 @@
+import { CardArquivo } from "@/components/cardArquivo";
 import { Menu } from "@/components/menu";
 import { ROUTES } from "@/constants/routes"
 import Link from "next/link";
-
+import { useState } from "react";
 
 
 export default function VerProjeto(){
+    const [showModal, setShowModal] = useState<boolean>(false);
+
+    function toggleModal() {
+        setShowModal(!showModal);
+    }
     return(
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
 
-            <div>
-                <div>
-                    <div>
+            <div className="flex px-16 items-center flex-col gap-4 justify-center h-screen px-28 py-14">
+                <div className="w-[90%] flex justify-between ">
+                    <div className="text-lg">
                         <h1>Projetos - Iot</h1>
                     </div>
-                    <div>
-                        <Link href={ROUTES.feedback}> <button>Feedback</button> </Link>
+                    <div className="">
+                        <Link href={ROUTES.project}> <button className="bg-buttonActivated p-2 rounded text-fontButtonDark"  onClick={toggleModal} >Feedback</button> </Link>
                     </div>
                 </div>
-                <div>
-                    <h1>Iot</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur accusamus eum corrupti aliquam error quis fugit, voluptate unde praesentium totam, deleniti amet tempora quae accusantium soluta maiores nesciunt sit? Cupiditate!</p>
+                <div className="w-[90%] gap-4 h-auto flex flex-col flex-wrap">
+                    <h1 className="text-3xl">Iot</h1>
+                    <p className="text-xl w-[85%]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur accusamus eum corrupti aliquam error quis fugit, voluptate unde praesentium totam, deleniti amet tempora quae accusantium soluta maiores nesciunt sit? Cupiditate!</p>
                 </div>
 
-                <div>
-                    <h1>Arquivos</h1>
-                    <div>
-                        <div>Item</div>
+                <div className="flex flex-col w-[90%] gap-4 h-full">
+                    <h1 className="text-xl w-[85%]">Arquivos</h1>
+                    <div className="flex gap-2 flex-row flex-wrap h-[50%] w-full">
+                        <CardArquivo></CardArquivo>
+                    </div>
+                    <div className="">
+                        <button className="bg-buttonActivated p-2 rounded text-fontButtonDark">Ir para o projeto</button>   
                     </div>
                 </div>
-                <button>Ir para o projeto</button>
             </div>
-
         </>
     )
 }
