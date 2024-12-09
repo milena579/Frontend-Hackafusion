@@ -1,3 +1,4 @@
+"use client"
 import { CardArquivo } from "@/components/cardArquivo";
 import { Menu } from "@/components/menu";
 import { ROUTES } from "@/constants/routes"
@@ -15,7 +16,7 @@ export default function VerProjeto(){
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
 
-            <div className="flex px-16 items-center flex-col gap-4 justify-center h-screen px-28 py-14">
+            <div className="flex items-center flex-col gap-4 justify-center h-screen px-28 py-14">
                 <div className="w-[90%] flex justify-between ">
                     <div className="text-lg">
                         <h1>Projetos - Iot</h1>

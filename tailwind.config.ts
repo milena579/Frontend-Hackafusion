@@ -26,6 +26,8 @@ export default {
         pinkCard: "var(--pinkCard)",
         greenCard: "var(--greenCard)",
         greyOpacity: "var(--greyOpacity)",
+        buttonRed: "var(--buttonRed)",
+        buttonRedHover: "var(--buttonRedHover)",
 
         backgroundDark: "var(--backgroundDark)",
         fontGreyDark: "var(--fontGreyDark)",
@@ -43,6 +45,8 @@ export default {
         pinkCardDark: "var(--pinkCardDark)",
         greenCardDark: "var(--greenCardDark)",
         greyOpacityDark: "var(--greyOpacityDark)",
+        buttonRedDark: "var(--buttonRedDark)",
+
 
       },
     },

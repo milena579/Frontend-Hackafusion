@@ -17,16 +17,17 @@ interface ICard {
     description?: string;
     classTitle?: string;
     image?: string;
+    classExtra?: string;
 }
 
-export const Card = ({ cor, title, redirect, width, height, description, classTitle, image } : ICard) => {
+export const Card = ({ cor, title, redirect, width, height, description, classTitle, image, classExtra } : ICard) => {
     const heightColor = Number(height) - 1;
     console.log(width)
 
     return (
         <>
             <Link href={`${redirect}`}>
-                <div className={`bg-card dark:bg-cardDark rounded-md shadow-md flex items-center p-2 gap-4 min-h-${height} w-${width}`}>
+                <div className={`${classExtra} bg-card dark:bg-cardDark rounded-md shadow-md flex items-center p-2 gap-4 min-h-${height} min-w-${width}`}>
                     <div className={`w-4  ${cor} dark:${cor}Dark rounded-sm`} style={{ minHeight: `${heightColor}px` }}></div>
                     {image != null && (
                         <Image src={pessoa} alt="logo" width={50} height={30} className="rounded-full"/>

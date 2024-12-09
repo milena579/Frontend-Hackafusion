@@ -33,14 +33,6 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
         setIsOpenNotification(!isOpenNotification);
     };
 
-    // const modalNotification = () => {
-    //     alert("Modal de notificação")
-    // }
-
-    // const modalSearch = () => {
-    //     alert("Modal de pesquisa")
-    // }
-
     return (
         <>
             <nav className="text-fontTitle z-50 shadow-xl bg-background flex items-center justify-between w-full p-2 px-8 fixed dark:bg-backgroundDark">
@@ -147,43 +139,43 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
 
             {/* Modal do notification */}
             <Modal title="Notificações" isOpen={isOpenNotification} onClose={toggleNotification}>
-                <div className="flex gap-2 flex-wrap overflow-auto h-[43rem] justify-center items-center p-1 w-full">
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
-                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="[500px]" height="65" image="" classTitle="font-semibold"></Card>
+                <div className="flex gap-2 flex-grow flex-col overflow-auto h-[43rem] justify-center items-center p-1 w-full">
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
+                    <Card title="Latonildo de Monster" description="curtiu o seu comentário" redirect="#" width="full" height="65" image="" classTitle="font-semibold" classExtra="basis-full"></Card>
                 </div>
             </Modal>
         </>

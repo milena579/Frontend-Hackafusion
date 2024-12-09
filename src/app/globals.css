@@ -19,6 +19,8 @@
   --pinkCard: #cc5dc3;
   --greenCard: #88BB70;
   --greyOpacity: rgba(169,169,169,0.5);
+  --buttonRed: #b90c0c;
+  --buttonRedHover: #3a0000;
 
   --backgroundDark: #2F2F2F;
   --fontGreyDark: #D9D9D9;
@@ -36,6 +38,7 @@
   --pinkCardDark: #691562;
   --greenCardDark: #508637;
   --greyOpacityDark: rgba(117, 117, 117, 0.5);
+  --buttonRedDark: #6e0101;
 
 }
 
