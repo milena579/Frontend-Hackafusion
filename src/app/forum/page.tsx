@@ -54,7 +54,7 @@ export default function Forum() {
                         <button className="bg-buttonDesabled py-1 px-5 w-28 cursor-default">
                             <h2 className="text-fontButton">Voltar</h2>
                         </button>
-                        <button className="bg-buttonActivated py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200">
+                        <button className="bg-buttonActivated dark:bg-buttonActivatedDark py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200">
                             <h2 className="text-fontButton">Avançar</h2>
                         </button>
                     </div>
