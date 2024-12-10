@@ -8,7 +8,7 @@ import { ROUTES } from "@/constants/routes";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function hardskills() {
+export default function focoCarreira() {
 
     const [isOpenAdd, setIsOpenAdd] = useState(false);
 
@@ -24,8 +24,8 @@ export default function hardskills() {
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <ProfileComponent isAdmin={true} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
-            <SeeMore title="HardSkills" toggleAdd={toggleAdd} button="Adicionar skill" isAdmin={true}>
-                <div className="flex gap-3 w-full flex-wrap justify-center mt-3">
+            <SeeMore title="Foco de Carreira" toggleAdd={toggleAdd} button="Adicionar mais" isAdmin={true}>
+                <div className="flex gap-3 max-w-[90%] flex-wrap justify-center mt-3">
                         <Skill button={() => apagarSkill(1)} cor={"blueLight"} title={"Design wed sla oq os krl a 4"} ></Skill>
                         <Skill button={() => apagarSkill(2)} cor={"blueLight"} title={"Design"} ></Skill>
                         <Skill button={() => apagarSkill(3)} cor={"blueLight"} title={"Design"} ></Skill>
@@ -35,7 +35,7 @@ export default function hardskills() {
             </SeeMore>
 
             {/* Modal pra adicionar mais skills */}
-            <Modal height="30%" onClose={toggleAdd} title={"Adicionar Hardskill"} isOpen={isOpenAdd}>
+            <Modal height="30%" onClose={toggleAdd} title={"Adicionar Foco de Carreira"} isOpen={isOpenAdd}>
                 <div className="flex flex-col w-full space-y-4">
                     <label className="text-lg font-semibold text-fontTitle dark:text-fontTitleDark">Opções:</label>
                     

@@ -25,16 +25,18 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
                     {isAdmin && (
                         <button
                             onClick={toggleEdit}
-                            className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-3 text-fontButton"
+                            className="bg-buttonActivated dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300 dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-3 text-fontButton"
                         >
                             Editar perfil
                         </button>
                     )}
                 </div>
                 <div className="md:w-6/12 w-full p-3 items-center flex flex-col justify-center md:gap-3">
-                    <button className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-3 text-fontButton self-end m-4 md:m-0">
-                        Feedback
-                    </button>
+                    {!isAdmin && (
+                        <button className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-3 text-fontButton self-end m-4 md:m-0">
+                            Feedback
+                        </button>
+                    )}
                     <div className="flex flex-row">
                         <div className="flex flex-col w-full px-5 justify-center">
                             <div className="flex flex-col justify-center lg:w-56">

@@ -8,6 +8,7 @@ import pessoa from "../../../../../public/pessoa.jpeg";
 import Image from "next/image"
 import { Answer } from "@/components/answer"
 import { ChatPrivate } from "@/components/chatPrivate"
+import { Question } from "@/components/question";
 
 interface IForum {
     params: {
@@ -43,20 +44,22 @@ const ForumId = async ({params: {id}} : IForum) => {
                         <h1>Pergunta</h1>
                 </div>
                 <div className="flex w-10/12 flex-col">
-                    <div className="mt-5 mb-3">
+                    <Question name={"Jurema linda"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Título da pergunta"} ></Question>
+                    {/* <div className="mt-5 mb-3">
                         <Link href={ROUTES.profile} className="flex items-center gap-2">
                             <Image src={pessoa} alt="logo" width={50} height={30} className="rounded-full "/>
                             <h1 className="text-fontText font-semibold text-lg dark:text-fontTextDark">Jurema linda</h1>
                         </Link>
                     </div>
-                    <hr />
+                    <hr /> */}
                     <div className="md:px-14 py-5">
-                        <h1 className="text-fontText font-semibold text-xl dark:text-fontTextDark">Título da pergunta</h1>
+                        {/* <h1 className="text-fontText font-semibold text-xl dark:text-fontTextDark">Título da pergunta</h1>
                         <div>
                             <p className="p-3 dark:text-fontTextDark text-fontText">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et molestiae culpa perspiciatis ea ratione nisi veniam nesciunt nobis, nostrum iste aliquam, totam rem! Ducimus debitis iusto doloremque blanditiis a nesciunt. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim vero illum aliquam eaque nulla, et placeat provident velit voluptates cum dolorem natus quo suscipit inventore esse numquam vel ipsa qui.</p>
                         </div>
-                        <hr />
-                        <div className="flex my-8 items-center md:gap-3 gap-1 w-full">
+                        <hr /> */}
+
+                        <div className="flex mb-8 items-center md:gap-3 gap-1 w-full">
                             <Link href={ROUTES.profile} className="flex items-center gap-2">
                                 <Image src={pessoa} alt="logo" width={50} height={30} className="rounded-full md:flex hidden"/>
                             </Link>

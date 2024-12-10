@@ -21,7 +21,7 @@ const SeeMore = ({ isAdmin, children, button, toggleAdd, title } : ISeeMore) => 
             <div className="flex items-center flex-col md:py-10 md:px-14 p-3">
                 <div className="flex justify-between w-full mb-3">
                     <Link href={ROUTES.profile}>
-                        <svg className="w-9 text-fontGrey dark:text-fontGreyDark" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                        <svg className="w-9 text-fontGrey dark:text-fontGreyDark hover:scale-105 transition-transform" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                             <g id="SVGRepo_iconCarrier">
@@ -38,7 +38,7 @@ const SeeMore = ({ isAdmin, children, button, toggleAdd, title } : ISeeMore) => 
                         </svg>
                     </Link>
                     {isAdmin && toggleAdd && (
-                        <button onClick={toggleAdd} className=" bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton">
+                        <button onClick={toggleAdd} className=" bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300 rounded py-2 px-4 text-fontButton">
                             {button}
                         </button>
                     )}
@@ -46,7 +46,7 @@ const SeeMore = ({ isAdmin, children, button, toggleAdd, title } : ISeeMore) => 
                <h1 className="text-fontTitle dark:text-fontTitleDark font-semibold text-xl md:text-2xl">{title}</h1>
 
 
-               <div className="flex justify-center" >
+               <div className="flex justify-center flex-col" >
                     {children}
                </div>
 
