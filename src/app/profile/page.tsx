@@ -5,18 +5,75 @@ import Image from "next/image";
 import { Skill } from "@/components/skills";
 import { Card } from "@/components/card";
 import { useEffect, useState } from "react";
+import {useRouter} from "next/navigation"
 import Modal from "@/components/modal";
+import {ROUTES} from "@/constants/routes"
+
+interface IUser {
+    name: string
+    email: string ,
+    EDV:string,
+    phone: string,
+    password: string
+}
 
 export default function Profile() {
     const [isOpenEdit, setIsOpenEdit] = useState(false);
+    const router = useRouter();
+    const [error, setErrror] = useState<Boolean>(false)
+
 
     const toggleEdit = () => {
         console.log('Ta indo')
         setIsOpenEdit(!isOpenEdit);
     }
 
+    const [userData, setUserData] = useState<IUser>({
+        name: "",
+        email: "" ,
+        EDV:"",
+        phone:"" ,
+        password: ""
+
+    }); 
+
     // Continuar o modal de editar perfil!
 
+    useEffect(() => {
+        const dataUser =  async () => {
+            
+            const token = sessionStorage.getItem("Token");
+    
+            if(!token) {
+                alert("Sua sessão expirou. Faça login novamente");
+                router.push(ROUTES.login);
+                setErrror(true);
+                return
+            }
+    
+            try {
+
+                const response =  await fetch ("http://localhost:8080/user/0", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/josn",
+                        Autorization: token
+                    },
+                });
+    
+                const data: IUser = await response.json();
+                setUserData(data);
+                setErrror(false)
+                
+            } catch (error) {
+                console.log
+            }
+        }
+    }, [])
+
+    const editProfile = async () => {
+
+    }
     return (
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>

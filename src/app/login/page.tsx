@@ -4,15 +4,20 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react";
 import logo from "/public/ets.png"
-
+import {useRouter} from "next/navigation"
 
 export default function Login() {
     const [edv, setEdv] =  useState<string>("")
     const [senha, setSenha] =  useState<string>("")
     const [error,setError] = useState<boolean>(false)
 
+    const router = useRouter();
 
-    const Logar = async () => {
+    const Login = async () => {
+        if( edv == "" || senha == ""){
+            alert("Toodos os campos devem ser preenchidos!")
+            return;
+        }
 
         try{
             const response =  await fetch ('http://localhost:8080/auth', {
@@ -32,14 +37,19 @@ export default function Login() {
                 setError(true)
                 setEdv("")
                 setSenha("")
-                alert(result.message);
+                console.log(result.message);
             } else{
-                sessionStorage.setItem("Token", "Bearer" +  result.token)
+                sessionStorage.setItem("Token", "Bearer " +  result.token)
+                sessionStorage.setItem("Admin", result.admin)
                 setError(false);
                 setEdv("")
                 setSenha("")
+                
+                alert(result.message)
 
-                if(result.mes)
+                setTimeout(() => {
+                    router.push(ROUTES.forum);
+                }, 1000);
             }
         }
 
@@ -47,6 +57,7 @@ export default function Login() {
             setError(true)
         }
     }
+
 
     return(
         <>  
@@ -63,7 +74,7 @@ export default function Login() {
                         <label htmlFor="senha">Senha:</label>
                         <input type="password" name="senha" className="w-full h-8 border p-2" value={senha} onChange={(event) => {setSenha(event.target.value)}} />
                     </div>
-                    <button className="bg-buttonActivated p-2 w-32 text-fontButton rounded-md" onClick={() => {Logar()}}> <Link href={ROUTES.forum}>Entrar</Link></button>
+                    <button className="bg-buttonActivated p-2 w-32 text-fontButton rounded-md" onClick={() => {Login()}}>Entrar</button>
                     <Link href={ROUTES.cadastrar}> Criar conta</Link>
                 </div>
             </div>
