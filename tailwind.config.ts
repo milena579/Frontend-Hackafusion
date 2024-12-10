@@ -26,13 +26,10 @@ export default {
         pinkCard: "var(--pinkCard)",
         greenCard: "var(--greenCard)",
         greyOpacity: "var(--greyOpacity)",
-<<<<<<< HEAD
         bgChatBlue: "var(--bgChatBlue)",
-=======
         buttonRed: "var(--buttonRed)",
         buttonRedHover: "var(--buttonRedHover)",
 
->>>>>>> eb0e292fb12b534e9830c48ea875591b318d98d3
         backgroundDark: "var(--backgroundDark)",
         fontGreyDark: "var(--fontGreyDark)",
         fontTextDark: "var(--fontTextDark)",
@@ -49,12 +46,9 @@ export default {
         pinkCardDark: "var(--pinkCardDark)",
         greenCardDark: "var(--greenCardDark)",
         greyOpacityDark: "var(--greyOpacityDark)",
-<<<<<<< HEAD
         bgChatBlueDark: "var(--bgChatBlueDark)",
-=======
         buttonRedDark: "var(--buttonRedDark)",
 
->>>>>>> eb0e292fb12b534e9830c48ea875591b318d98d3
 
       },
     },

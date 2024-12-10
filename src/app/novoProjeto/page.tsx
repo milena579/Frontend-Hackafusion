@@ -37,11 +37,11 @@ export default function novoProjeto(){
                         <div className="flex justify-around flex-wrap">
                             <div className="flex gap-6 items-center">
                                 <label htmlFor="sim" className="w-10">Sim</label>
-                                <input type="radio" value={publico} name="sim" onChange={(event) => {setPublico(event.target.value)}}/>
+                                {/* <input type="radio" value={publico} name="sim" onChange={(event) => {setPublico(event.target.value)}}/> */}
                             </div>
                             <div className="flex gap-6 items-center">
                                 <label htmlFor="nao" className="w-10">Não</label>
-                                <input type="radio" value={"false"} name="nao" onChange={(event) => {setPublico(event.target.value)}}/>
+                                {/* <input type="radio" value={"false"} name="nao" onChange={(event) => {setPublico(event.target.value)}}/> */}
                             </div>
                         </div>
                     </div>
