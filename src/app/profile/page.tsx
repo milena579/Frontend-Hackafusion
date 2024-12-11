@@ -9,13 +9,44 @@ import { useEffect, useState } from "react";
 import {useRouter} from "next/navigation"
 import Modal from "@/components/modal";
 import { ProfileComponent } from "@/components/profile";
+import { ROUTES } from "@/constants/routes"
 import Link from "next/link";
 
+interface IUser{
+    isOwner   : boolean,
+    user      :
+    {
+        id        : string,
+        name      : string,
+        edv       : string,
+        email     : string,
+        telefone  : string,
+        image     : string,
+        student   : boolean,
+        admin     : boolean
+    }
+}
 export default function Profile() {
     const [isOpenHardskills, setIsOpenHardskills] = useState(false);
     const [isOpenFocoCarreira, setIsOpenFocoCarreira] = useState(false);
-    const isAdmin = true
+    const isAdmin = true;
+    const [error,setError] = useState<boolean>(false);
 
+    const [userData, setUserData] = useState<IUser>({
+        isOwner   : false,
+        user      :
+        {
+            id        : "",
+            name      : "",
+            edv       : "",
+            email     : "",
+            telefone  : "",
+            image     : "",
+            student   : false,
+            admin     : false
+        }
+    });
+    
     const toggleHardskills = () => {
         setIsOpenHardskills(!isOpenHardskills);
     }
@@ -24,45 +55,49 @@ export default function Profile() {
         setIsOpenFocoCarreira(!isOpenFocoCarreira);
     }
 
+    const router = useRouter();
+
     useEffect(() => {
         const dataUser =  async () => {
             
             const token = sessionStorage.getItem("Token");
-    
+            console.log(token)
             if(!token) {
                 alert("Sua sessão expirou. Faça login novamente");
                 router.push(ROUTES.login);
-                setErrror(true);
+                setError(true);
                 return
             }
-    
             try {
-
                 const response =  await fetch ("http://localhost:8080/user/0", {
                     method: "GET",
                     headers: {
-                        "Content-Type": "application/josn",
-                        Autorization: token
+                        "Content-Type": "application/json",
+                        Authorization: token
                     },
                 });
+
+                
+                console.log(response);
     
                 const data: IUser = await response.json();
                 setUserData(data);
-                setErrror(false)
+                console.log(userData.user.name)
+                setError(false)
                 
             } catch (error) {
-                console.log
+                console.log("Erro ao buscar os dados do usuário:", error);
+                setError(true);
             }
         }
+
+        dataUser();
     }, [])
 
-    const editProfile = async () => {
-
-    }
     return (
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-            <ProfileComponent isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
+            <ProfileComponent isAdmin={isAdmin} name={userData.user.name} email={userData.user.email} edv={userData.user.edv} telefone={userData.user.telefone} ></ProfileComponent >
 
             <div className="flex flex-col w-full p-3 items-center gap-5">
                 <div className="flex flex-col w-10/12 border items-center rounded p-2 gap-4">

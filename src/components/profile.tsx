@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Modal from "./modal";
 import pessoa from "../../public/pessoa.jpeg";
+import { tree } from "next/dist/build/templates/app-page";
 
 interface IProfile {
     image?: string;
@@ -17,6 +18,69 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
 
     const toggleEdit = () => setIsOpenEdit(!isOpenEdit);
 
+    const [error,setError] = useState<boolean>(false);
+
+    interface IUser{
+        id        : string,
+        name      : string,
+        edv       : string,
+        email     : string,
+        telefone  : string,
+        image     : string,
+        student   : boolean,
+        
+    }
+    const [userData, setUserData] = useState<IUser>({
+        id        : "",
+        name      : "",
+        edv       : "",
+        email     : "",
+        telefone  : "",
+        image     : "",
+        student   : false,
+    });
+
+    const editProfile = async () => {
+        const token = sessionStorage.getItem("Token");
+
+        if (!token) {
+            alert("Token não encontrado. Faça login novamente.");
+            return;
+        }
+
+        try {
+            const response =  await fetch("http://localhost:8080/user", {
+                method: "PUT",
+                headers:{
+                    "Content-Type": "application/json",
+                    Authorization: token
+                },
+                body:JSON.stringify({
+                    "name": userData.name,
+                    "image": userData.image,
+                    "email": userData.email,
+                    "EDV": userData.edv,
+                    "phone": userData.telefone,
+                    "student": userData.student
+                }),
+            });
+
+            if(!response.ok){
+                alert("Erro ao atualizar o cadastro")
+                setError(true);
+            }
+            else{
+                alert("Cadastrado com sucesso")
+                setError(true)
+            }
+
+
+        } catch (error) {
+            console.error("Erro ao atualizar os dados do usuário:", error);
+            alert("Erro ao atualizar os dados.");
+            setError(true);
+        }
+    } 
     return (
         <>
             <div className="bg-blueLight dark:bg-blueLightDark w-screen md:flex-row flex-col flex items-center justify-around md:p-3 md:py-8 mt-10">
@@ -118,7 +182,7 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
 
                             <div className="flex justify-between md:gap-44">
                                 <button className="bg-buttonDesabled dark:bg-buttonDesabledDark rounded py-2 px-3 text-fontButton self-end">Cancelar</button>
-                                <button className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-5 text-fontButton self-end">Salvar</button>
+                                <button className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-5 text-fontButton self-end" onClick={editProfile}>Salvar</button>
                             </div>
 
                         </div>
