@@ -16,7 +16,7 @@ export default function VerProjeto(){
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
 
-            <div className="flex items-center flex-col gap-4 justify-center h-screen px-28 py-14">
+            <div className="flex items-center flex-col gap-4 justify-center h-screen px-28 py-14  dark:text-fontTextDark">
                 <div className="w-[90%] flex justify-between ">
                     <div className="text-2xl">
                         <h1>Projetos - Iot</h1>
