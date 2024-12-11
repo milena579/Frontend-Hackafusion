@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ROUTES } from "@/constants/routes";
 import logoETS from "../../public/logoETS.png";
 import pessoa from "../../public/pessoa.jpeg";
@@ -20,6 +20,45 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenSearch, setIsOpenSearch] = useState(false);
     const [isOpenNotification, setIsOpenNotification] = useState(false);
+    const [isDark, setIsDark] = useState(false);
+
+    const toggleTheme = () => {
+        const tagHtml = document.documentElement;
+
+        if(localStorage.getItem(`theme`) === undefined) {
+            return
+        }
+
+        const tema : any = localStorage.getItem("theme");
+
+        tagHtml.classList.toggle(tema);
+    }
+
+    useEffect(() => {
+        const tagHtml = document.documentElement;
+
+        if(localStorage.getItem(`theme`) === undefined) {
+            return
+        }
+
+        const tema = localStorage.getItem("theme");
+        console.log(tema);
+
+    }, [isDark]);
+
+    const setLocalStorage = () => {
+        try {
+            if(!localStorage.getItem(`theme`)) {
+                localStorage.setItem(`theme`, `dark`);
+                toggleTheme();
+                return
+            }
+            localStorage.setItem(`theme`, localStorage.getItem(`theme`) === `dark` ? `` : `dark`);
+            setIsDark(!isDark);
+            toggleTheme();
+        
+        } catch {}
+    }
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -53,6 +92,17 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
                     <Link href={ROUTES.profile} className="flex items-center gap-2">
                         <Image src={pessoa} alt="logo" width={50} height={30} className="rounded-full"/>
                     </Link>
+                    <button onClick={setLocalStorage}>
+                        <svg className="w-11 text-fontTitle dark:text-fontTitleDark" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+                            <circle cx="21" cy="16" r="8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                            <line x1="14" y1="5" x2="14" y2="6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                            <line x1="4.81" y1="6.81" x2="6.93" y2="8.93" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                            <line x1="3" y1="16" x2="4" y2="16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                            <line x1="4.81" y1="25.19" x2="6.93" y2="23.07" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                            <line x1="14" y1="27" x2="14" y2="26" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M16.43,22.57C15.67,22.85,14.85,23,14,23c-3.87,0-7-3.13-7-7s3.13-7,7-7c0.85,0,1.67,0.15,2.43,0.43" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                    </button>
                     <Link href={ROUTES.login} className="flex items-center gap-2">
                         <div>
                             <svg className="w-9 text-fontTitle dark:text-fontTitleDark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 7.63636L14 4.5C14 4.22386 13.7761 4 13.5 4L4.5 4C4.22386 4 4 4.22386 4 4.5L4 19.5C4 19.7761 4.22386 20 4.5 20L13.5 20C13.7761 20 14 19.7761 14 19.5L14 16.3636" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path> <path d="M10 12L21 12M21 12L18.0004 8.5M21 12L18 15.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg>
@@ -83,6 +133,17 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
                             <button onClick={toggleNotification}>
                                 <svg className="w-8 text-fontTitleDark" viewBox="-0.96 -0.96 25.92 25.92" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M18.7491 9.70957V9.00497C18.7491 5.13623 15.7274 2 12 2C8.27256 2 5.25087 5.13623 5.25087 9.00497V9.70957C5.25087 10.5552 5.00972 11.3818 4.5578 12.0854L3.45036 13.8095C2.43882 15.3843 3.21105 17.5249 4.97036 18.0229C9.57274 19.3257 14.4273 19.3257 19.0296 18.0229C20.789 17.5249 21.5612 15.3843 20.5496 13.8095L19.4422 12.0854C18.9903 11.3818 18.7491 10.5552 18.7491 9.70957Z" stroke="currentColor" strokeWidth="1.5"></path> <path d="M7.5 19C8.15503 20.7478 9.92246 22 12 22C14.0775 22 15.845 20.7478 16.5 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"></path> </g></svg>
                             </button>
+                            <button onClick={setLocalStorage}>
+                                <svg className="w-11 text-fontTitleDark" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+                                    <circle cx="21" cy="16" r="8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <line x1="14" y1="5" x2="14" y2="6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <line x1="4.81" y1="6.81" x2="6.93" y2="8.93" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <line x1="3" y1="16" x2="4" y2="16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <line x1="4.81" y1="25.19" x2="6.93" y2="23.07" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <line x1="14" y1="27" x2="14" y2="26" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M16.43,22.57C15.67,22.85,14.85,23,14,23c-3.87,0-7-3.13-7-7s3.13-7,7-7c0.85,0,1.67,0.15,2.43,0.43" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </button>
                             <button onClick={toggleSearch}>
                                 <svg className="w-9 text-fontTitleDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
                             </button>
@@ -107,32 +168,32 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
                     </div>
 
                     <div className="flex flex-wrap gap-2 items-center justify-center mt-3 overflow-auto h-[38rem] p-1">
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
-                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect="/profile/joana_joaninha" image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
+                        <Card classTitle="font-semibold" height="65" width="72" title="Joana Joaninha" redirect={ROUTES.profile} image=""></Card>
                     </div>
                 </div>
             </Modal>

@@ -4,6 +4,7 @@ import { Menu } from "@/components/menu";
 import { CardProjeto } from "@/components/cardProject";
 import { ROUTES } from "@/constants/routes"
 import Link from "next/link";
+import { ChatPrivate } from "@/components/chatPrivate";
 
 
 export default function Projeto(){
@@ -32,6 +33,8 @@ export default function Projeto(){
                 </div>
                         
             </div>
+            <ChatPrivate />
+
         </>
     )
 }

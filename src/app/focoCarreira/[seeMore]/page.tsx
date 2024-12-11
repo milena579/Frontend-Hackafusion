@@ -1,4 +1,5 @@
 "use client"
+import { ChatPrivate } from "@/components/chatPrivate";
 import { Menu } from "@/components/menu";
 import Modal from "@/components/modal";
 import { ProfileComponent } from "@/components/profile";
@@ -51,7 +52,8 @@ export default function focoCarreira() {
                     </div>
                 </div>
             </Modal>
-        
+            <ChatPrivate />
+
         </>
     )
 }

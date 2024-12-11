@@ -1,5 +1,6 @@
 "use client"
 import { CardArquivo } from "@/components/cardArquivo";
+import { ChatPrivate } from "@/components/chatPrivate";
 import { Menu } from "@/components/menu";
 import { ROUTES } from "@/constants/routes"
 import Link from "next/link";
@@ -33,7 +34,7 @@ export default function VerProjeto(){
                 <div className="flex flex-col w-[90%] gap-4 h-full">
                     <h1 className="text-xl w-[85%]">Arquivos</h1>
                     <div className="flex gap-2 flex-row flex-wrap h-[50%] w-full">
-                        <CardArquivo></CardArquivo>
+                        <CardArquivo file="teste"></CardArquivo>
                     </div>
                     <div className="">
                         <Link href={`/project/Projeto-site/iot`}>
@@ -42,6 +43,8 @@ export default function VerProjeto(){
                     </div>
                 </div>
             </div>
+            <ChatPrivate />
+
         </>
     )
 }

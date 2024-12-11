@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Modal from "@/components/modal";
 import { ProfileComponent } from "@/components/profile";
 import Link from "next/link";
+import { ChatPrivate } from "@/components/chatPrivate";
 
 export default function Profile() {
     const [isOpenHardskills, setIsOpenHardskills] = useState(false);
@@ -113,7 +114,8 @@ export default function Profile() {
             <Modal isOpen={isOpenFocoCarreira} onClose={toggleFocoCarreira} title="Adicionar Foco de Carreira">
                 
             </Modal>
-
+            <ChatPrivate />
+            
         </>
     )
 }

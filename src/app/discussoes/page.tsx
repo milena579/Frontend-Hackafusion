@@ -24,14 +24,33 @@ export default function Discussoes (){
                 <div className="flex items-center justify-center mt-10 flex-col">
                     <div className="flex w-4/6 flex-wrap gap-4 items-center justify-center">
                         {modulo == 0 && (
-                            <Card redirect="/foruns/java" width="96" height="96" cor="bg-purpleCard" title="Card lindo aaaaa mt texto nss aaaa preciso de mais texto pra ver oq acontece mais texto mds quanto texto nss aaaa" description="Teste teste teste teste"></Card>
+                            <Card redirect="/" width="250px" height="80px" cor="bg-purpleCard" title="Card lindo aaaaa mt texto nss aaaa preciso de mais texto pra ver oq acontece mais texto mds quanto texto nss aaaa" description="Teste teste teste teste"></Card>
                         )}
                         {modulo == 1 && (
-                            <Card redirect="/foruns/outraCoisa" width="96" height="96" cor="bg-pinkCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-pinkCard" title="Card lindo" description="Teste teste teste teste"></Card>
                         )}
                         {modulo == 2 && (
-                            <Card redirect="/foruns/outraCoisa2" width="96" height="96" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
                         )}
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
+
                     </div>
                     {/* <div className="flex gap-5 mt-8 absolute bottom-1/4"> */}
                     <div className="flex gap-5 mt-8">
@@ -45,7 +64,7 @@ export default function Discussoes (){
                 </div>
             </div>
             <ChatPrivate />
-
+            
         </>
     );
 }

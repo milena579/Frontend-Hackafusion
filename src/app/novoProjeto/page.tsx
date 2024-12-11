@@ -4,6 +4,7 @@ import { Menu } from "@/components/menu"
 import Link from "next/link"
 import { useState } from "react"
 import { ROUTES } from "@/constants/routes"
+import { ChatPrivate } from "@/components/chatPrivate"
 
 export default function novoProjeto(){
     
@@ -71,6 +72,7 @@ export default function novoProjeto(){
                     <button className="bg-buttonActivated p-2 w-32 rounded text-fontButton" onClick={() => {CriarProjeto()}}>Criar Projeto</button>
                 </div>
             </div>
+            <ChatPrivate />
 
         </>
     )

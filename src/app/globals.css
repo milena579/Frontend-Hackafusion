@@ -44,6 +44,25 @@
   --bgChatBlueDark: #2b2b2b;
   --buttonRedDark: #6e0101;
 
+  --scroll: #4e4e4e6c;
+  --scrollHover: #4141419d;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollHover);
 }
 
 /* @media (prefers-color-scheme: dark) {

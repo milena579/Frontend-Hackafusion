@@ -1,5 +1,6 @@
 "use client"
 import { Card } from "@/components/card";
+import { ChatPrivate } from "@/components/chatPrivate";
 import { Menu } from "@/components/menu";
 import Modal from "@/components/modal";
 import { ProfileComponent } from "@/components/profile";
@@ -51,6 +52,8 @@ export default function Feedbacks() {
                     <Card star={true} favorite={favorites[11]} toggleFavorite={() => toggleFavorite(11)}  image="" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Amei trabalhar com você, você é uma pessoa incrível, deveriamos fazer mais projetos juntos!" height="130px" width="40vw"></Card>
                 </div>
             </SeeMore>
+            <ChatPrivate />
+
         </>
     )
 }
