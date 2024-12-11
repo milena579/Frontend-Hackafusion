@@ -24,14 +24,14 @@
   --buttonRed: #b90c0c;
   --buttonRedHover: #3a0000;
 
-  --backgroundDark: #2F2F2F;
+  --backgroundDark: #2b2b2c;
   --fontGreyDark: #D9D9D9;
   --fontTitleDark: #ffffff;
   --fontTextDark: #ffffff;
   --buttonActivatedDark: #004972;
   --buttonActivatedHoverDark: #001c2c;
   --buttonDesabledDark: #6C7070;
-  --backgroundCardDark: #4B6F8A;
+  --backgroundCardDark: #2b2f3a;
   --blueLightDark: #386794;
   --blueMiddleDark: #11416F;
   --blueMiddleDarkHover: #0c3f6e;
@@ -43,6 +43,7 @@
   --greyOpacityDark: rgba(117, 117, 117, 0.5);
   --bgChatBlueDark: #2b2b2b;
   --buttonRedDark: #6e0101;
+  --bgInputDark: #30363b;
 
   --scroll: #4e4e4e6c;
   --scrollHover: #4141419d;

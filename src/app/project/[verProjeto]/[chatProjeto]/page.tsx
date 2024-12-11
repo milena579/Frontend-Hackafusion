@@ -1,5 +1,7 @@
 "use client"
 
+"use client"
+
 import { ChatPrivate } from "@/components/chatPrivate";
 import { ChatPublico } from "@/components/chatPublico";
 import { Menu } from "@/components/menu";

@@ -74,7 +74,7 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
 
     return (
         <>
-            <nav className="text-fontTitle z-50 shadow-xl bg-background flex items-center justify-between w-full p-2 px-8 fixed dark:bg-backgroundDark">
+            <nav className="text-fontTitle z-50 shadow-xl bg-background flex items-center justify-between w-full p-2 px-8 fixed dark:bg-backgroundDark  shadow-gray-100/5">
                 <Link href={ROUTES.forum} className="flex items-center gap-2">
                     <Image src={logoETS} alt="logo" width={50} height={30}/>
                     <h1 className="text-lg font-bold text-fontGrey dark:text-fontGreyDark md:flex hidden">Engineering Technical School</h1>
