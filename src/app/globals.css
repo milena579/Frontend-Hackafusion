@@ -22,14 +22,14 @@
   --buttonRed: #b90c0c;
   --buttonRedHover: #3a0000;
 
-  --backgroundDark: #2F2F2F;
+  --backgroundDark: #2b2b2c;
   --fontGreyDark: #D9D9D9;
   --fontTitleDark: #ffffff;
   --fontTextDark: #ffffff;
   --buttonActivatedDark: #004972;
   --buttonActivatedHoverDark: #001c2c;
   --buttonDesabledDark: #6C7070;
-  --backgroundCardDark: #4B6F8A;
+  --backgroundCardDark: #2b2f3a;
   --blueLightDark: #386794;
   --blueMiddleDark: #11416F;
   --fontButtonDark: #ffffff;
@@ -39,7 +39,8 @@
   --greenCardDark: #508637;
   --greyOpacityDark: rgba(117, 117, 117, 0.5);
   --buttonRedDark: #6e0101;
-
+  --bgInputDark: #3a3e46;
+  --bgMenuDark: #2c2d2e;
 }
 
 /* @media (prefers-color-scheme: dark) {

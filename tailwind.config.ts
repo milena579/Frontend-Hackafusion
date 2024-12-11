@@ -46,8 +46,8 @@ export default {
         greenCardDark: "var(--greenCardDark)",
         greyOpacityDark: "var(--greyOpacityDark)",
         buttonRedDark: "var(--buttonRedDark)",
-
-
+        bgInputDark : "var(--bgInputDark)",
+        bgMenuDark :"var(--bgMenuDark)",
       },
     },
   },
