@@ -11,7 +11,6 @@ export default function Discussoes (){
     return(
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-
              <div className="flex flex-col p-5 items-center justify-center">
                 <div className="flex flex-row gap-2 w-9/12 min-w-72 mt-5 md:gap-5 items-center">
                     <h1 className="text-fontGrey text-xl dark:text-fontGreyDark md:text-1xl">Discussões</h1>

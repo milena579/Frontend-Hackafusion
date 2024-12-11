@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Skill } from "@/components/skills";
 import { Card } from "@/components/card";
 import { useEffect, useState } from "react";
+import {useRouter} from "next/navigation"
 import Modal from "@/components/modal";
 import { ProfileComponent } from "@/components/profile";
 import Link from "next/link";
@@ -23,6 +24,41 @@ export default function Profile() {
         setIsOpenFocoCarreira(!isOpenFocoCarreira);
     }
 
+    useEffect(() => {
+        const dataUser =  async () => {
+            
+            const token = sessionStorage.getItem("Token");
+    
+            if(!token) {
+                alert("Sua sessão expirou. Faça login novamente");
+                router.push(ROUTES.login);
+                setErrror(true);
+                return
+            }
+    
+            try {
+
+                const response =  await fetch ("http://localhost:8080/user/0", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/josn",
+                        Autorization: token
+                    },
+                });
+    
+                const data: IUser = await response.json();
+                setUserData(data);
+                setErrror(false)
+                
+            } catch (error) {
+                console.log
+            }
+        }
+    }, [])
+
+    const editProfile = async () => {
+
+    }
     return (
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>

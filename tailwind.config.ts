@@ -52,6 +52,8 @@ export default {
         buttonRedDark: "var(--buttonRedDark)",
 
 
+        bgInputDark : "var(--bgInputDark)",
+        bgMenuDark :"var(--bgMenuDark)",
       },
     },
   },
