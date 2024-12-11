@@ -25,7 +25,7 @@ export default function focoCarreira() {
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <ProfileComponent isAdmin={true} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
-            <SeeMore title="Foco de Carreira" toggleAdd={toggleAdd} button="Adicionar mais" isAdmin={true}>
+            <SeeMore redirect={ROUTES.profile} title="Foco de Carreira" toggleAdd={toggleAdd} button="Adicionar mais" isAdmin={true}>
                 <div className="flex gap-3 max-w-[90%] flex-wrap justify-center mt-3">
                         <Skill button={() => apagarSkill(1)} cor={"blueLight"} title={"Design wed sla oq os krl a 4"} ></Skill>
                         <Skill button={() => apagarSkill(2)} cor={"blueLight"} title={"Design"} ></Skill>

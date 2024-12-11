@@ -36,7 +36,7 @@ export const Card = ({ cor, title, redirect, width, height, description, classTi
     return (
         <>
             {(display && redirect) ? (
-                <Link href={`${redirect}`}>
+                <Link href={`${redirect}`} style={{minWidth: `${width}`, minHeight: `${height}`, height: 'auto'}}>
                     <div className={`${classExtra} bg-card dark:bg-cardDark rounded-md shadow-md flex items-center p-2 gap-4`} style={{minWidth: `${width}`, minHeight: `${height}`, height: 'auto'}}>
                         <div className={`w-4 ${cor} dark:${cor}Dark rounded-sm`} style={{ minHeight: `${heightColor}px`, height: `${heightColor}` }}></div>
                         {image != null && (

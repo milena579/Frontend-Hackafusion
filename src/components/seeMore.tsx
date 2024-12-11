@@ -11,16 +11,17 @@ interface ISeeMore {
     button: string;
     toggleAdd?: () => void;
     title: string;
+    redirect: string;
 }
 
-const SeeMore = ({ isAdmin, children, button, toggleAdd, title } : ISeeMore) => {
+const SeeMore = ({ isAdmin, children, button, toggleAdd, title, redirect } : ISeeMore) => {
 
 
     return (
         <>
             <div className="flex items-center flex-col md:py-10 md:px-14 p-3">
                 <div className="flex justify-between w-full mb-3">
-                    <Link href={ROUTES.profile}>
+                    <Link href={redirect}>
                         <svg className="w-9 text-fontGrey dark:text-fontGreyDark hover:scale-105 transition-transform" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>

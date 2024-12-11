@@ -37,7 +37,7 @@ export default function Feedbacks() {
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <ProfileComponent isAdmin={true} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
-            <SeeMore title="Feedbacks" button="Adicionar skill" isAdmin={true}>
+            <SeeMore redirect={ROUTES.profile} title="Feedbacks" button="Adicionar skill" isAdmin={true}>
                 <div className="flex gap-3 flex-wrap justify-center mt-3 items-center w-full">
                     <Card star={true} favorite={favorites[1]} toggleFavorite={() => toggleFavorite(1)} image="" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Amei trabalhar com você, você é uma pessoa incrível, deveriamos fazer mais projetos juntos!" height="130px" width="40vw"></Card>
                     <Card star={true} favorite={favorites[2]} toggleFavorite={() => toggleFavorite(2)} image="" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Amei trabalhar com você, você é uma pessoa incrível, deveriamos fazer mais projetos juntos!" height="130px" width="40vw"></Card>
