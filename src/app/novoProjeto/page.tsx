@@ -30,7 +30,7 @@ export default function novoProjeto(){
                 </div>
             </div>
 
-            {/* <div className="flex w-full flex-col items-center px-64 py-20 h-screen justify-start gap-20 dark:text-fontTextDark ">
+            <div className="flex w-full flex-col items-center px-64 py-20 h-screen justify-start gap-20 dark:text-fontTextDark ">
                 <div className="items-center w-[90%] flex justify-center gap-10 ">
                     <div className="flex flex-col w-[40%] gap-4">
                         <label htmlFor="nome">Nome do projeto</label>
@@ -79,7 +79,7 @@ export default function novoProjeto(){
                     <Link href={ROUTES.project}><button className="bg-buttonDesabled p-2 rounded w-32 text-fontButton">Voltar</button></Link>
                     <button className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300" onClick={() => {CriarProjeto()}}>Criar Projeto</button>
                 </div>
-            </div> */}
+            </div>
             <ChatPrivate />
 
         </>
