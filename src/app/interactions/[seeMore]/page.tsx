@@ -2,13 +2,16 @@
 
 import { Answer } from "@/components/answer";
 import { Card } from "@/components/card";
+import { ChatPrivate } from "@/components/chatPrivate";
 import { Menu } from "@/components/menu";
 import { ProfileComponent } from "@/components/profile";
 import { Question } from "@/components/question";
 import SeeMore from "@/components/seeMore";
+import { ROUTES } from "@/constants/routes";
 import { useState } from "react";
 
 export default function interactions() {
+    const isAdmin = true;
     const [option, setOption] = useState(1);
 
     const clickQuestion = () => {
@@ -29,8 +32,8 @@ export default function interactions() {
             {option == 1 ? (
                 <>
                     <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-                    <ProfileComponent isAdmin={true} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
-                    <SeeMore title="Interações" button="Adicionar skill" isAdmin={true}>
+                    <ProfileComponent isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
+                    <SeeMore redirect={ROUTES.profile} title="Interações" button="Adicionar skill" isAdmin={isAdmin}>
                         <div className="flex flex-col md:px-10 items-center justify-center">
                             <div className="flex self-start gap-3 md:gap-10 mt-5 relative mb-5">
                                 <button onClick={clickQuestion} className="text-lg text-fontGrey dark:text-fontGreyDark transition-all duration-300 relative before:content-[''] before:block before:w-full before:h-[2px] before:bg-fontGrey dark:before:bg-fontGreyDark before:absolute before:bottom-0">Perguntas</button>
@@ -54,7 +57,7 @@ export default function interactions() {
                 <>
                     <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
                     <ProfileComponent isAdmin={true} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
-                    <SeeMore title="Interações" button="Adicionar skill" isAdmin={true}>
+                    <SeeMore redirect={ROUTES.profile} title="Interações" button="Adicionar skill" isAdmin={true}>
                     <div className="flex flex-col md:px-10 items-center justify-center">
                            <div className="flex self-start gap-3 md:gap-10 mt-5 relative mb-5">
                                 <button onClick={clickQuestion} className="text-lg text-fontGrey dark:text-fontGreyDark transition-all duration-300 relative hover:before:content-[''] hover:before:block hover:before:w-full hover:before:h-[2px] hover:before:bg-fontGrey dark:hover:before:bg-fontGreyDark hover:before:absolute hover:before:bottom-0">Perguntas</button>
@@ -92,7 +95,7 @@ export default function interactions() {
                 <>
                     <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
                     <ProfileComponent isAdmin={true} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
-                    <SeeMore title="Interações" button="Adicionar skill" isAdmin={true}>
+                    <SeeMore redirect={ROUTES.profile} title="Interações" button="Adicionar skill" isAdmin={true}>
                     <div className="flex flex-col md:px-10 items-center justify-center w-full">
                            <div className="flex self-start gap-3 md:gap-10 mt-5 relative mb-5 w-full">
                                 <button onClick={clickQuestion} className="text-lg text-fontGrey dark:text-fontGreyDark transition-all duration-300 relative hover:before:content-[''] hover:before:block hover:before:w-full hover:before:h-[2px] hover:before:bg-fontGrey dark:hover:before:bg-fontGreyDark hover:before:absolute hover:before:bottom-0">Perguntas</button>
@@ -115,6 +118,8 @@ export default function interactions() {
                     </SeeMore>
                 </>
             ): null}
+            <ChatPrivate />
+
         </>
     )
 }

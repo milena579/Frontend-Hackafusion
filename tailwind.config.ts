@@ -50,8 +50,6 @@ export default {
         greyOpacityDark: "var(--greyOpacityDark)",
         bgChatBlueDark: "var(--bgChatBlueDark)",
         buttonRedDark: "var(--buttonRedDark)",
-
-
         bgInputDark : "var(--bgInputDark)",
         bgMenuDark :"var(--bgMenuDark)",
       },
