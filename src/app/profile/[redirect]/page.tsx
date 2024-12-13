@@ -10,8 +10,8 @@ import { ChatPrivate } from "@/components/chatPrivate";
 
 export default function Profile() {
     const isAdmin = false
-    const isStudent = false
-    const isOnwer = true
+    const isStudent = true
+    const isOnwer = false
 
     useEffect(() => {
         const dataUser =  async () => {
