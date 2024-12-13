@@ -32,6 +32,8 @@ export default function Profile() {
     const isAdmin = true;
     const [error,setError] = useState<boolean>(false);
 
+    const [loadData, setLoadData] = useState<boolean>(false);
+
     const [userData, setUserData] = useState<IUser>({
         isOwner   : false,
         user      :
@@ -89,6 +91,8 @@ export default function Profile() {
                 console.log("Erro ao buscar os dados do usuário:", error);
                 setError(true);
             }
+
+            setLoadData(true);
         }
 
         dataUser();
@@ -97,7 +101,7 @@ export default function Profile() {
     return (
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-            <ProfileComponent isAdmin={isAdmin} name={userData.user.name} email={userData.user.email} edv={userData.user.edv} telefone={userData.user.telefone} ></ProfileComponent >
+            {loadData && <ProfileComponent isAdmin={isAdmin} name={userData.user.name} email={userData.user.email} edv={userData.user.edv} telefone={userData.user.telefone}  ></ProfileComponent >}
 
             <div className="flex flex-col w-full p-3 items-center gap-5">
                 <div className="flex flex-col w-10/12 border items-center rounded p-2 gap-4">
