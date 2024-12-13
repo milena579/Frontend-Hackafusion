@@ -18,6 +18,8 @@ export default function Cadastro() {
     const [cadSenha, setSenha] = useState<string>("");
 
     const [error,setError] = useState<boolean>(false)
+    const [messageError,setMessageError] = useState<String>("")
+    const router = useRouter();
 
     const Singup = async () => {
 
@@ -45,8 +47,9 @@ export default function Cadastro() {
             const result = await response.json();
 
             if(response.status >= 400  && response.status < 500) {
-                console.log(result.message);
                 setError(true)
+                console.log(result.message);
+                setMessageError(result.message);
                 // setNome("")
                 // setEmail("")
                 // setEdv("")
@@ -60,6 +63,7 @@ export default function Cadastro() {
                 setCel("")
                 setSenha("")
                 alert(result.message)
+                router.push(ROUTES.login);
             }
 
         } catch (error) {
@@ -95,6 +99,7 @@ export default function Cadastro() {
                         <label htmlFor="senha">Senha:</label>
                         <input type="password" name="senha" className="w-full h-8 border p-2" value={cadSenha} onChange={(event) => {setSenha(event.target.value)}} />
                     </div>
+                    {error&&<div className="text-red-600">{messageError}!</div>}
                     <button className="bg-buttonActivated p-2 w-32 text-fontButton rounded-md" onClick={() => {Singup()}}>Cadastrar</button>
                     <Link href={ROUTES.login}>Já tenho conta</Link>
                 </div>

@@ -10,6 +10,7 @@ export default function Login() {
     const [edv, setEdv] =  useState<string>("")
     const [senha, setSenha] =  useState<string>("")
     const [error,setError] = useState<boolean>(false)
+    const [messageError,setMessageError] = useState<String>("")
 
     const router = useRouter();
 
@@ -35,9 +36,8 @@ export default function Login() {
 
             if(response.status >= 400  && response.status < 500) {
                 setError(true)
-                setEdv("")
                 setSenha("")
-                console.log(result.message);
+                setMessageError(result.message);
             } else{
                 sessionStorage.setItem("Token", "Bearer " +  result.token)
                 sessionStorage.setItem("Admin", result.admin)
@@ -47,9 +47,7 @@ export default function Login() {
                 
                 alert(result.message)
 
-                setTimeout(() => {
-                    router.push(ROUTES.forum);
-                }, 1000);
+                router.push(ROUTES.forum);
             }
         }
 
@@ -74,6 +72,7 @@ export default function Login() {
                         <label htmlFor="senha">Senha:</label>
                         <input type="password" name="senha" className="w-full h-8 border p-2" value={senha} onChange={(event) => {setSenha(event.target.value)}} />
                     </div>
+                    {error&&<div className="text-red-600">{messageError}!</div>}
                     <button className="bg-buttonActivated p-2 w-32 text-fontButton rounded-md" onClick={() => {Login()}}>Entrar</button>
                     <Link href={ROUTES.cadastrar}> Criar conta</Link>
                 </div>
