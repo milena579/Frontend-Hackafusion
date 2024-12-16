@@ -26,6 +26,18 @@ interface IUser{
         admin     : boolean
     }
 }
+
+interface ICareerandSkill {
+    id    : number,
+    name  : string
+}
+
+interface ICareersSkills{
+    numPage       : number,
+    listObject    : ICareerandSkill[]
+    
+}
+
 export default function Profile() {
     const [isOpenHardskills, setIsOpenHardskills] = useState(false);
     const [isOpenFocoCarreira, setIsOpenFocoCarreira] = useState(false);
@@ -33,7 +45,8 @@ export default function Profile() {
     const [error,setError] = useState<boolean>(false);
 
     const [loadData, setLoadData] = useState<boolean>(false);
-
+    const [loadCarrer, setLoadCareer] =useState<boolean>(false);
+    
     const [userData, setUserData] = useState<IUser>({
         isOwner   : false,
         user      :
@@ -49,6 +62,15 @@ export default function Profile() {
         }
     });
     
+    const [carrerData, setCarrerData] = useState<ICareersSkills>({
+        numPage       : 0,
+        listObject    : []
+    })
+    const [skillData, setSkillData] = useState<ICareersSkills>({
+        numPage       : 0,
+        listObject    : []
+    })
+
     const toggleHardskills = () => {
         setIsOpenHardskills(!isOpenHardskills);
     }
@@ -63,7 +85,7 @@ export default function Profile() {
         const dataUser =  async () => {
             
             const token = sessionStorage.getItem("Token");
-            console.log(token)
+            // console.log(token)
             if(!token) {
                 alert("Sua sessão expirou. Faça login novamente");
                 router.push(ROUTES.login);
@@ -79,12 +101,11 @@ export default function Profile() {
                     },
                 });
 
-                
-                console.log(response);
+                // console.log(response);
     
                 const data: IUser = await response.json();
                 setUserData(data);
-                console.log(userData.user.name)
+                // console.log(userData.user.name)
                 setError(false)
                 
             } catch (error) {
@@ -97,6 +118,75 @@ export default function Profile() {
 
         dataUser();
     }, [])
+
+    useEffect(() => {
+        const dataCareer = async () => {
+
+            const token = sessionStorage.getItem("Token");
+            
+            if(!token) {
+                alert("Sua sessão expirou. Faça login novamente");
+                router.push(ROUTES.login);
+                setError(true);
+                return;
+            }
+            try {
+                const response =  await fetch ("http://localhost:8080/career/user/0", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token
+                    },
+                });
+    
+                const data: ICareersSkills = await response.json();
+                setCarrerData(data);
+                setError(false)
+                
+            } catch (error) {
+                console.log("Erro ao buscar os dados de carreira:", error);
+                setError(true);
+            }
+
+            setLoadCareer(true);
+        }
+        dataCareer();
+    }, [])
+
+    useEffect(() => {
+        const dataSkills = async () => {
+
+            const token = sessionStorage.getItem("Token");
+            
+            if(!token) {
+                alert("Sua sessão expirou. Faça login novamente");
+                router.push(ROUTES.login);
+                setError(true);
+                return;
+            }
+            try {
+                const response =  await fetch ("http://localhost:8080//ability/user/0", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token
+                    },
+                });
+    
+                const data: ICareersSkills = await response.json();
+                setSkillData(data);
+                setError(false)
+                
+            } catch (error) {
+                console.log("Erro ao buscar os dados de carreira:", error);
+                setError(true);
+            }
+
+            setLoadCareer(true);
+        }
+        dataSkills();
+    }, [])
+
 
     return (
         <>
@@ -115,13 +205,12 @@ export default function Profile() {
                         )} */}
                     </h1>
                 </div>
-
-                    <div className="flex flex-wrap gap-2 md:gap-5 justify-center">
-                        <Skill cor={"blueLight"} title={"Design"} ></Skill>
-                        <Skill cor={"blueLight"} title={"Design"} ></Skill>
-                        <Skill cor={"blueLight"} title={"Design"} ></Skill>
-                        <Skill cor={"blueLight"} title={"Design"} ></Skill>
-                        <Skill cor={"blueLight"} title={"Design"} ></Skill>
+                    <div className="flex flex-wrap gap-2 md:gap-5 just{ify-center">
+                        {loadCarrer && carrerData.listObject.map((item) => {
+                            return(
+                                <Skill key={item.id} cor={"blueLight"} title={item.name} ></Skill>
+                            )
+                        })}
                         <Link href={'/focoCarreira/creuza sla oq souza'} className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300 rounded py-2 px-4 text-fontButton">Ver mais</Link>
                     </div>
                 </div>
@@ -136,11 +225,11 @@ export default function Profile() {
                         )} */}
                     </h1>
                     <div className="flex flex-wrap gap-2 md:gap-5 justify-center">
-                        <Skill cor={"blueLight"} title={"Design"} ></Skill>
-                        <Skill cor={"blueLight"} title={"Design"} ></Skill>
-                        <Skill cor={"blueLight"} title={"Design"} ></Skill>
-                        <Skill cor={"blueLight"} title={"Design"} ></Skill>
-                        <Skill cor={"blueLight"} title={"Design"} ></Skill>
+                         {loadCarrer && skillData.listObject.map((item) => {
+                            return(
+                                <Skill key={item.id} cor={"blueLight"} title={item.name}></Skill>
+                            )
+                        })}
                         <Link href={'/hardskills/creuza sla oq souza'} className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300 rounded py-2 px-4 text-fontButton">Ver mais</Link>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Modal from "./modal";
 import pessoa from "../../public/pessoa.jpeg";
 import { tree } from "next/dist/build/templates/app-page";
+import { stdout } from "process";
 
 interface IProfile {
     image?: string;
@@ -31,14 +32,14 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
 
     const [error,setError] = useState<boolean>(false);
 
-    const [imageSelected,setImageSelected] = useState<FileList | null>(null);
+    // const [imageSelected,setImageSelected] = useState<FileList | null>(null);
 
-    const uploadImage = (files: FileList) =>{
+    // const uploadImage = (files: FileList) =>{
        
-        if(files.length > 0){ 
-            setImage(files[0]);
-        }
-    }
+    //     if(files.length > 0){ 
+    //         setImage(files[0]);
+    //     }
+    // }
 
     const editProfile = async () => {
         console.log(nameUse);
@@ -51,26 +52,35 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
         }
 
         try {
-            const formData = new FormData();
+            // const formData = new FormData();
 
-            formData.append("name", nameUse);
-            formData.append("email", emailUse);
-            formData.append("EDV", edvUse);
-            formData.append("phone", telefoneUse);
-            formData.append("student", adminUse.toString());
+            // formData.append("name", nameUse);
+            // formData.append("email", emailUse);
+            // formData.append("EDV", edvUse);
+            // formData.append("phone", telefoneUse);
+            // formData.append("student", adminUse.toString());
     
-            if (imageUse) {
-                formData.append("file", imageUse);
-            }
+            // if (imageUse) {
+            //     formData.append("file", imageUse);
+            // }
 
             console.log(imageUse)
 
             const response =  await fetch("http://localhost:8080/user", {
                 method: "PUT",
                 headers:{
+                    'Content-Type': 'application/json',
                     Authorization: token
                 },
-                body: formData
+                body: JSON.stringify(
+                    {
+                        name: nameUse,
+                        email: emailUse,
+                        EDV: edvUse,
+                        phone: telefoneUse,
+                        student: adminUse
+                    }
+                )
             });
 
             console.log(nameUse);
@@ -114,22 +124,22 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
                         <div className="flex flex-col w-full px-5 justify-center">
                             <div className="flex flex-col justify-center lg:w-56">
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Nome</h1>
-                                <h2 className="text-fontTitle dark:text-fontTitleDark md:text-lg">{name}</h2>
+                                <h2 className="text-fontTitle dark:text-fontTextDark md:text-lg">{name}</h2>
                             </div>
                             <div className="flex flex-col justify-center lg:w-56">
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Email</h1>
-                                <h2 className="text-fontTitle dark:text-fontTitleDark md:text-lg">{email}</h2>
+                                <h2 className="text-fontTitle dark:text-fontTextDark md:text-lg">{email}</h2>
                             </div>
                         </div>
 
                         <div className="flex flex-col w-full px-5 justify-center">
                             <div className="flex flex-col justify-center lg:w-56">
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">EDV</h1>
-                                <h2 className="text-fontTitle dark:text-fontTitleDark md:text-lg">{edv}</h2>
+                                <h2 className="text-fontTitle dark:text-fontTextDark md:text-lg">{edv}</h2>
                             </div>
                             <div className="flex flex-col justify-center lg:w-56">
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Telefone</h1>
-                                <h2 className="text-fontTitle dark:text-fontTitleDark md:text-lg">{telefone}</h2>
+                                <h2 className="text-fontTitle dark:text-fontTextDark md:text-lg">{telefone}</h2>
                             </div>
                         </div>
                     </div>
@@ -139,8 +149,8 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
             {/* Modal de editar perfil */}
             <Modal isOpen={isOpenEdit} onClose={toggleEdit} title="Editar perfil">
                 <div className="flex overflow-auto flex-col justify-center items-center">
-                <input type="file" id="myFileField" onChange={(event) => {setImageSelected(event.target.files)}}/>
-                <button onClick={() =>{if(imageSelected!==null){uploadImage(imageSelected)}}}>Upload image</button>
+                {/* <input type="file" id="myFileField" onChange={(event) => {setImageSelected(event.target.files)}}/> */}
+                {/* <button onClick={() =>{if(imageSelected!==null){uploadImage(imageSelected)}}}>Upload image</button> */}
                     <Image src={image || pessoa} alt="profile" width={100} height={100} className="rounded-full w-52 p-3" priority />
 
                     <div className="flex justify-center items-center">
@@ -152,7 +162,7 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
                                     type="text"
                                     value={nameUse}
                                     onChange={(e) => {setName(e.target.value)}}
-                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12"
+                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />
                             </div>
 
@@ -162,7 +172,7 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
                                     type="text"
                                     value={emailUse}
                                     onChange={(e) => {setEmail(e.target.value)}}
-                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12"
+                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />
                             </div>
 
@@ -172,7 +182,7 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
                                     type="text"
                                     value={edvUse}
                                     onChange={(e) => {setEdv(e.target.value)}}
-                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12"
+                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />
                             </div>
 
@@ -182,12 +192,12 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
                                     type="text"
                                     value={telefoneUse}
                                     onChange={(e) => {setTel(e.target.value)}}
-                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12"
+                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />
                             </div>
 
                             <div className="flex flex-row gap-3">
-                                <label htmlFor="">Atualmente Aprendiz</label>
+                                <label htmlFor="" className="dark:text-fontTextDark">Atualmente Aprendiz</label>
                                 <input type="checkbox" />
                             </div>
 
