@@ -1,18 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "./card";
 import { CardChat } from "./cardChat";
 import { ChatPerson } from "./chatPerson";
 import { Message } from "./message";
+import axios from "axios";
 
-interface IChat {
-
+interface IUser {
+    id: number,
+    name: string,
+    edv: string,
+    email: string,
+    telefone: string,
+    image: string,
+    student: boolean,
+    admin: boolean
 }
 
 export const ChatPrivate = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenPerson, setIsOpenPerson] = useState(false);
+    const [searchPerson, setSearchPerson] = useState('');
+    const [error, setError] = useState(false);
+    const [messageError, setMessageError] = useState('');
+    const [userArray, setUserArray] = useState<IUser[]>([]);
     
     const openChat = () => {
         setIsOpen(!isOpen);
@@ -27,6 +39,59 @@ export const ChatPrivate = () => {
 
     const sendMessage = () => {
         console.log('Mensagem enviada!')
+    }
+
+    useEffect (() => {
+        const getAllUsers = async () => {
+            const jwt = sessionStorage.getItem('Token');
+    
+            try {
+                const response = await axios.get(`http://localhost:8080/chat` , {
+                    headers: {
+                        Authorization: `${jwt}`
+                    }
+                });
+                console.log(response.data);
+                setError(false);
+                setUserArray(response.data.listObject);
+            } catch (error) {
+                console.log("Error: ", error);
+                setError(true);
+                setMessageError('Erro ao buscar usuários');
+            }
+        };
+        getAllUsers();
+    }, []);
+
+
+
+    // Requisição para a pesquisa de users
+    const searchUsers = async () => {
+        if (searchPerson == "") {
+            // Só não envia a requisição
+            return
+        }
+
+        const jwt = sessionStorage.getItem('Token');
+
+        try {
+            const response = await axios.get(`http://localhost:8080/chat` , {
+                params: {
+                    page: 0,
+                    size: 10000,
+                    query: searchPerson
+                },
+                headers: {
+                    Authorization: `${jwt}`
+                }
+            });
+            console.log(response.data);
+            setError(false);
+        } catch (error) {
+            console.log("Error: ", error);
+            setError(true);
+            setMessageError('Erro ao buscar usuários');
+        }
     }
 
     return (
@@ -85,23 +150,18 @@ export const ChatPrivate = () => {
                         ) : !isOpenPerson ? (
                             <>
                                 <div className="flex flex-row items-center md:w-72 w-60">
-                                    <input type="text" className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 h-10" placeholder="Pesquise uma pessoa"/>
-                                    <button>
+                                    {error &&  (
+                                        <h1 className="text-fontGrey text-lg dark:text-fontGreyDark md:text-lg">{messageError}</h1>
+                                    )}
+                                    <input value={searchPerson} onChange={(e) => setSearchPerson(e.target.value)} type="text" className="text-fontText dark:text-fontTextDark border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 h-10" placeholder="Pesquise uma pessoa"/>
+                                    <button onClick={searchUsers}>
                                         <svg className="w-8 text-fontGrey dark:text-fontGreyDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
                                     </button>
                                 </div>
                                 <div className="flex flex-col w-full px-3 gap-3 overflow-auto mt-2">
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
+                                    {userArray.map((user : IUser) => (
+                                        <CardChat title={user.name} height="5" width="full" redirect={openChatPerson} image={user.image} classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
+                                    ))}
                                 </div>
                             </>
                         ): null}

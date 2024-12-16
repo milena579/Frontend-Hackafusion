@@ -42,10 +42,10 @@ export default function Login() {
                 sessionStorage.setItem("Token", "Bearer " +  result.token)
                 sessionStorage.setItem("Admin", result.admin)
                 setError(false);
-                setEdv("")
-                setSenha("")
+                setEdv("");
+                setSenha("");
                 
-                alert(result.message)
+                // alert(result.message)
 
                 router.push(ROUTES.forum);
             }

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "-hackthon": "file:",
+    "axios": "^1.7.9",
     "clsx": "^2.1.1",
     "material": "^0.9.20",
     "next": "15.0.3",
