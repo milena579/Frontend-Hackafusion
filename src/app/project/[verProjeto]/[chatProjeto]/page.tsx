@@ -94,7 +94,13 @@ export const chatProjeto = () => {
                 description:message
             })
         }).then((res)=>{
-            console.log(res)
+            if(res.status==400){
+                router.push(ROUTES.login)
+                return
+            }
+
+            loadChat()
+            
         })
     }
 

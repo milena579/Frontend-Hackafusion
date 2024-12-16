@@ -16,7 +16,7 @@ export const Message = ({ author, text, file, imagePerson } : IMessage) => {
             <div className="flex items-center flex-col bg-blueLight dark:bg-blueLightDark p-2 rounded-md shadow max-w-3xl">
                 <div className="flex items-center self-start gap-3">
                     {imagePerson ? (
-                        <Image src={imagePerson} alt="logo" width={50} height={30} className="rounded-full"/>
+                        <Image src={imagePerson} loader={()=>imagePerson} alt="logo" width={50} height={30} className="rounded-full"/>
                     ) : (
                         <Image src={pessoa} alt="logo" width={50} height={30} className="rounded-full"/>
                     )}
