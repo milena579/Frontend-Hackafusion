@@ -6,8 +6,48 @@ import { Menu } from "@/components/menu";
 import { Message } from "@/components/message";
 import { ROUTES } from "@/constants/routes";
 import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+
+interface ITopic{
+    id:Number,
+    name:string,
+    description:string
+}
+
 
 export default function ChatDiscussoes(){
+
+    const router = useRouter();
+
+    const params = useParams<{redirect:string}>()
+    
+    const [project,setProject] = useState<ITopic>();
+
+
+    const load = async()=>{
+        await fetch(`http://localhost:8080/topic/${params.redirect}`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string
+            }
+        })
+        .then((res)=>{
+            if(res.status === 403){
+                router.push(ROUTES.login)
+            }
+            console.log(res);
+            res.json().then((data)=>{
+                setProject(data)
+            })
+        })
+    }
+
+    useEffect(()=>{
+        load()
+    },[])
+
     const sendMessage = () => {
         console.log('Mensagem enviada!');
     }
@@ -27,10 +67,10 @@ export default function ChatDiscussoes(){
 
                     <h1>&gt;</h1>
 
-                    <h1>Java</h1>
+                    <h1>{project?.name}</h1>
                 </div>
 
-                <h1 className="flex text-fontGrey md:hidden dark:text-fontGreyDark font-semibold mb-3 text-lg">Nome da discussão</h1>
+                <h1 className="flex text-fontGrey md:hidden dark:text-fontGreyDark font-semibold mb-3 text-lg">{project?.name}</h1>
 
 
                 <div className="flex w-full justify-center">
