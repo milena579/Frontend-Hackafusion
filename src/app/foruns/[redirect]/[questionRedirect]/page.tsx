@@ -22,13 +22,15 @@ interface IData {
 }
 
 const ForumId = async ({params: {id}} : IForum) => {
+    const upVote = 50;
+    const downVote = 12;
     // const res = await fetch('blablablaLinkBackend');
     // const data : IData[] = (await res.json()).items // Ver qual é o nome do retorno dps e mudar o .items
     // const {redirect} = useParams() // Da erro por causa do async e do use client
 
     return (
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <div className="flex flex-col md:p-8 p-2 items-center justify-center">
                 <div className="md:flex text-fontGrey dark:text-fontGreyDark gap-5 self-start px-10 font-semibold hidden">
                     <Link href={ROUTES.forum}>
@@ -45,19 +47,8 @@ const ForumId = async ({params: {id}} : IForum) => {
                 </div>
                 <div className="flex w-10/12 flex-col">
                     <Question name={"Jurema linda"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Título da pergunta"} ></Question>
-                    {/* <div className="mt-5 mb-3">
-                        <Link href={ROUTES.profile} className="flex items-center gap-2">
-                            <Image src={pessoa} alt="logo" width={50} height={30} className="rounded-full "/>
-                            <h1 className="text-fontText font-semibold text-lg dark:text-fontTextDark">Jurema linda</h1>
-                        </Link>
-                    </div>
-                    <hr /> */}
+
                     <div className="md:px-14 py-5">
-                        {/* <h1 className="text-fontText font-semibold text-xl dark:text-fontTextDark">Título da pergunta</h1>
-                        <div>
-                            <p className="p-3 dark:text-fontTextDark text-fontText">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et molestiae culpa perspiciatis ea ratione nisi veniam nesciunt nobis, nostrum iste aliquam, totam rem! Ducimus debitis iusto doloremque blanditiis a nesciunt. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim vero illum aliquam eaque nulla, et placeat provident velit voluptates cum dolorem natus quo suscipit inventore esse numquam vel ipsa qui.</p>
-                        </div>
-                        <hr /> */}
 
                         <div className="flex mb-8 items-center md:gap-3 gap-1 w-full">
                             <Link href={ROUTES.profile} className="flex items-center gap-2">
@@ -70,19 +61,19 @@ const ForumId = async ({params: {id}} : IForum) => {
                             </button>
                         </div>
                         <div className="flex mt-4 flex-col gap-8">
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
-                            <Answer breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
+                            <Answer redirect={`/profile/juremaLinda`} upVote={upVote} downVote={downVote} breakLine={true} image="" name="Pessoa aleatória" answer="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas, minus ea delectus, aspernatur necessitatibus sint repellendus harum laborum voluptas vitae ab quis nisi, iusto excepturi! Corrupti tenetur amet omnis animi."></Answer>
                         </div>
                     </div>
                 </div>

@@ -15,10 +15,10 @@ export default function FeedbackProject() {
 
     return (
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <SeeMore redirect="/project/iot" title="Feedbacks do projeto" button="Adicionar skill" isAdmin={true}>
                 <button onClick={toggleModal} className="flex self-end items-center justify-center bg-buttonActivated dark:bg-buttonActivatedDark px-5 py-2 dark:hover:bg-buttonActivatedHoverDark transition-colors duration-200 rounded-md shadow-lg">
-                    <h1 className="text-fontTitle dark:text-fontTitleDark font-semibold text-md">Dar feedback</h1>
+                    <h1 className="text-fontButton font-semibold text-md">Dar feedback</h1>
                 </button>
                 <div className="flex gap-3 flex-wrap justify-center mt-3 items-center w-full">
                     <Card image="" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Adorei esse projeto, é muito bom de vdd, deveriam ter mais como esse! Aprendi muito" height="130px" width="40vw"></Card>

@@ -11,7 +11,8 @@ import { ROUTES } from "@/constants/routes";
 import { useState } from "react";
 
 export default function interactions() {
-    const isAdmin = true;
+    const isAdmin = false;
+    const isStudent = true;
     const [option, setOption] = useState(1);
 
     const clickQuestion = () => {
@@ -31,8 +32,8 @@ export default function interactions() {
         <>
             {option == 1 ? (
                 <>
-                    <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-                    <ProfileComponent isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
+                    <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+                    <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
                     <SeeMore redirect={ROUTES.profile} title="Interações" button="Adicionar skill" isAdmin={isAdmin}>
                         <div className="flex flex-col md:px-10 items-center justify-center">
                             <div className="flex self-start gap-3 md:gap-10 mt-5 relative mb-5">
@@ -55,8 +56,8 @@ export default function interactions() {
                 </>
             ) : option == 2 ? (
                 <>
-                    <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-                    <ProfileComponent isAdmin={true} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
+                    <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+                    <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
                     <SeeMore redirect={ROUTES.profile} title="Interações" button="Adicionar skill" isAdmin={true}>
                     <div className="flex flex-col md:px-10 items-center justify-center">
                            <div className="flex self-start gap-3 md:gap-10 mt-5 relative mb-5">
@@ -67,23 +68,23 @@ export default function interactions() {
                             <div className="flex gap-3 max-w-[90%] flex-wrap justify-center mt-3">
                                 <div className="flex flex-col items-center">
                                     <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                    <Answer image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} ></Answer>
+                                    <Answer redirect={`/profile/juremaLinda`} image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} ></Answer>
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                    <Answer image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} ></Answer>
+                                    <Answer redirect={`/profile/juremaLinda`} image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} ></Answer>
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                    <Answer image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} ></Answer>
+                                    <Answer redirect={`/profile/juremaLinda`} image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} ></Answer>
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                    <Answer image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} ></Answer>
+                                    <Answer redirect={`/profile/juremaLinda`} image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} ></Answer>
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                    <Answer image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} ></Answer>
+                                    <Answer redirect={`/profile/juremaLinda`} image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} ></Answer>
                                 </div>
 
                             </div>
@@ -93,8 +94,8 @@ export default function interactions() {
                 </>
             ) : option == 3 ? (
                 <>
-                    <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-                    <ProfileComponent isAdmin={true} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
+                    <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+                    <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
                     <SeeMore redirect={ROUTES.profile} title="Interações" button="Adicionar skill" isAdmin={true}>
                     <div className="flex flex-col md:px-10 items-center justify-center w-full">
                            <div className="flex self-start gap-3 md:gap-10 mt-5 relative mb-5 w-full">

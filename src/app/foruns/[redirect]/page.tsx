@@ -25,7 +25,7 @@ const ForumId = async ({params: {id}} : IForum) => {
 
     return (
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <div className="flex flex-col p-8 items-center justify-center">
                 <div className="flex text-fontGrey dark:text-fontGreyDark gap-5 self-start px-10 font-semibold">
                     <Link href={ROUTES.forum}>
@@ -36,7 +36,7 @@ const ForumId = async ({params: {id}} : IForum) => {
                         {/* <h1>{redirect}</h1> */}
                         <h1>Nome do fórum</h1>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center mt-3">
                     <div className="flex gap-4 flex-col items-center">
                         <Card cor="bg-blueLight" classTitle="font-semibold text-lg" title="Pq java é tão feio?" description="Java é uma linguagem deprogramação horrível, odeio java, é péssimo, só é meio bom pra backend, mas pra qualquer outra coisa é ruim, então queria saber pq ele é tão ruim assim? aaaaaaa n sei oq escrever preciso que o texto seja longo mds quanta palavra socorro aaaaa n aguento mais vou morrer preciso de muitas palavras aaaaa Java é uma linguagem deprogramação horrível, odeio java, é péssimo, só é meio bom pra backend, mas pra qualquer outra coisa é ruim, então queria saber pq ele é tão ruim assim? aaaaaaa n sei oq escrever preciso que o texto seja longo mds quanta palavra socorro aaaaa n aguento mais vou morrer preciso de muitas palavras aaaaa" redirect={`/foruns/java/Pq java é tão feio?`} height="80px" width="70vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
                         <Card cor="bg-blueLight" classTitle="font-semibold text-lg" title="Pq java é tão feio?" description="Java é uma linguagem deprogramação horrível, odeio java, é péssimo, só é meio bom pra backend, mas pra qualquer outra coisa é ruim, então queria saber pq ele é tão ruim assim? aaaaaaa n sei oq escrever preciso que o texto seja longo mds quanta palavra socorro aaaaa n aguento mais vou morrer preciso de muitas palavras aaaaa Java é uma linguagem deprogramação horrível, odeio java, é péssimo, só é meio bom pra backend, mas pra qualquer outra coisa é ruim, então queria saber pq ele é tão ruim assim? aaaaaaa n sei oq escrever preciso que o texto seja longo mds quanta palavra socorro aaaaa n aguento mais vou morrer preciso de muitas palavras aaaaa" redirect={`/foruns/java/Pq java é tão feio?`} height="80px" width="70vw"></Card> {/* Colocar o caminho baseado no nome do forum */}

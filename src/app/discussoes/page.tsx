@@ -10,7 +10,7 @@ export default function Discussoes (){
     
     return(
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
              <div className="flex flex-col p-5 items-center justify-center">
                 <div className="flex flex-row gap-2 w-9/12 min-w-72 mt-5 md:gap-5 items-center">
                     <h1 className="text-fontGrey text-xl dark:text-fontGreyDark md:text-1xl">Discussões</h1>
@@ -53,10 +53,10 @@ export default function Discussoes (){
                     </div>
                     {/* <div className="flex gap-5 mt-8 absolute bottom-1/4"> */}
                     <div className="flex gap-5 mt-8">
-                        <button className="bg-buttonDesabled py-1 px-5 w-28 cursor-default">
+                        <button className="bg-buttonDesabled rounded py-1 px-5 w-28 cursor-default">
                             <h2 className="text-fontButton">Voltar</h2>
                         </button>
-                        <button className="bg-buttonActivated py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200">
+                        <button className="bg-buttonActivated rounded py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200">
                             <h2 className=" text-fontButton">Avançar</h2>
                         </button>
                     </div>
