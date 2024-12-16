@@ -1,15 +1,11 @@
 "use client"
 
 import { Menu } from "@/components/menu";
-import { CardProjeto } from "@/components/cardProject";
 import { ROUTES } from "@/constants/routes"
-import Link from "next/link";
 import { ChatPrivate } from "@/components/chatPrivate";
 import { useEffect, useState } from "react";
 import { Card } from "@/components/card";
 import { useRouter } from "next/navigation";
-import { time } from "console";
-import { it } from "node:test";
 
 interface IProject{
     id:Number,
@@ -78,6 +74,7 @@ export default function Projeto(){
 
     return(
         <>
+        
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <div className="flex px-16 items-center flex-col gap-4">
                 <div className="flex items-center w-8/12 py-8 px-14 justify-center ">
@@ -93,8 +90,8 @@ export default function Projeto(){
                             <button onClick={clickProject} className="text-lg text-fontGrey dark:text-fontGreyDark transition-all duration-300 relative before:content-[''] before:block before:w-full before:h-[2px] before:bg-fontGrey dark:before:bg-fontGreyDark before:absolute before:bottom-0">Todos os projetos</button>
                             <button onClick={clickMyProject} className="text-lg text-fontGrey dark:text-fontGreyDark transition-all duration-300 relative hover:before:content-[''] hover:before:block hover:before:w-full hover:before:h-[2px] hover:before:bg-fontGrey dark:hover:before:bg-fontGreyDark hover:before:absolute hover:before:bottom-0">Meus projetos</button>
                             </div>
-                            {/* <button onClick={toggleModal} className="p-2 bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300 rounded text-fontButton">Novo projeto</button> */}
-                            <Link href={ROUTES.novoProjeto}><button className="p-2 bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300 rounded text-fontButton" >Novo Projeto</button></Link>
+                            <button onClick={toggleModal} className="p-2 bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300 rounded text-fontButton">Novo projeto</button>
+                            {/* <Link href={ROUTES.novoProjeto}><button className="p-2 bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300 rounded text-fontButton" >Novo Projeto</button></Link> */}
                         </div>
                         <div className="flex flex-col w-9/12 items-center px-14 gap-3">
                             {data.map((item)=>{
