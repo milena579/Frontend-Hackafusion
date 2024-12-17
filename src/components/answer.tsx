@@ -22,7 +22,7 @@ export const Answer = ({name, image, answer, breakLine} : IAnswer) => {
             </div>
             <div className="flex gap-2 flex-col px-1">
                 <div className="flex items-center gap-3">
-                    {image == null ? <p>{image}</p> : <Image src={pessoa} alt="pessoa" width={50} height={30} className="rounded-full"></Image>}
+                    {image == null ? <p>{image}</p> : <Image src={image} loader={()=>image} alt="pessoa" width={50} height={30} className="rounded-full"></Image>}
                     <h1 className="text-fontText font-semibold text-lg dark:text-fontTextDark">{name}</h1>
                 </div>
                 <div>

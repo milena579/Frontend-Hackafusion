@@ -27,7 +27,7 @@ interface ICard {
     toggleFavorite?: () => void; // Para mudar o favorito (estrela pintada ou não)
 }
 
-export const Card = ({ cor, title, redirect, width, height, description, classTitle, image, classExtra, display=true, favorite, star, toggleFavorite } : ICard) => {
+export const Card = ({cor, title, redirect, width, height, description, classTitle, image, classExtra, display=true, favorite, star, toggleFavorite } : ICard) => {
     const heightValue = parseInt(height); // Converte a altura para um número inteiro pq ele vem como string;
     const heightColor = heightValue - 1;
 

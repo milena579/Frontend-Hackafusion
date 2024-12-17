@@ -47,7 +47,7 @@ const ForumId = () => {
 
     const nextPage = () => {
         console.log(page)
-        if(page < questions.numPage)
+        if(page === questions.numPage)
             return
         setPage(page+1)
     }
@@ -60,7 +60,7 @@ const ForumId = () => {
     
     const loasQuestions = async() => {
         await fetch(
-            `http://localhost:8080/question/${1}?page=${page}&size=${10}`,
+            `http://localhost:8080/question?idForum=${idForum}&page=${page}&size=${10}`,
             {
                 method: 'GET',
                 headers: {
@@ -106,6 +106,7 @@ const ForumId = () => {
                             questions.listObject.map((item) => {
                                 return(
                                     <Card 
+                                    key={item.id}
                                     cor="bg-blueLight" 
                                     classTitle="font-semibold text-lg" 
                                     title={`${item.title}`}
