@@ -26,7 +26,10 @@ export const Answer = ({ name, image, answer, breakLine, upVote, downVote, redir
             </div>
             <div className="flex gap-2 flex-col px-1">
                 <Link href={`${redirect}`} className="flex items-center gap-3">
-                    {image == null ? <p>{image}</p> : (
+                    {image != null ? (
+                        <Image src={image} loader={()=>image} alt="pessoa" width={50} height={30} className="rounded-full"></Image>
+                    ) 
+                    : (
                             <Image src={pessoa} alt="pessoa" width={50} height={30} className="rounded-full"></Image>
                         )}
                     <h1 className="text-fontText font-semibold text-lg dark:text-fontTextDark">{name}</h1>

@@ -8,7 +8,56 @@ import { ProfileComponent } from "@/components/profile";
 import { Question } from "@/components/question";
 import SeeMore from "@/components/seeMore";
 import { ROUTES } from "@/constants/routes";
-import { useState } from "react";
+import { count } from "console";
+import { useParams } from "next/navigation";
+import { it } from "node:test";
+import { useEffect, useState } from "react";
+
+interface Iuser{
+    id        : string,
+    name      : string,
+    edv       : string,
+    email     : string,
+    telefone  : string,
+    image     : string,
+    student   : boolean,
+    admin     : boolean
+}
+
+interface Iforum{
+    id:number,
+    name:string,
+    description:string
+}
+
+interface Ianwser{
+    id:number,
+    description:string,
+    user:Iuser,
+    votes:{id:number,up:boolean}[]
+}
+
+interface IquestionsProfile{
+    idQiestion : number,
+    title : string,
+    description : string,
+    forum : Iforum,
+    user : Iuser
+}
+
+interface IAnwswerProfile{
+    idQiestion : number,
+    title : string,
+    description : string,
+    forum : Iforum,
+    user : Iuser,
+    answer:Ianwser
+}
+interface Itopic{
+    id:number,
+    name:string,
+    description:string
+}
 
 export default function interactions() {
     const isAdmin = false;
@@ -27,13 +76,68 @@ export default function interactions() {
         setOption(3);
     }
 
+        ///Questions
+    const params = useParams<{seeMore:string}>()
+
+    const [question,setQuestion] = useState<IquestionsProfile[]>([])
+    const [answers,setAnswers] = useState<IAnwswerProfile[]>([])
+    const [topics,setTopics] = useState<Itopic[]>([])
+
+    const loadQuestion = async()=>{
+        await fetch(`http://localhost:8080/user/interactions/question/${params.seeMore}?page=1&size=5`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string,
+            },
+        }).then((res)=>{
+            res.json().then((item)=>{
+                setQuestion(item.listObject)
+            })
+        })
+    }
+
+    const loadAnwser = async()=>{
+        await fetch(`http://localhost:8080/user/interactions/anwser/${params.seeMore}?page=1&size=5`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string,
+            },
+        }).then((res)=>{
+            console.log(res)
+            res.json().then((item)=>{
+                setAnswers(item.listObject)
+            })
+        })
+    }
+
+
+    const loadTopic = async()=>{
+        await fetch(`http://localhost:8080/user/interactions/topic/${params.seeMore}?page=1&size=5`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string,
+            },
+        }).then((res)=>{
+            console.log(res)
+            res.json().then((item)=>{
+                setTopics(item.listObject)
+            })
+        })
+    }
+
+    useEffect(()=>{
+        loadQuestion()
+        loadAnwser()
+        loadTopic()
+    },[])
+
 
     return (
         <>
             {option == 1 ? (
                 <>
                     <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-                    <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} isOnwer={null}></ProfileComponent >
+                    <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} isOnwer={true}></ProfileComponent >
                     <SeeMore redirect={ROUTES.profile} title="Interações" button="Adicionar skill" isAdmin={isAdmin}>
                         <div className="flex flex-col md:px-10 items-center justify-center">
                             <div className="flex self-start gap-3 md:gap-10 mt-5 relative mb-5">
@@ -42,13 +146,11 @@ export default function interactions() {
                                 <button onClick={clickDiscussions} className="text-lg text-fontGrey dark:text-fontGreyDark transition-all duration-300 relative hover:before:content-[''] hover:before:block hover:before:w-full hover:before:h-[2px] hover:before:bg-fontGrey dark:hover:before:bg-fontGreyDark hover:before:absolute hover:before:bottom-0">Discussões</button>
                             </div>
                             <div className="flex gap-3 w-full flex-wrap justify-center mt-3 items-center">
-
-                                <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                            
+                                {question.map((item)=>{
+                                    return(
+                                        <Question forum={item.forum.name} name={item.user.name} question={item.description} title={item.title} ></Question>
+                                    )
+                                })}
                             </div>
 
                         </div>
@@ -66,27 +168,15 @@ export default function interactions() {
                                 <button onClick={clickDiscussions} className="text-lg text-fontGrey dark:text-fontGreyDark transition-all duration-300 relative hover:before:content-[''] hover:before:block hover:before:w-full hover:before:h-[2px] hover:before:bg-fontGrey dark:hover:before:bg-fontGreyDark hover:before:absolute hover:before:bottom-0">Discussões</button>
                             </div>
                             <div className="flex gap-3 max-w-[90%] flex-wrap justify-center mt-3">
-                                <div className="flex flex-col items-center">
-                                    <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                    <Answer redirect={`/profile/juremaLinda`} image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} upVote={0} downVote={0} ></Answer>
-                                </div>
-                                <div className="flex flex-col items-center">
-                                    <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                    <Answer redirect={`/profile/juremaLinda`} image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} upVote={0} downVote={0} ></Answer>
-                                </div>
-                                <div className="flex flex-col items-center">
-                                    <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                    <Answer redirect={`/profile/juremaLinda`} image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} upVote={0} downVote={0} ></Answer>
-                                </div>
-                                <div className="flex flex-col items-center">
-                                    <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                    <Answer redirect={`/profile/juremaLinda`} image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} upVote={0} downVote={0} ></Answer>
-                                </div>
-                                <div className="flex flex-col items-center">
-                                    <Question forum="Java" name={"Creuza sla oq souza"} question={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} title={"Titulo da pergunta"} ></Question>
-                                    <Answer redirect={`/profile/juremaLinda`} image="" name={"Creuza sla oq souza"} answer={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"} breakLine={true} upVote={0} downVote={0} ></Answer>
-                                </div>
-
+                                {answers.map((item)=>{
+                                    return(
+                                        <div className="flex flex-col items-center">
+                                            <Question forum={item.forum.name} name={item.user.name} question={item.description} title={item.title} ></Question>
+                                            <Answer redirect={`/profile/${item.answer.user.id}`} image={item.answer.user.image} name={item.answer.user.name} answer={item.answer.description} breakLine={true} upVote={item.answer.votes.length} downVote={0} ></Answer>
+                                        </div>
+                                    )
+                                })}
+                        
                             </div>
 
                         </div>
@@ -104,15 +194,11 @@ export default function interactions() {
                                 <button onClick={clickDiscussions} className="text-lg text-fontGrey dark:text-fontGreyDark transition-all duration-300 relative before:content-[''] before:block before:w-full before:h-[2px] before:bg-fontGrey dark:before:bg-fontGreyDark before:absolute before:bottom-0">Discussões</button>
                             </div>
                             <div className="flex gap-3 max-w-[90%] flex-wrap justify-center mt-3 w-full">
-                                <Card redirect="/discussoes/java" title={"Java"} width={"87vw"} height={"60px"} cor="bg-blueMiddle" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"></Card>
-                                <Card redirect="/discussoes/java" title={"Java"} width={"87vw"} height={"60px"} cor="bg-blueMiddle" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"></Card>
-                                <Card redirect="/discussoes/java" title={"Java"} width={"87vw"} height={"60px"} cor="bg-blueMiddle" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"></Card>
-                                <Card redirect="/discussoes/java" title={"Java"} width={"87vw"} height={"60px"} cor="bg-blueMiddle" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"></Card>
-                                <Card redirect="/discussoes/java" title={"Java"} width={"87vw"} height={"60px"} cor="bg-blueMiddle" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"></Card>
-                                <Card redirect="/discussoes/java" title={"Java"} width={"87vw"} height={"60px"} cor="bg-blueMiddle" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"></Card>
-                                <Card redirect="/discussoes/java" title={"Java"} width={"87vw"} height={"60px"} cor="bg-blueMiddle" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"></Card>
-                                <Card redirect="/discussoes/java" title={"Java"} width={"87vw"} height={"60px"} cor="bg-blueMiddle" description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet voluptatem asperiores, voluptatum odit repudiandae soluta, labore dolor fugit facilis voluptatibus suscipit. Tempora, blanditiis? Voluptatem provident necessitatibus recusandae saepe itaque sed?"></Card>
-                            
+                                {topics.map((item)=>{
+                                    return(
+                                        <Card redirect={`dicussoes/${item.id}`} title={item.name} width={"87vw"} height={"60px"} cor="bg-blueMiddle" description={item.description}></Card>
+                                    )
+                                })}
                             </div>
 
                         </div>

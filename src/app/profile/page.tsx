@@ -6,11 +6,12 @@ import Image from "next/image";
 import { Skill } from "@/components/skills";
 import { Card } from "@/components/card";
 import { useEffect, useState } from "react";
-import {useRouter} from "next/navigation"
+import {useParams, useRouter} from "next/navigation"
 import Modal from "@/components/modal";
 import { ProfileComponent } from "@/components/profile";
 import { ROUTES } from "@/constants/routes"
 import Link from "next/link";
+import { it } from "node:test";
 
 interface IUser{
     isOwner   : boolean,
@@ -36,6 +37,24 @@ interface ICareersSkills{
     numPage       : number,
     listObject    : ICareerandSkill[]
     
+}
+
+interface IquestionsProfile{
+    idQiestion : number,
+    title : string,
+    description:string,
+    forum:{id:number,name:string,description:string},
+    user      :
+    {
+        id        : string,
+        name      : string,
+        edv       : string,
+        email     : string,
+        telefone  : string,
+        image     : string,
+        student   : boolean,
+        admin     : boolean
+    }
 }
 
 export default function Profile() {
@@ -120,6 +139,27 @@ export default function Profile() {
         dataUser();
     }, [])
 
+
+    ///Questions
+    const params = useParams()
+
+    const [question,setQuestion] = useState<IquestionsProfile[]>([])
+
+    const loadQuestion = async()=>{
+        await fetch(`http://localhost:8080/user/interactions/question/0?page=1&size=5`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string,
+            },
+        }).then((res)=>{
+            res.json().then((item)=>{
+                setQuestion(item.listObject)
+            })
+        })
+    }
+
+
+
     useEffect(() => {
         const dataCareer = async () => {
 
@@ -152,6 +192,8 @@ export default function Profile() {
             setLoadCareer(true);
         }
         dataCareer();
+        console.log(params)
+        loadQuestion()
     }, [])
 
     useEffect(() => {
@@ -261,12 +303,12 @@ export default function Profile() {
 
                 <div className="flex flex-col w-10/12 border items-center rounded p-2 gap-4">
                     <h1 className="text-fontTitle dark:text-fontTitleDark font-semibold text-xl md:text-2xl">Interações recentes</h1>
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Comentou: Esse projeto é muito legal, adoro ele, poderiam ter mais como esse!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Comentou: Esse projeto é muito legal, adoro ele, poderiam ter mais como esse!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Comentou: Esse projeto é muito legal, adoro ele, poderiam ter mais como esse!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Comentou: Esse projeto é muito legal, adoro ele, poderiam ter mais como esse!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Comentou: Esse projeto é muito legal, adoro ele, poderiam ter mais como esse!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Link href={'/interactions/creuza sla oq souza'} className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300">Ver mais</Link>
+                    {question.map((item:IquestionsProfile)=>{
+                        return(
+                            <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title={item.forum.name} description={item.title} height="65px" width="75vw"></Card>
+                        )
+                    })}
+                    <Link href={'/interactions/0'} className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300">Ver mais</Link>
 
                 </div>
             </div>
