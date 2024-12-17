@@ -55,7 +55,7 @@ export const ChatPrivate = () => {
     }
 
     const sendFile = () => {
-        console.log('Arquivo enviado!')
+        console.log('Arquivo enviado!');
     }
 
     const sendMessage = (description: string) => {
@@ -68,14 +68,16 @@ export const ChatPrivate = () => {
             const jwt = sessionStorage.getItem('Token');
     
             try {
-                const response = await axios.get(`http://localhost:8080/chat` , {
+                const response = await fetch(`http://localhost:8080/chat`, {
                     headers: {
-                        Authorization: `${jwt}`
-                    }
+                        Authorization: `${jwt}`,
+                    },
                 });
-                // console.log(response.data);
+
+                if (!response.ok) throw new Error("Erro ao buscar usuários");
+                const data = await response.json();
                 setError(false);
-                setUserArray(response.data.listObject);
+                setUserArray(data.listObject);
             } catch (error) {
                 console.log("Error: ", error);
                 setError(true);
@@ -97,20 +99,16 @@ export const ChatPrivate = () => {
         const jwt = sessionStorage.getItem('Token');
 
         try {
-            const response = await axios.get(`http://localhost:8080/chat` , {
-                params: {
-                    page: 0,
-                    size: 10000,
-                    query: searchPerson
-                },
+            const response = await fetch(`http://localhost:8080/chat?page=0&size=1000000&query=${searchPerson}`, {
                 headers: {
-                    Authorization: `${jwt}`
-                }
+                    Authorization: `${jwt}`,
+                },
             });
-            // console.log(response.data);
-            setError(false);
-            setUserArray(response.data.listObject);
 
+            if (!response.ok) throw new Error("Erro ao buscar usuários");
+            const data = await response.json();
+            setError(false);
+            setUserArray(data.listObject);
         } catch (error) {
             console.log("Error: ", error);
             setError(true);
@@ -125,15 +123,16 @@ export const ChatPrivate = () => {
         // console.log('ID do Chat: ', id);
         // console.log(jwt)
         try {
-            const response = await axios.get(`http://localhost:8080/chat/${id}` , {
+            const response = await fetch(`http://localhost:8080/chat/${id}`, {
                 headers: {
-                    Authorization: `${jwt}`
-                }
+                    Authorization: `${jwt}`,
+                },
             });
-            console.log(response.data);
-            setError(false);
-            setMessageArray(response.data.listObject);
 
+            if (!response.ok) throw new Error("Erro ao buscar mensagens");
+            const data = await response.json();
+            setError(false);
+            setMessageArray(data.listObject);
         } catch (error) {
             console.log("Error: ", error);
             setError(true);
@@ -160,9 +159,10 @@ export const ChatPrivate = () => {
                     chatId: `${idChat}`
                 }),
             });
-            console.log(response);
+            // console.log(response);
             setError(false);
-            console.log('Enviou!')
+            // console.log('Enviou!')
+            getMessage(idChat);
 
         } catch (error) {
             console.log("Error: ", error);
@@ -171,7 +171,7 @@ export const ChatPrivate = () => {
         }
     }
 
-    console.log(messageArray);
+    // console.log(messageArray);
 
     return (
         <>  
@@ -213,7 +213,7 @@ export const ChatPrivate = () => {
                                         <div className="flex gap-2 flex-col">
                                             {Array.isArray(messageArray) && messageArray.length > 0 ? (
                                                 messageArray.map((message : IMessage) => (
-                                                    <Message key={`${message.id}-${message.user.email}`} author={message.user.name} text={message.description} imagePerson={message.user.image} />
+                                                    <Message key={`${message.id}-${message.user.email}-${message.description}`} author={message.user.name} text={message.description} imagePerson={message.user.image} />
                                                 ))
                                             ) : (
                                                 <p className="text-fontGrey text-lg dark:text-fontGreyDark md:text-lg">Nenhum usuário encontrado! Clique em 'Criar chat' no perfil de quem você gostaria de conversar!</p>

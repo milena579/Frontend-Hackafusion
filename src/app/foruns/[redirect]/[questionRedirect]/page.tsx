@@ -30,7 +30,7 @@ const ForumId = async ({params: {id}} : IForum) => {
 
     return (
         <>
-            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <div className="flex flex-col md:p-8 p-2 items-center justify-center">
                 <div className="md:flex text-fontGrey dark:text-fontGreyDark gap-5 self-start px-10 font-semibold hidden">
                     <Link href={ROUTES.forum}>

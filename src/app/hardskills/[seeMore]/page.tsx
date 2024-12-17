@@ -25,7 +25,7 @@ export default function hardskills() {
 
     return (
         <>
-            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} isOnwer={false} ></ProfileComponent >
             <SeeMore redirect={ROUTES.profile} title="HardSkills" toggleAdd={toggleAdd} button="Adicionar skill" isAdmin={isAdmin}>
                 <div className="flex gap-3 w-full flex-wrap justify-center mt-3">

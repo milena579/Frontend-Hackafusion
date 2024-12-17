@@ -32,7 +32,7 @@ const ForumId = ({params: {id}} : IForum) => {
 
     return (
         <>
-            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <div className="flex flex-col p-8 items-center justify-center">
                 <div className="flex text-fontGrey dark:text-fontGreyDark gap-5 self-start px-10 font-semibold">
                     <Link href={ROUTES.forum}>

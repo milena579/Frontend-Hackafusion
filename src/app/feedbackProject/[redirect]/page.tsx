@@ -15,7 +15,7 @@ export default function FeedbackProject() {
 
     return (
         <>
-            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <SeeMore redirect="/project/iot" title="Feedbacks do projeto" button="Adicionar skill" isAdmin={true}>
                 <button onClick={toggleModal} className="flex self-end items-center justify-center bg-buttonActivated dark:bg-buttonActivatedDark px-5 py-2 dark:hover:bg-buttonActivatedHoverDark transition-colors duration-200 rounded-md shadow-lg">
                     <h1 className="text-fontButton font-semibold text-md">Dar feedback</h1>

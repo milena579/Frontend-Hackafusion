@@ -14,14 +14,14 @@ interface IMenu {
     op1: string;
     op2: string;
     op3: string;
-    isAdmin: boolean;
 }
 
-export const Menu = ({ op1, op2, op3, isAdmin }: IMenu) => {
+export const Menu = ({ op1, op2, op3 }: IMenu) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenSearch, setIsOpenSearch] = useState(false);
     const [isOpenNotification, setIsOpenNotification] = useState(false);
     const [isDark, setIsDark] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(true || null);
 
     const toggleTheme = () => {
         const tagHtml = document.documentElement;
@@ -44,6 +44,8 @@ export const Menu = ({ op1, op2, op3, isAdmin }: IMenu) => {
 
         const tema = localStorage.getItem("theme");
         console.log(tema);
+        const admin = sessionStorage.getItem('Admin');
+        setIsAdmin(admin === "true");
 
     }, [isDark]);
 

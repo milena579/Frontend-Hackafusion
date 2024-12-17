@@ -25,7 +25,7 @@ export default function focoCarreira() {
 
     return (
         <>
-            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <ProfileComponent isStudent={isStudent} isAdmin={isAdmin}name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
             <SeeMore redirect={ROUTES.profile} title="Foco de Carreira" toggleAdd={toggleAdd} button="Adicionar mais" isAdmin={true}>
                 <div className="flex gap-3 max-w-[90%] flex-wrap justify-center mt-3">

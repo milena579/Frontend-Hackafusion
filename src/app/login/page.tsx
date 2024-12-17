@@ -41,6 +41,7 @@ export default function Login() {
             } else{
                 sessionStorage.setItem("Token", "Bearer " +  result.token)
                 sessionStorage.setItem("Admin", result.admin)
+                // console.log(result.admin)
                 setError(false);
                 setEdv("");
                 setSenha("");
