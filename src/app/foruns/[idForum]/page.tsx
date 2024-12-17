@@ -34,33 +34,39 @@ interface IQuestion {
     forum : IForum
 }
 
-interface IQuestions {
-    numPage: number,
-    listObject: IQuestion[]
-}
-
 const ForumId = () => {
 
-    const [questions, setQuestions] = useState<IQuestions>({numPage: 0, listObject: []})
-    const [page, setPage] = useState(1)
-    const { idForum } = useParams();
+    const [questions, setQuestions] = useState<IQuestion[]>([])
+    const [forum,setForum] = useState<IForum>()
+    const params = useParams<{idForum:string}>()
+    const [page,setPage] = useState<string>("1");
+    const [maxPage,setMaxPage] = useState<boolean>(false);
 
-    const nextPage = () => {
-        console.log(page)
-        if(page === questions.numPage)
-            return
-        setPage(page+1)
+
+    const loadForum = async()=>{
+        await fetch(`http://localhost:8080/forum/${params.idForum}`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string
+            }
+        })
+        .then((res)=>{
+            if(res.status === 403){
+                router.push(ROUTES.login)
+            }
+            
+            res.json().then((data)=>{
+                console.log(data)
+
+                setForum(data)
+            })
+        })
     }
-    const prevPage = () => {
-        console.log(page)
-        if(page === 1)
-            return
-        setPage(page-1)
-    }
+
     
     const loasQuestions = async() => {
         await fetch(
-            `http://localhost:8080/question?idForum=${idForum}&page=${page}&size=${10}`,
+            `http://localhost:8080/question?idForum=${params.idForum}&page=${page}&size=${10}`,
             {
                 method: 'GET',
                 headers: {
@@ -73,8 +79,15 @@ const ForumId = () => {
                     router.push(ROUTES.login)
                 }
                 res.json().then((data) =>{
-                    console.log(data);
-                    setQuestions(data);
+
+                    setQuestions(data.listObject);
+
+                if(Number(page) >= data.numPage){
+                    setMaxPage(true)
+                    return
+                }
+
+                setMaxPage(false)
                 })
             }
         )
@@ -82,13 +95,14 @@ const ForumId = () => {
 
 
     useEffect(() => {
+        loadForum()
         loasQuestions();
-    },[])
+    },[page])
     
 
     return (
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu op1="Fóruns" op2="Projetos" op3="Discussões" isAdmin={false}></Menu>
             <div className="flex flex-col p-8 items-center justify-center">
                 <div className="flex text-fontGrey dark:text-fontGreyDark gap-5 self-start px-10 font-semibold">
                     <Link href={ROUTES.forum}>
@@ -97,13 +111,13 @@ const ForumId = () => {
                         <h1>&gt;</h1>
                         {/* <h1>{name}</h1> */}
                         {/* <h1>{redirect}</h1> */}
-                        <h1>Nome do fórum</h1>
+                        <h1>{forum?.name}</h1>
                 </div>
                 <div className="flex items-center">
                     <div className="flex gap-4 flex-col items-center">
 
                         {
-                            questions.listObject.map((item) => {
+                            questions.map((item) => {
                                 return(
                                     <Card 
                                     key={item.id}
@@ -111,7 +125,7 @@ const ForumId = () => {
                                     classTitle="font-semibold text-lg" 
                                     title={`${item.title}`}
                                     description={`${item.description}`} 
-                                    redirect={`/foruns/${idForum}/${item.id}`} height="80px" width="70vw"></Card> 
+                                    redirect={`/foruns/${params.idForum}/${item.id}`} height="80px" width="70vw"></Card> 
                                 )
                             })
                         }
@@ -119,12 +133,26 @@ const ForumId = () => {
                     </div>
                 </div>
                 <div className="flex gap-5 mt-8">
-                    <button className="bg-buttonDesabled py-1 px-5 w-28 cursor-default" onClick={prevPage}>
-                        <h2 className="text-fontButton">Voltar</h2>
-                    </button>
-                    <button className="bg-buttonActivated py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200" onClick={nextPage}>
-                        <h2 className="text-fontButton">Avançar</h2>
-                    </button>
+                    {Number(page)>1&&
+                        <button className="bg-buttonDesabled py-1 px-5 w-28 cursor-default" onClick={()=>{setPage(String(Number(page)-1))}}>
+                            <h2 className="text-fontButton" >Voltar</h2>
+                        </button>
+                        }
+                        {Number(page)<=1&&
+                        <button className="bg-buttonDesabled py-1 px-5 w-28 cursor-default" disabled>
+                            <h2 className="text-fontButton" >Voltar</h2>
+                        </button>
+                        }
+                        {maxPage&&
+                            <button className="bg-buttonActivated dark:bg-buttonActivatedDark py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200" disabled>
+                                <h2 className="text-fontButton">Avançar</h2>
+                            </button>
+                        }
+                        {!maxPage&&
+                            <button className="bg-buttonActivated dark:bg-buttonActivatedDark py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200" onClick={()=>{setPage(String(Number(page)+1))}}>
+                                <h2 className="text-fontButton">Avançar</h2>
+                            </button>
+                    }
                 </div>
             </div>
             <ChatPrivate />

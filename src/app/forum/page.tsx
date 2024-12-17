@@ -113,48 +113,9 @@ export default function Forum() {
                         }
 
                     </div>
-
-                    <div className="flex items-center justify-center mt-10 flex-col">
-                        <div className="flex w-4/6 flex-wrap gap-4 items-center justify-center">
-                            {modulo == 0 && (
-                                <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-purpleCard" title="Card lindo aaaaa mt texto nss aaaa preciso de mais texto pra ver oq acontece mais texto mds quanto texto nss aaaa"></Card>
-                            )}
-                            {modulo == 1 && (
-                                <Card redirect="/foruns/outraCoisa" width="250px" height="80px" cor="bg-pinkCard" title="Card lindo"></Card>
-                            )}
-                            {modulo == 2 && (
-                                <Card redirect="/foruns/outraCoisa2" width="250px" height="80px" cor="bg-greenCard" title="Card lindo"></Card>
-                            )}
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                            <Card redirect="/foruns/java" width="250px" height="80px" cor="bg-blueMiddle" title="Card lindo"></Card>
-                        </div>
-                        {/* <div className="flex gap-5 mt-8 absolute bottom-1/4"> */}
-                        <div className="flex gap-5 mt-8">
-                            <button className="bg-buttonDesabled py-1 px-5 w-28 cursor-default">
-                                <h2 className="text-fontButton">Voltar</h2>
-                            </button>
-                            <button className="bg-buttonActivated dark:bg-buttonActivatedDark py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200">
-                                <h2 className="text-fontButton">Avançar</h2>
-                            </button>
-                        </div>
-                    </div>
                 </div>
-                <ChatPrivate />
-            </>
-        );
-    }
+            </div>
+            <ChatPrivate />
+        </>
+    );
+}

@@ -114,33 +114,30 @@ const ForumId = () => {
         )
     }
 
-
     useEffect(() => {
         loadQuestionFunction();
-    },[])
-    useEffect(() => {
         sendMessage();
     },[sendAsnwer])
 
     return (
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu op1="Fóruns" op2="Projetos" op3="Discussões" isAdmin={false}></Menu>
             <div className="flex flex-col md:p-8 p-2 items-center justify-center">
                 <div className="md:flex text-fontGrey dark:text-fontGreyDark gap-5 self-start px-10 font-semibold hidden">
                     <Link href={ROUTES.forum}>
                         <h1>Fóruns</h1>
                     </Link>
                         <h1>&gt;</h1>
-                    <Link href={'/foruns/java'}>
-                        <h1>Nome do fórum</h1>
+                    <Link href={`/foruns/${question?.forum?.id}`}>
+                        <h1>{question?.forum?.name}</h1>
                     </Link>
                         <h1>&gt;</h1>
-                        <h1>Pergunta</h1>
+                        <h1>{question?.title}</h1>
                 </div>
                 <div className="flex w-10/12 flex-col">
                     {
                         question &&
-                        <Question name={`${question.user.name}`} image={question.user.image} question={`${question.description}`} title={`${question.title}`} ></Question>
+                        <Question name={`${question?.user?.name}`} image={question?.user?.image} question={`${question?.description}`} title={`${question?.title}`} ></Question>
                     }
                    
                     <div className="md:px-14 py-5">
@@ -151,8 +148,8 @@ const ForumId = () => {
                                 {
                                     question &&
                                     <Image
-                                        src={question.user.image}
-                                        loader={() => question.user.image}
+                                        src={question?.user?.image}
+                                        loader={() => question?.user?.image}
                                         alt="logo"
                                         width={50}
                                         height={30}
@@ -169,9 +166,9 @@ const ForumId = () => {
                         <div className="flex mt-4 flex-col gap-8">
                             {   
                                 question &&
-                                question.answers.map((item) => {
+                                question?.answers?.map((item) => {
                                     return(
-                                        <Answer key={item.id} breakLine={true} image={`${item.user.image}`} name={`${item.user.name}`} answer={`${item.description}`}></Answer>
+                                        <Answer key={item.id} breakLine={true} image={`${item.user.image}`} name={`${item.user.name}`} answer={`${item.description}`} upVote={0} downVote={0} redirect={"#"}></Answer>
                                     )
                                 })
                             }
