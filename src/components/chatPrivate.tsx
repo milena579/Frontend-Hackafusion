@@ -162,6 +162,7 @@ export const ChatPrivate = () => {
             });
             console.log(response);
             setError(false);
+            console.log('Enviou!')
 
         } catch (error) {
             console.log("Error: ", error);
