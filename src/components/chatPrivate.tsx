@@ -1,33 +1,177 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "./card";
 import { CardChat } from "./cardChat";
 import { ChatPerson } from "./chatPerson";
 import { Message } from "./message";
+import axios from "axios";
 
-interface IChat {
-
+interface IUser {
+    id: number;
+    user: {
+        name: string;
+        email: string;
+        image?: string;
+        telefone: string;
+        student: boolean;
+    };
 }
+
+interface IMessage {
+    id: number;
+    description: string;
+    // timestamp: date
+    user: {
+        name: string;
+        email: string;
+        image?: string;
+        telefone: string;
+        student: boolean;
+    };
+}
+
 
 export const ChatPrivate = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenPerson, setIsOpenPerson] = useState(false);
+    const [searchPerson, setSearchPerson] = useState('');
+    const [error, setError] = useState(false);
+    const [messageError, setMessageError] = useState('');
+    const [userArray, setUserArray] = useState<IUser[]>([]);
+    const [idChat, setIdChat] = useState(0);
+    const [messageArray, setMessageArray] = useState<IMessage[]>([]);
+    const [chatPersonName, setChatPersonName] = useState("");
+
     
     const openChat = () => {
         setIsOpen(!isOpen);
     }
-    const openChatPerson = () => {
+    const openChatPerson = (id: number, name: string) => {
         setIsOpenPerson(!isOpenPerson);
+        getMessage(id);
+        setChatPersonName(name);
+        setIdChat(id);
     }
 
     const sendFile = () => {
-        console.log('Arquivo enviado!')
+        console.log('Arquivo enviado!');
     }
 
-    const sendMessage = () => {
-        console.log('Mensagem enviada!')
+    const sendMessage = (description: string) => {
+        newMessage(idChat, description)
     }
+
+    // Use effect pra pegar todos os chats existentes daquele perfil
+    useEffect (() => {
+        const getAllUsers = async () => {
+            const jwt = sessionStorage.getItem('Token');
+    
+            try {
+                const response = await fetch(`http://localhost:8080/chat`, {
+                    headers: {
+                        Authorization: `${jwt}`,
+                    },
+                });
+
+                if (!response.ok) throw new Error("Erro ao buscar usuários");
+                const data = await response.json();
+                setError(false);
+                setUserArray(data.listObject);
+            } catch (error) {
+                console.log("Error: ", error);
+                setError(true);
+                setMessageError('Erro ao buscar usuários');
+            }
+        };
+        getAllUsers();
+    }, []);
+
+
+
+    // Requisição para a pesquisa de users
+    const searchUsers = async () => {
+        if (searchPerson == "") {
+            // Só não envia a requisição
+            return
+        }
+
+        const jwt = sessionStorage.getItem('Token');
+
+        try {
+            const response = await fetch(`http://localhost:8080/chat?page=0&size=1000000&query=${searchPerson}`, {
+                headers: {
+                    Authorization: `${jwt}`,
+                },
+            });
+
+            if (!response.ok) throw new Error("Erro ao buscar usuários");
+            const data = await response.json();
+            setError(false);
+            setUserArray(data.listObject);
+        } catch (error) {
+            console.log("Error: ", error);
+            setError(true);
+            setMessageError('Erro ao buscar usuários');
+        }
+    }
+
+    // Pegar as mensagens de um chat
+    const getMessage = async (id: number) => {
+        const jwt = sessionStorage.getItem('Token');
+
+        // console.log('ID do Chat: ', id);
+        // console.log(jwt)
+        try {
+            const response = await fetch(`http://localhost:8080/chat/${id}`, {
+                headers: {
+                    Authorization: `${jwt}`,
+                },
+            });
+
+            if (!response.ok) throw new Error("Erro ao buscar mensagens");
+            const data = await response.json();
+            setError(false);
+            setMessageArray(data.listObject);
+        } catch (error) {
+            console.log("Error: ", error);
+            setError(true);
+            setMessageError('Erro ao buscar mensagens');
+        }
+    }
+
+    const newMessage = async (idChat: number, description: string) => {
+        const jwt = sessionStorage.getItem('Token');
+        console.log('Mensagem: ', description);
+
+        console.log('ID do Chat: ', idChat);
+        console.log(jwt)
+
+        try {
+            const response = await fetch(`http://localhost:8080/chat/message` , {
+                method: 'POST',
+                headers: {
+                    Authorization: `${jwt}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    description: `${description}`,
+                    chatId: `${idChat}`
+                }),
+            });
+            // console.log(response);
+            setError(false);
+            // console.log('Enviou!')
+            getMessage(idChat);
+
+        } catch (error) {
+            console.log("Error: ", error);
+            setError(true);
+            setMessageError('Erro ao enviar mensagem');
+        }
+    }
+
+    // console.log(messageArray);
 
     return (
         <>  
@@ -61,21 +205,19 @@ export const ChatPrivate = () => {
                                                 </g>
                                             </svg>
                                         </button>
-                                        <h1 className="text-fontGrey text-xl dark:text-fontGreyDark md:text-lg">Nome da pessoa</h1>
+                                        <h1 className="text-fontGrey text-xl dark:text-fontGreyDark md:text-lg">{chatPersonName}</h1>
                                     </div>
                                 </div>
                                 <div className="flex flex-col w-full px-3 gap-3 overflow-auto mt-2">
                                     <ChatPerson sendFile={sendFile} sendMessage={sendMessage}>
                                         <div className="flex gap-2 flex-col">
-                                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                                            <Message author={"Latonildo de redbull"} text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi, consectetur! Ullam ad quae odit et vitae nobis distinctio atque officiis est? Magni, harum ducimus numquam eligendi libero debitis natus culpa?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi, consectetur! Ullam ad quae odit et vitae nobis distinctio atque officiis est? Magni, harum ducimus numquam eligendi libero debitis natus culpa?"/>
-                                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                                            <Message author={"Latonildo de redbull"} file="a"/>
+                                            {Array.isArray(messageArray) && messageArray.length > 0 ? (
+                                                messageArray.map((message : IMessage) => (
+                                                    <Message key={`${message.id}-${message.user.email}-${message.description}`} author={message.user.name} text={message.description} imagePerson={message.user.image} />
+                                                ))
+                                            ) : (
+                                                <p className="text-fontGrey text-lg dark:text-fontGreyDark md:text-lg">Nenhum usuário encontrado! Clique em 'Criar chat' no perfil de quem você gostaria de conversar!</p>
+                                            )}
                                         </div>
                                     </ChatPerson>
                                 </div>
@@ -85,23 +227,23 @@ export const ChatPrivate = () => {
                         ) : !isOpenPerson ? (
                             <>
                                 <div className="flex flex-row items-center md:w-72 w-60">
-                                    <input type="text" className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 h-10" placeholder="Pesquise uma pessoa"/>
-                                    <button>
+                                    {error &&  (
+                                        <h1 className="text-fontGrey text-lg dark:text-fontGreyDark md:text-lg">{messageError}</h1>
+                                    )}
+                                    <input value={searchPerson} onChange={(e) => setSearchPerson(e.target.value)} type="text" className="text-fontText dark:text-fontTextDark border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 h-10" placeholder="Pesquise uma pessoa"/>
+                                    <button onClick={searchUsers}>
                                         <svg className="w-8 text-fontGrey dark:text-fontGreyDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
                                     </button>
                                 </div>
-                                <div className="flex flex-col w-full px-3 gap-3 overflow-auto mt-2">
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
-                                    <CardChat title="Jurema linda" height="5" width="full" redirect={openChatPerson} image="" classTitle="text-fontText dark:text-fontTextDark font-semibold"></CardChat>
+                                
+                                <div className="flex flex-col w-full px-3 gap-3 overflow-auto mt-2 items-center">
+                                    {Array.isArray(userArray) && userArray.length > 0 ? (
+                                        userArray.map((user: IUser) => (
+                                            <CardChat key={user.id} id={user.id} title={user.user.name} height="5" width="full" redirect={() => openChatPerson(user.id, user.user.name)}  image={user.user.image || ""} classTitle="text-fontText dark:text-fontTextDark font-semibold"/>
+                                        ))
+                                    ) : (
+                                        <p className="text-fontGrey text-lg dark:text-fontGreyDark md:text-lg">Nenhum usuário encontrado! Clique em 'Criar chat' no perfil de quem você gostaria de conversar!</p>
+                                    )}
                                 </div>
                             </>
                         ): null}

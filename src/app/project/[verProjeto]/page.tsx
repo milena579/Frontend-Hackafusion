@@ -61,7 +61,7 @@ export default function VerProjeto(){
 
     return(
         <>
-            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <div className="flex items-center flex-col gap-4 justify-center md:px-28 px-10 py-14 dark:text-fontTextDark">
                 <div className="md:w-full flex md:justify-between self-end">
                     <div className="md:flex text-fontGrey hidden dark:text-fontGreyDark gap-5 self-start font-semibold">

@@ -136,8 +136,8 @@ export default function interactions() {
         <>
             {option == 1 ? (
                 <>
-                    <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-                    <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} isOnwer={true}></ProfileComponent >
+                    <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+                    <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
                     <SeeMore redirect={ROUTES.profile} title="Interações" button="Adicionar skill" isAdmin={isAdmin}>
                         <div className="flex flex-col md:px-10 items-center justify-center">
                             <div className="flex self-start gap-3 md:gap-10 mt-5 relative mb-5">
@@ -158,8 +158,8 @@ export default function interactions() {
                 </>
             ) : option == 2 ? (
                 <>
-                    <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-                    <ProfileComponent  isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
+                    <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+                    <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
                     <SeeMore redirect={ROUTES.profile} title="Interações" button="Adicionar skill" isAdmin={true}>
                     <div className="flex flex-col md:px-10 items-center justify-center">
                            <div className="flex self-start gap-3 md:gap-10 mt-5 relative mb-5">
@@ -184,7 +184,7 @@ export default function interactions() {
                 </>
             ) : option == 3 ? (
                 <>
-                    <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+                    <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
                     <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
                     <SeeMore redirect={ROUTES.profile} title="Interações" button="Adicionar skill" isAdmin={true}>
                     <div className="flex flex-col md:px-10 items-center justify-center w-full">

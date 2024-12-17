@@ -30,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background dark:bg-backgroundDark overflow-x-hidden`}
       >
-        {/* <Menu isAdmin={false} op1="aaa" op2="bbb" op3="ccc"></Menu> */}
+        {/* <Menu  op1="aaa" op2="bbb" op3="ccc"></Menu> */}
         {children}
       </body>
     </html>

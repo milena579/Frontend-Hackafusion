@@ -21,7 +21,7 @@ export default function Projects() {
     }
     return (
         <>
-            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
             <SeeMore redirect={ROUTES.profile} title="Projects" button="Adicionar skill" isAdmin={isAdmin}>
                 <div className="flex gap-3 w-full items-center flex-wrap justify-center mt-3">
