@@ -41,6 +41,7 @@ interface ICareersSkills{
 export default function Profile() {
     const [isOpenHardskills, setIsOpenHardskills] = useState(false);
     const [isOpenFocoCarreira, setIsOpenFocoCarreira] = useState(false);
+    const [isOwner, setIsOwner] = useState(false);
     const isAdmin = true;
     const [error,setError] = useState<boolean>(false);
 
@@ -185,13 +186,14 @@ export default function Profile() {
             setLoadCareer(true);
         }
         dataSkills();
+        console.log(userData.isOwner)
     }, [])
 
 
     return (
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões" isAdmin={false}></Menu>
-            {loadData && <ProfileComponent isAdmin={isAdmin} name={userData.user.name} email={userData.user.email} edv={userData.user.edv} telefone={userData.user.telefone} isStudent={false} isOnwer={false}  ></ProfileComponent >}
+            {loadData && <ProfileComponent isAdmin={isAdmin} name={userData.user.name} email={userData.user.email} edv={userData.user.edv} telefone={userData.user.telefone} isStudent={false} isOnwer={userData.isOwner}  ></ProfileComponent >}
 
             <div className="flex flex-col w-full p-3 items-center gap-5">
                 <div className="flex flex-col w-10/12 border items-center rounded p-2 gap-4">

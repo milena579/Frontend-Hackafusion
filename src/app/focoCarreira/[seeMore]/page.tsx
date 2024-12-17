@@ -267,6 +267,7 @@ export default function focoCarreira() {
                 <div className="flex flex-col w-full space-y-4">
                     <label className="text-lg font-semibold text-fontTitle dark:text-fontTitleDark">Opções:</label>
                     <select id="status" name="status" value={opSelect} onChange={handleChange} className="border rounded-lg p-2 text-fontText dark:bg-backgroundDark dark:text-fontTextDark focus:ring-2 focus:blueMiddle focus:outline-none transition duration-200 ease-in-out">
+                        <option className="text-fontText dark:text-fontTextDark">Selecione um foco de carreira</option>
                         {loadCarrer && itensCareer.listObject.map((item) => {
                         return(
                             <option key={item.id} value={item.id} className="text-fontText dark:text-fontTextDark">{item.name}</option>

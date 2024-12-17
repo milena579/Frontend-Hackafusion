@@ -13,10 +13,10 @@ interface IProfile {
     telefone: string;
     isAdmin: boolean;
     isStudent: boolean;
-    isOnwer: boolean
+    isOnwer?: boolean
 }
 
-export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }: IProfile) => {
+export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin,isOnwer }: IProfile) => {
 
     //colocar o get de coisas do perfil aqui
     
@@ -113,7 +113,7 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }:
                             Editar perfil
                         </button>
                     ) : !isAdmin ? (
-                        <button onClick={startMessage} className="bg-buttonActivated dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300 dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-3 text-fontButton" >
+                        <button className="bg-buttonActivated dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300 dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-3 text-fontButton" >
                             Criar chat
                         </button>
                     ) : null}
