@@ -8,10 +8,13 @@ import { BlobOptions } from "buffer";
 import { useEffect, useState } from "react";
 import pessoa from "../../../public/pessoa.jpeg";
 import Image from "next/image";
+import { Skill } from "@/components/skills";
 
 
 export default function Users() {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isOpenSkill, setIsOpenSkill] = useState(false);
+    const [screen, setScreen] = useState(true);
 
     const toggleModalEdit = () => {
         setIsOpen(!isOpen);
@@ -21,49 +24,156 @@ export default function Users() {
     const modulo = id % 3;
 
     const editFunction = () => {
-        console.log('Editar')
+        console.log('Editar');
     }
 
     const deleteFunction = () => {
-        console.log('Excluir')
+        console.log('Excluir');
     }
+
+    const toggleModalSkill = () => {
+        setIsOpenSkill(!isOpenSkill);
+    }
+
+    const toggleScreen = () => {
+        setScreen(!screen);
+    }
+
+    const apagarSkill = (id : Number) => {
+        console.log('Apagado! Id: ', id);
+    }
+
+    
 
     return (
         <>
             <Menu isAdmin={true} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <div className="flex flex-col p-5 items-center justify-center">
-                <div className="flex flex-row gap-5 w-7/12 min-w-72 mt-5 md:gap-10">
-                    <h1 className="text-fontGrey text-xl dark:text-fontGreyDark md:text-2xl">Usuários</h1>
-                    <input type="text" placeholder="Pesquise um usuário" className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12"/>
-                    <button>
-                        <svg className="w-9 text-fontGrey dark:text-fontGreyDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
-                    </button>
+                <div className="flex md:flex-row flex-col items-center gap-5 w-7/12 min-w-72 mt-5 md:gap-10">
+                    <div className="flex gap-3 w-full">
+                        {screen ? (
+                            <>
+                                <h1 className="text-fontGrey text-xl dark:text-fontGreyDark md:text-2xl">Usuários</h1>
+                                <input type="text" placeholder="Pesquise um usuário" className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12"/>
+                                <button>
+                                    <svg className="w-9 text-fontGrey dark:text-fontGreyDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <h1 className="text-fontGrey text-xl dark:text-fontGreyDark md:text-2xl">Skills</h1>
+                                <input type="text" placeholder="Pesquise uma skill" className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12"/>
+                                <button>
+                                    <svg className="w-9 text-fontGrey dark:text-fontGreyDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
+                                </button>
+                            </>
+                        )}
+                    </div>
+                    <div className="flex gap-3">
+                        <button onClick={toggleModalSkill} className="bg-buttonActivated rounded dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover py-1 px-5 w-40 hover:dark:bg-buttonActivatedHoverDark transition-colors duration-200">
+                            <h2 className="text-fontButton">Criar Skill</h2>
+                        </button>
+                        {screen ? (
+                            <button onClick={toggleScreen} className="bg-buttonActivated rounded dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover py-1 px-5 w-40 hover:dark:bg-buttonActivatedHoverDark transition-colors duration-200">
+                                <h2 className="text-fontButton">Ver Skills</h2>
+                            </button>
+                        ) : (
+                            <button onClick={toggleScreen} className="bg-buttonActivated rounded dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover py-1 px-5 w-40 hover:dark:bg-buttonActivatedHoverDark transition-colors duration-200">
+                                <h2 className="text-fontButton">Ver Usuários</h2>
+                            </button>
+                        )}
+                    </div>
                 </div>
 
-                <div className="flex items-center justify-center mt-10 flex-col">
-                    <div className="flex w-4/6 flex-wrap gap-4 items-center justify-center">
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
-                        <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                {screen ? (
+                    <div className="flex items-center justify-center mt-10 flex-col">
+                        <div className="flex w-4/6 flex-wrap gap-4 items-center justify-center">
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                            <Card redirect={`/profile/jurema`} image="" width="100%" height="60px" title="Card lindo" editButton={true} deleteButton={true} editFunction={toggleModalEdit} deleteFunction={deleteFunction}></Card>
+                        </div>
+                        <div className="flex gap-5 mt-8">
+                            <button className="bg-buttonDesabled rounded py-1 px-5 w-28 cursor-default">
+                                <h2 className="text-fontButton">Voltar</h2>
+                            </button>
+                            <button className="bg-buttonActivated rounded dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover py-1 px-5 w-28 hover:dark:bg-buttonActivatedHoverDark transition-colors duration-200">
+                                <h2 className="text-fontButton">Avançar</h2>
+                            </button>
+                        </div>
                     </div>
-                    <div className="flex gap-5 mt-8">
-                        <button className="bg-buttonDesabled rounded py-1 px-5 w-28 cursor-default">
-                            <h2 className="text-fontButton">Voltar</h2>
-                        </button>
-                        <button className="bg-buttonActivated rounded dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover py-1 px-5 w-28 hover:dark:bg-buttonActivatedHoverDark transition-colors duration-200">
-                            <h2 className="text-fontButton">Avançar</h2>
-                        </button>
-                    </div>
-                </div>
+                ) : (
+                    <>
+                        <div className="flex items-center justify-center mt-10 flex-col">
+                            <div className="flex w-4/6 flex-wrap gap-4 items-center justify-center">
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                                <Skill cor="blueLight" title="Nome da skill" button={() => apagarSkill(1)}></Skill>
+                            </div>
+                            <div className="flex gap-5 mt-8">
+                                <button className="bg-buttonDesabled rounded py-1 px-5 w-28 cursor-default">
+                                    <h2 className="text-fontButton">Voltar</h2>
+                                </button>
+                                <button className="bg-buttonActivated rounded dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover py-1 px-5 w-28 hover:dark:bg-buttonActivatedHoverDark transition-colors duration-200">
+                                    <h2 className="text-fontButton">Avançar</h2>
+                                </button>
+                            </div>
+                        </div>
+                    </>
+                )}
+
             </div>
             <ChatPrivate />
 
@@ -125,6 +235,21 @@ export default function Users() {
                             </div>
 
                         </div>
+                    </div>
+                </div>
+            </Modal>
+
+
+            {/* Modal das skills */}
+            <Modal height="30%" onClose={toggleModalSkill} title={"Adicionar Hardskill"} isOpen={isOpenSkill}>
+                <div className="flex flex-col w-full space-y-4">
+                    <label className="text-lg font-semibold text-fontTitle dark:text-fontTitleDark">Digite a nova HardSkill:</label>
+                    
+                    <input placeholder="Nova skill..." className="border rounded-lg p-2 text-fontText dark:bg-backgroundDark dark:text-fontTextDark focus:ring-2 focus:blueMiddle focus:outline-none transition duration-200 ease-in-out"></input>
+
+                    <div className="flex justify-center gap-5">
+                        <button onClick={toggleModalSkill} className=" bg-buttonDesabled dark:bg-buttonDesabledDark hover:bg-buttonDesabledHover rounded py-2 px-4 text-fontButton">Cancelar</button>
+                        <button className=" bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton">Adicionar</button>
                     </div>
                 </div>
             </Modal>

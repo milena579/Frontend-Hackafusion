@@ -12,7 +12,7 @@ export const ChatPublico = ({ children, sendMessage, sendFile } : IChatPublico) 
     return(
         <>
             <div className="bg-bgChatBlue dark:bg-bgChatBlueDark flex-col lg:w-9/12 w-full px-3 py-2 flex min-h-[75vh] max-h-[75vh] rounded-md md:max-w-4xl items-center">
-                <div className="flex flex-col flex-grow overflow-auto py-3">
+                <div className="flex flex-col flex-grow overflow-auto py-3 min-w-full">
                     {children}
                 </div>
                 <div className="self-end w-full flex-row flex gap-2 mt-auto items-center justify-center">
