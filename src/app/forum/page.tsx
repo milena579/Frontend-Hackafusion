@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Iforum{
-    id:Number,
+    id: Number,
     name:string,
     description:String
 }
@@ -81,11 +81,11 @@ export default function Forum() {
                         {data.map((item)=>{
                             let mod = Number(item.id) % 3;
                             if(mod === 0){
-                                return(<Card redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-purpleCard" title={item.name}></Card>)
+                                return(<Card key={item.id.toString()} redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-purpleCard" title={item.name}></Card>)
                             }else if(mod === 1){
-                                return(<Card redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-pinkCard" title={item.name}></Card>)
+                                return(<Card key={item.id.toString()} redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-pinkCard" title={item.name}></Card>)
                             }
-                            return(<Card redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-greenCard" title={item.name}></Card>)
+                            return(<Card key={item.id.toString()} redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-greenCard" title={item.name}></Card>)
                         }
                         )}
                     </div>

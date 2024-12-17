@@ -95,6 +95,7 @@ const ForumId = () => {
 
 
     useEffect(() => {
+        console.log(params.idForum)
         loadForum()
         loasQuestions();
     },[page])
@@ -102,7 +103,7 @@ const ForumId = () => {
 
     return (
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões" isAdmin={false}></Menu>
+            <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <div className="flex flex-col p-8 items-center justify-center">
                 <div className="flex text-fontGrey dark:text-fontGreyDark gap-5 self-start px-10 font-semibold">
                     <Link href={ROUTES.forum}>
