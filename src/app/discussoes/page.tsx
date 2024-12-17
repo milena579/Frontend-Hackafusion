@@ -3,6 +3,7 @@
 import { Card } from "@/components/card";
 import { ChatPrivate } from "@/components/chatPrivate";
 import { Menu } from "@/components/menu";
+import Modal from "@/components/modal";
 import { ROUTES } from "@/constants/routes";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -25,6 +26,14 @@ export default function Discussoes (){
     const [query,setQuery] = useState<string>("");
     const [maxPage,setMaxPage] = useState<boolean>(false);
     const [data,setData] = useState<ITopic[]>([]);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleModal = () => {
+        setIsOpen(!isOpen);
+    }
 
     const load = async()=>{
         await fetch(`http://localhost:8080/topic?page=${page}&size=20&query=${query}`,{
@@ -53,9 +62,34 @@ export default function Discussoes (){
         })
     }
 
+    const addDiscussao = async () => {
+        const jwt = sessionStorage.getItem('Token');
+
+        try {
+            const response = await fetch(`http://localhost:8080/topic` , {
+                method: 'POST',
+                headers: {
+                    Authorization: `${jwt}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: `${name}`,
+                    description: `${description}`
+                }),
+            });
+            console.log(response);
+            toggleModal();
+            load();
+        } catch (error) {
+            console.log("Error: ", error);
+        }
+    }
+
     useEffect(()=>{
         console.log(sessionStorage.getItem("Token"))
-        load()
+        load();
+        const admin = sessionStorage.getItem('Admin');
+        setIsAdmin(admin === "true");
     },[page])
 
     
@@ -68,7 +102,12 @@ export default function Discussoes (){
                     <input type="text" placeholder="Pesquise o tema da discussão" className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dar: text-fontGreyDark"/>
                     <button>
                         <svg className="w-6 text-fontGrey dark:text-fontGreyDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
-                    </button>
+                    </button>                    
+                    {isAdmin ? (
+                        <button onClick={addDiscussao} className="bg-buttonActivated rounded dark:bg-buttonActivatedDark py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200">
+                            <h2 className="text-fontButton">Criar Discussão</h2>
+                        </button>
+                    ):null}
                 </div>
 
                 <div className="flex items-center justify-center mt-10 flex-col">
@@ -76,11 +115,11 @@ export default function Discussoes (){
                         {data.map((item)=>{
                                 let mod = Number(item.id) % 3;
                                 if(mod === 0){
-                                    return(<Card redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-purpleCard" title={item.name} description={item.description}></Card>)
+                                    return(<Card key={Number(item.id)} redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-purpleCard" title={item.name} description={item.description}></Card>)
                                 }else if(mod === 1){
-                                    return(<Card redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-pinkCard" title={item.name} description={item.description}></Card>)
+                                    return(<Card key={Number(item.id)} redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-pinkCard" title={item.name} description={item.description}></Card>)
                                 }
-                                return(<Card redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-greenCard" title={item.name} description={item.description}></Card>)
+                                return(<Card key={Number(item.id)} redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-greenCard" title={item.name} description={item.description}></Card>)
                             }
                         )}
                     </div>
@@ -110,6 +149,20 @@ export default function Discussoes (){
                 </div>
             </div>
             <ChatPrivate />
+
+            {/* Modal pra adicionar mais skills */}
+            <Modal height="50%" onClose={toggleModal} title={"Adicionar Discussão"} isOpen={isOpen}>
+                <div className="flex flex-col w-full space-y-4 items-center">
+                    {/* <label className="text-lg font-semibold text-fontTitle dark:text-fontTitleDark">Nome da discussão</label> */}
+                    <input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Digite o nome da discussão..." className="mt-5 border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dar: text-fontGreyDark"/>
+                    <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="border rounded-md h-52 w-11/12 resize-none p-2 text-fontTitle dark:text-fontTitleDark dark:bg-backgroundDark"></textarea>
+                    
+                    <div className="flex justify-center gap-5">
+                        <button onClick={toggleModal} className=" bg-buttonDesabled dark:bg-buttonDesabledDark hover:bg-buttonDesabledHover rounded py-2 px-4 text-fontButton">Cancelar</button>
+                        <button className=" bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton" onClick={addDiscussao}>Adicionar</button>
+                    </div>
+                </div>
+            </Modal>
             
         </>
     );

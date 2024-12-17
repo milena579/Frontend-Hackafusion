@@ -134,7 +134,7 @@ export default function ChatDiscussoes(){
                         <div className="flex gap-2 flex-col">
                             {messages.map((item)=>{
                                 return(
-                                    <Message imagePerson={item.user.image} author={item.user.name} text={item.description}/>
+                                    <Message key={Number(item.id)} imagePerson={item.user.image} author={item.user.name} text={item.description}/>
                                 )
                             })}
                         </div>

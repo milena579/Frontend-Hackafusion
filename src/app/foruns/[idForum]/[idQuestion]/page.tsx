@@ -53,8 +53,6 @@ interface IQuestion {
 
 const ForumId = () => {
 
-
-
     const { idQuestion } = useParams() // Da erro por causa do async e do use client
     const [question, setQuestion] = useState<IQuestion | null>(null)
     const [answer, setAnswer] = useState<String>("")
@@ -116,12 +114,11 @@ const ForumId = () => {
 
     useEffect(() => {
         loadQuestionFunction();
-        sendMessage();
     },[sendAsnwer])
 
     return (
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões" isAdmin={false}></Menu>
+            <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <div className="flex flex-col md:p-8 p-2 items-center justify-center">
                 <div className="md:flex text-fontGrey dark:text-fontGreyDark gap-5 self-start px-10 font-semibold hidden">
                     <Link href={ROUTES.forum}>

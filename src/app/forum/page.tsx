@@ -3,6 +3,7 @@
 import { Card } from "@/components/card";
 import { ChatPrivate } from "@/components/chatPrivate";
 import { Menu } from "@/components/menu";
+import Modal from "@/components/modal";
 import { ROUTES } from "@/constants/routes";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -22,8 +23,38 @@ export default function Forum() {
     const [query,setQuery] = useState<string>("");
     const [maxPage,setMaxPage] = useState<boolean>(false);
     const [data,setData] = useState<Iforum[]>([]);
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
-    const isAdmin = true;
+
+    const toggleModal = () => {
+        setIsOpen(!isOpen);
+    }
+
+    const addForum = async () => {
+        const jwt = sessionStorage.getItem('Token');
+
+        try {
+            const response = await fetch(`http://localhost:8080/admin/forum` , {
+                method: 'POST',
+                headers: {
+                    Authorization: `${jwt}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: `${name}`,
+                    description: `${description}`
+                }),
+            });
+            console.log(response);
+            toggleModal();
+            loadForum();
+        } catch (error) {
+            console.log("Error: ", error);
+        }
+    }
 
     const loadForum = async()=>{
         await fetch(`http://localhost:8080/forum?page=${page}&size=20&query=${query}`,{
@@ -54,7 +85,9 @@ export default function Forum() {
 
     useEffect(()=>{
         
-        loadForum()
+        loadForum();
+        const admin = sessionStorage.getItem('Admin');
+        setIsAdmin(admin === "true");
 
     },[page])
 
@@ -70,7 +103,7 @@ export default function Forum() {
                     </button>
 
                     {isAdmin ? (
-                        <button className="bg-buttonActivated rounded dark:bg-buttonActivatedDark py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200">
+                        <button onClick={addForum} className="bg-buttonActivated rounded dark:bg-buttonActivatedDark py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200">
                             <h2 className="text-fontButton">Criar Fórum</h2>
                         </button>
                     ):null}
@@ -81,11 +114,11 @@ export default function Forum() {
                         {data.map((item)=>{
                             let mod = Number(item.id) % 3;
                             if(mod === 0){
-                                return(<Card key={item.id.toString()} redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-purpleCard" title={item.name}></Card>)
+                                return(<Card key={Number(item.id)} redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-purpleCard" title={item.name}></Card>)
                             }else if(mod === 1){
-                                return(<Card key={item.id.toString()} redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-pinkCard" title={item.name}></Card>)
+                                return(<Card key={Number(item.id)} redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-pinkCard" title={item.name}></Card>)
                             }
-                            return(<Card key={item.id.toString()} redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-greenCard" title={item.name}></Card>)
+                            return(<Card key={Number(item.id)} redirect={"/foruns/"+item.id} width="250px" height="80px" cor="bg-greenCard" title={item.name}></Card>)
                         }
                         )}
                     </div>
@@ -116,6 +149,20 @@ export default function Forum() {
                 </div>
             </div>
             <ChatPrivate />
+
+            {/* Modal pra adicionar mais skills */}
+            <Modal height="50%" onClose={toggleModal} title={"Adicionar Fórum"} isOpen={isOpen}>
+                <div className="flex flex-col w-full space-y-4 items-center">
+                    {/* <label className="text-lg font-semibold text-fontTitle dark:text-fontTitleDark">Nome da discussão</label> */}
+                    <input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Digite o nome do Fórum..." className="mt-5 border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dar: text-fontGreyDark"/>
+                    <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="border rounded-md h-52 w-11/12 resize-none p-2 text-fontTitle dark:text-fontTitleDark dark:bg-backgroundDark"></textarea>
+                    
+                    <div className="flex justify-center gap-5">
+                        <button onClick={toggleModal} className=" bg-buttonDesabled dark:bg-buttonDesabledDark hover:bg-buttonDesabledHover rounded py-2 px-4 text-fontButton">Cancelar</button>
+                        <button className=" bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton" onClick={addForum}>Adicionar</button>
+                    </div>
+                </div>
+            </Modal>
         </>
     );
 }

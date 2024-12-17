@@ -45,7 +45,7 @@ export const Card = ({ cor, title, redirect, width, height, description, classTi
                             <Link href={`${redirect}`} className="flex items-center p-2 gap-4 w-full">
                                 <div className={`w-4 ${cor} dark:${cor}Dark rounded-sm`} style={{ minHeight: `${heightColor}px`, height: `${heightColor}` }}></div>
                                 {image != null && (
-                                    <Image src={pessoa} alt="logo" width={50} height={30} className="rounded-full"/>
+                                    <Image src={image} alt="logo" width={50} height={30} className="rounded-full"/>
                                 )}
                                 {image == null && (
                                     <>
