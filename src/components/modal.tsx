@@ -15,7 +15,7 @@ const Modal = ({ title, isOpen, children, onClose, height = "80%" } : IModal) =>
 
     return (
         <>
-            <div className='fixed inset-0 w-screen h-screen bg-black bg-opacity-75 z-50 flex flex-col items-center justify-center gap-4'>
+            <div className='absolute inset-0 w-screen h-screen bg-black bg-opacity-75 z-50 flex flex-col items-center justify-center gap-4'>
                 <div className='flex flex-col fixed bg-background dark:bg-backgroundDark md:w-3/6 md:min-h-64 w-11/12 p-3 rounded-lg shadow' style={{height: `${height}`}}>
                     <div className='flex flex-row items-center w-full justify-between'>
                         <h1 className='text-fontText dark:text-fontTextDark text-xl font-semibold mb-2'>{title}</h1>
@@ -25,7 +25,7 @@ const Modal = ({ title, isOpen, children, onClose, height = "80%" } : IModal) =>
                     </div>
                     <hr className='w-full z-50'/>
 
-                <div className='z-50 flex p-2 justify-center items-center flex-wrap'>
+                <div className='z-50 p-2 md:max-h-full max-h-[600px] overflow-y-auto'>
                     {children}
                 </div>
                 

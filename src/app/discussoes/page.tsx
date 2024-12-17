@@ -1,16 +1,67 @@
+"use client"
+
 import { Card } from "@/components/card";
 import { ChatPrivate } from "@/components/chatPrivate";
 import { Menu } from "@/components/menu";
+import { ROUTES } from "@/constants/routes";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+interface ITopic{
+    id:Number,
+    name:string,
+    description:string
+}
 
 
 export default function Discussoes (){
     const id = 2;
     const modulo = id % 3;
     console.log(modulo);
+
+    const router = useRouter();
+
+    const [page,setPage] = useState<string>("1");
+    const [query,setQuery] = useState<string>("");
+    const [maxPage,setMaxPage] = useState<boolean>(false);
+    const [data,setData] = useState<ITopic[]>([]);
+
+    const load = async()=>{
+        await fetch(`http://localhost:8080/topic?page=${page}&size=20&query=${query}`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string
+            }
+        })
+        .then((res)=>{
+            if(res.status === 403){
+                router.push(ROUTES.login)
+            }
+            
+            res.json().then((data)=>{
+                console.log(data)
+
+                setData(data.listObject);
+
+                if(Number(page) >= data.numPage){
+                    setMaxPage(true)
+                    return
+                }
+
+                setMaxPage(false)
+            })
+        })
+    }
+
+    useEffect(()=>{
+        console.log(sessionStorage.getItem("Token"))
+        load()
+    },[page])
+
     
     return(
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
              <div className="flex flex-col p-5 items-center justify-center">
                 <div className="flex flex-row gap-2 w-9/12 min-w-72 mt-5 md:gap-5 items-center">
                     <h1 className="text-fontGrey text-xl dark:text-fontGreyDark md:text-1xl">Discussões</h1>
@@ -22,43 +73,39 @@ export default function Discussoes (){
 
                 <div className="flex items-center justify-center mt-10 flex-col">
                     <div className="flex w-4/6 flex-wrap gap-4 items-center justify-center">
-                        {modulo == 0 && (
-                            <Card redirect="/" width="250px" height="80px" cor="bg-purpleCard" title="Card lindo aaaaa mt texto nss aaaa preciso de mais texto pra ver oq acontece mais texto mds quanto texto nss aaaa" description="Teste teste teste teste"></Card>
+                        {data.map((item)=>{
+                                let mod = Number(item.id) % 3;
+                                if(mod === 0){
+                                    return(<Card redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-purpleCard" title={item.name} description={item.description}></Card>)
+                                }else if(mod === 1){
+                                    return(<Card redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-pinkCard" title={item.name} description={item.description}></Card>)
+                                }
+                                return(<Card redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-greenCard" title={item.name} description={item.description}></Card>)
+                            }
                         )}
-                        {modulo == 1 && (
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-pinkCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                        )}
-                        {modulo == 2 && (
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                        )}
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-                            <Card redirect="/discussoes/java" width="250px" height="80px" cor="bg-greenCard" title="Card lindo" description="Teste teste teste teste"></Card>
-
                     </div>
                     {/* <div className="flex gap-5 mt-8 absolute bottom-1/4"> */}
                     <div className="flex gap-5 mt-8">
-                        <button className="bg-buttonDesabled py-1 px-5 w-28 cursor-default">
-                            <h2 className="text-fontButton">Voltar</h2>
-                        </button>
-                        <button className="bg-buttonActivated py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200">
-                            <h2 className=" text-fontButton">Avançar</h2>
-                        </button>
+                        {Number(page)>1&&
+                            <button className="bg-buttonDesabled py-1 px-5 w-28 cursor-default" onClick={()=>{setPage(String(Number(page)-1))}}>
+                                <h2 className="text-fontButton" >Voltar</h2>
+                            </button>
+                        }
+                        {Number(page)<=1&&
+                            <button className="bg-buttonDesabled py-1 px-5 w-28 cursor-default" disabled>
+                                <h2 className="text-fontButton" >Voltar</h2>
+                            </button>
+                        }
+                        {maxPage&&
+                            <button className="bg-buttonActivated dark:bg-buttonActivatedDark py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200" disabled>
+                                <h2 className="text-fontButton">Avançar</h2>
+                            </button>
+                        }
+                        {!maxPage&&
+                            <button className="bg-buttonActivated dark:bg-buttonActivatedDark py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200" onClick={()=>{setPage(String(Number(page)+1))}}>
+                                <h2 className="text-fontButton">Avançar</h2>
+                            </button>
+                        }
                     </div>
                 </div>
             </div>

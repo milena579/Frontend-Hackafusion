@@ -34,6 +34,10 @@ const nextConfig: NextConfig = {
         {
           source: "/novoProjeto",
           destination: "/novoProjeto"
+        },
+        {
+          source: "/users",
+          destination: "/users"
         }
     ];
 }

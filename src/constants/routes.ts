@@ -6,5 +6,6 @@ export enum ROUTES {
     discosion = "/discussoes",
     project = "/project",
     profile = "/profile",
-    novoProjeto = "/novoProjeto"
+    novoProjeto = "/novoProjeto",
+    users = "/users"
 }
