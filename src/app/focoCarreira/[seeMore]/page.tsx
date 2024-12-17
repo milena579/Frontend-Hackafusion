@@ -209,6 +209,8 @@ export default function focoCarreira() {
                 }
             })
 
+            window.location.reload()
+
             const result = await response.json();
             console.log(result.message)
         }
@@ -235,6 +237,8 @@ export default function focoCarreira() {
                     Authorization: token
                 }
             })
+
+            window.location.reload()
 
             const result = await response.json();
             console.log(result.message)

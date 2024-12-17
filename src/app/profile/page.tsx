@@ -165,7 +165,7 @@ export default function Profile() {
                 return;
             }
             try {
-                const response =  await fetch ("http://localhost:8080//ability/user/0", {
+                const response =  await fetch ("http://localhost:8080/ability/user/0", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
