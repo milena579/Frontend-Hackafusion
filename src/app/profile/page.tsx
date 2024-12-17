@@ -11,6 +11,7 @@ import Modal from "@/components/modal";
 import { ProfileComponent } from "@/components/profile";
 import { ROUTES } from "@/constants/routes"
 import Link from "next/link";
+import { CardProjeto } from "@/components/cardProject";
 
 interface IUser{
     isOwner   : boolean,
@@ -37,6 +38,26 @@ interface ICareersSkills{
     listObject    : ICareerandSkill[]
     
 }
+interface IFeedback{
+    id : number,
+    userReceiver : IUser,
+    userSender: IUser,
+    description : string,
+    isPrivate : boolean
+}
+
+interface IListPageFeed{
+    numPage       : number,
+    listObject    : IFeedback[]
+}
+
+interface IProject{
+    id:number,
+    name:string,
+    description:string
+    category:string
+}
+
 
 export default function Profile() {
     const [isOpenHardskills, setIsOpenHardskills] = useState(false);
@@ -79,6 +100,16 @@ export default function Profile() {
     const toggleFocoCarreira = () => {
         setIsOpenFocoCarreira(!isOpenFocoCarreira);
     }
+
+    const [type,setType] = useState<string>("others")
+    const [page,setPage] = useState<string>("1");
+    const [query,setQuery] = useState<string>("");
+    const [maxPage,setMaxPage] = useState<boolean>(false);
+    const [data,setData] = useState<IProject[]>([]);
+    const [feedback,setFeedback] = useState<IListPageFeed>({
+        numPage       : 0,
+        listObject    : []
+    })
 
     const router = useRouter();
 
@@ -189,6 +220,62 @@ export default function Profile() {
         console.log(userData.isOwner)
     }, [])
 
+    const loadProject = async()=>{
+        await fetch(`http://localhost:8080/project/me?page=&size=7&query=`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string
+            }
+        })
+        .then((res)=>{
+            if(res.status === 403){
+                router.push(ROUTES.login)
+            }
+            
+            res.json().then((data)=>{
+
+                setData(data.listObject);
+
+                if(Number(page) > data.numPage){
+                    setMaxPage(true)
+                    return
+                }
+
+                setMaxPage(false)
+            })
+        })
+    }
+
+    const loadFeedback = async()=>{
+        await fetch(`http://localhost:8080/user/feedback`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string
+            }
+        })
+        .then((res)=>{
+            if(res.status === 403){
+                router.push(ROUTES.login)
+            }
+            
+            res.json().then((feedback)=>{
+
+                setFeedback(feedback.listObject);
+
+                if(Number(page) > feedback.numPage){
+                    setMaxPage(true)
+                    return
+                }
+
+                setMaxPage(false)
+            })
+        })
+    }
+    useEffect(()=>{
+        loadProject(),
+        loadFeedback()
+    },[page,query])
+
 
     return (
         <>
@@ -239,22 +326,25 @@ export default function Profile() {
                 <div className="flex flex-col w-10/12 border items-center rounded p-2 gap-4">
                     <h1 className="text-fontTitle dark:text-fontTitleDark font-semibold text-xl md:text-2xl">Projetos</h1>
                     <div className="flex flex-col items-center justify-center gap-5 w-full">
-                        <Card cor="bg-blueLight" classTitle="font-semibold text-lg" title="Pq java é tão feio?" description="Java é uma linguagem deprogramação horrível, odeio java, é péssimo, só é meio bom pra backend" redirect="project/java" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                        <Card cor="bg-blueLight" classTitle="font-semibold text-lg" title="Pq java é tão feio?" description="Java é uma linguagem deprogramação horrível, odeio java, é péssimo, só é meio bom pra backend" redirect="project/java" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                        <Card cor="bg-blueLight" classTitle="font-semibold text-lg" title="Pq java é tão feio?" description="Java é uma linguagem deprogramação horrível, odeio java, é péssimo, só é meio bom pra backend" redirect="project/java" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                        <Card cor="bg-blueLight" classTitle="font-semibold text-lg" title="Pq java é tão feio?" description="Java é uma linguagem deprogramação horrível, odeio java, é péssimo, só é meio bom pra backend" redirect="project/java" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                        <Card cor="bg-blueLight" classTitle="font-semibold text-lg" title="Pq java é tão feio?" description="Java é uma linguagem deprogramação horrível, odeio java, é péssimo, só é meio bom pra backend" redirect="project/java" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
+                        {data.map((item) => {
+                            return(
+                                
+                                <Card key={item.id} title={item.name} width={"90%"} height={"60px"} cor="bg-blueLight" redirect={"/project/"+item.id} description={item.category}></Card>
+                            );
+
+                        })}
                         <Link href={'/projects/creuza sla oq souza'} className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300">Ver mais</Link>
                     </div>
                 </div>
 
                 <div className="flex flex-col w-10/12 border items-center rounded p-2 gap-4">
                     <h1 className="text-fontTitle dark:text-fontTitleDark font-semibold text-xl md:text-2xl">Feedbacks em destaque</h1>
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Você é incrível, amei trabalhar com você, você é maravilhosa!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Você é incrível, amei trabalhar com você, você é maravilhosa!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Você é incrível, amei trabalhar com você, você é maravilhosa!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Você é incrível, amei trabalhar com você, você é maravilhosa!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Você é incrível, amei trabalhar com você, você é maravilhosa!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
+                    {feedback.listObject.map((item) => {
+                            return(
+                                <Card key={item.id} star={true} title={item.userSender.user.name} height="130px" width="40vw" cor="bg-blueLight" description={item.description}></Card>
+                            );
+
+                    })}
                     <Link href={'/feedbacks/creuza sla oq souza'} className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300">Ver mais</Link>
 
                 </div>
@@ -262,10 +352,7 @@ export default function Profile() {
                 <div className="flex flex-col w-10/12 border items-center rounded p-2 gap-4">
                     <h1 className="text-fontTitle dark:text-fontTitleDark font-semibold text-xl md:text-2xl">Interações recentes</h1>
                     <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Comentou: Esse projeto é muito legal, adoro ele, poderiam ter mais como esse!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Comentou: Esse projeto é muito legal, adoro ele, poderiam ter mais como esse!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Comentou: Esse projeto é muito legal, adoro ele, poderiam ter mais como esse!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Comentou: Esse projeto é muito legal, adoro ele, poderiam ter mais como esse!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Comentou: Esse projeto é muito legal, adoro ele, poderiam ter mais como esse!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
+
                     <Link href={'/interactions/creuza sla oq souza'} className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300">Ver mais</Link>
 
                 </div>
