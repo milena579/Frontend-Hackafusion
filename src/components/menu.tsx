@@ -15,7 +15,6 @@ interface IMenu {
     op1: string;
     op2: string;
     op3: string;
-    isAdmin: boolean;
 }
 
 interface IUser{
@@ -28,7 +27,17 @@ interface IUser{
     student:boolean
 }
 
-export const Menu = ({ op1, op2, op3, isAdmin }: IMenu) => {
+interface IUser{
+    id:Number,
+    name:string,
+    edv:string,
+    email:string,
+    telefone:string,
+    image:string,
+    student:boolean
+}
+
+export const Menu = ({ op1, op2, op3 }: IMenu) => {
 
     const router = useRouter();
     const [data,setData] = useState<IUser>();
@@ -58,6 +67,7 @@ export const Menu = ({ op1, op2, op3, isAdmin }: IMenu) => {
     const [isOpenSearch, setIsOpenSearch] = useState(false);
     const [isOpenNotification, setIsOpenNotification] = useState(false);
     const [isDark, setIsDark] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(true || null);
 
     const toggleTheme = () => {
         const tagHtml = document.documentElement;
@@ -80,6 +90,8 @@ export const Menu = ({ op1, op2, op3, isAdmin }: IMenu) => {
 
         const tema = localStorage.getItem("theme");
         console.log(tema);
+        const admin = sessionStorage.getItem('Admin');
+        setIsAdmin(admin === "true");
         loadProfile();
 
     }, [isDark]);

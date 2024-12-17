@@ -60,7 +60,7 @@ export default function Forum() {
 
     return (
         <>
-            <Menu isAdmin={true} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <div className="flex flex-col p-5 items-center justify-center">
                 <div className="flex flex-row gap-5 w-7/12 min-w-72 mt-5 md:gap-10">
                     <h1 className="text-fontGrey text-xl dark:text-fontGreyDark md:text-2xl">Fóruns</h1>

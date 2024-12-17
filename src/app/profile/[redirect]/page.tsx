@@ -50,7 +50,7 @@ export default function Profile() {
     }
     return (
         <>
-            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} isOnwer={isOnwer} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
 
             <div className="flex flex-col w-full p-3 items-center gap-5">

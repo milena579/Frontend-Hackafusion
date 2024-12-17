@@ -234,8 +234,8 @@ export default function Profile() {
 
     return (
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões" isAdmin={false}></Menu>
-            {loadData && <ProfileComponent isAdmin={isAdmin} name={userData.user.name} email={userData.user.email} edv={userData.user.edv} telefone={userData.user.telefone} isStudent={false} isOnwer={userData.isOwner}  ></ProfileComponent >}
+            <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <ProfileComponent isStudent={isStudent} isAdmin={isAdmin} isOnwer={isOnwer} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
 
             <div className="flex flex-col w-full p-3 items-center gap-5">
                 <div className="flex flex-col w-10/12 border items-center rounded p-2 gap-4">

@@ -19,7 +19,7 @@ export default function novoProjeto(){
     }
     return(
         <>
-            <Menu isAdmin={false} op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
+            <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
             <div className="flex flex-col md:p-8 p-3 items-center justify-center overflow-hidden md:gap-4">
                 <div className="md:flex text-fontGrey hidden dark:text-fontGreyDark gap-5 self-start px-10 font-semibold">
                     <Link href={ROUTES.project}>
