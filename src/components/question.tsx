@@ -19,7 +19,7 @@ export const Question = ({name, image, question, title, forum } : IQuestion) => 
                     <Link href={ROUTES.profile} className="flex items-center gap-2">
                     {image ? (
                         <>
-                            <Image src={image} alt="logo" width={50} height={30} className="rounded-full"/>
+                            <Image src={image} loader={() => image} alt="logo" width={50} height={30} className="rounded-full"/>
                         </>
                     ) : (
                         <>

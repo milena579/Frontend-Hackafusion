@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Iforum{
-    id:Number,
+    id: Number,
     name:string,
     description:String
 }
