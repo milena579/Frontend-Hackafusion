@@ -2,6 +2,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Modal from "./modal";
 import pessoa from "../../public/pessoa.jpeg";
+import { tree } from "next/dist/build/templates/app-page";
+import { stdout } from "process";
 
 interface IProfile {
     image?: string;
@@ -14,34 +16,93 @@ interface IProfile {
     isOnwer: boolean
 }
 
-export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin, isStudent, isOnwer }: IProfile) => {
+export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin }: IProfile) => {
+
+    //colocar o get de coisas do perfil aqui
+    
+    const [nameUse,setName] = useState<string>(name);
+    const [emailUse, setEmail] = useState<string>(email);
+    const [edvUse, setEdv] = useState<string>(edv);
+    const [telefoneUse, setTel] = useState<string>(telefone);
+    const [adminUse, setAdm] = useState<boolean>(isAdmin);
+    const [imageUse, setImage] = useState<File>();
+ 
+
     const [isOpenEdit, setIsOpenEdit] = useState(false);
     const [position, setPosition] = useState(1);
     
     const toggleEdit = () => setIsOpenEdit(!isOpenEdit);
 
-    const startMessage = () => {
+    const [error,setError] = useState<boolean>(false);
 
-    };
+    // const [imageSelected,setImageSelected] = useState<FileList | null>(null);
+
+    // const uploadImage = (files: FileList) =>{
+       
+    //     if(files.length > 0){ 
+    //         setImage(files[0]);
+    //     }
+    // }
+
+    const editProfile = async () => {
+        console.log(nameUse);
+
+        const token = sessionStorage.getItem("Token");
+
+        if (!token) {
+            alert("Token não encontrado. Faça login novamente.");
+            return;
+        }
+
+        try {
+            // const formData = new FormData();
+
+            // formData.append("name", nameUse);
+            // formData.append("email", emailUse);
+            // formData.append("EDV", edvUse);
+            // formData.append("phone", telefoneUse);
+            // formData.append("student", adminUse.toString());
     
-    useEffect(() => {
-        // Instrutor
-        if (isAdmin == true && isStudent == false) {
-            setPosition(2);
+            // if (imageUse) {
+            //     formData.append("file", imageUse);
+            // }
+
+            console.log(imageUse)
+
+            const response =  await fetch("http://localhost:8080/user", {
+                method: "PUT",
+                headers:{
+                    'Content-Type': 'application/json',
+                    Authorization: token
+                },
+                body: JSON.stringify(
+                    {
+                        name: nameUse,
+                        email: emailUse,
+                        EDV: edvUse,
+                        phone: telefoneUse,
+                        student: adminUse
+                    }
+                )
+            });
+
+            console.log(nameUse);
+            if(!response.ok){
+                alert(response.status)
+                setError(true);
+            }
+            else{
+                alert("Perfil atualizado com sucesso!")
+                setError(false)
+            }
+
+
+        } catch (error) {
+            console.log("Erro ao atualizar os dados do usuário:", error);
+            alert("Erro ao atualizar os dados.");
+            setError(true);
         }
-        // Aprendiz
-        else if (isAdmin == false && isStudent == true) {
-            setPosition(1);
-        }
-        // Ex-Aprendiz
-        else if (isAdmin == false && isStudent == false) {
-            setPosition(3);
-        }
-        // Indefinido
-        else {
-            setPosition(0);
-        }
-    })
+    } 
     return (
         <>
             <div className="bg-blueLight dark:bg-blueLightDark w-screen md:flex-row flex-col flex items-center justify-around md:p-3 md:py-8 mt-10">
@@ -88,11 +149,11 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin, i
                         <div className="flex flex-col w-full px-5 justify-center">
                             <div className="flex flex-col justify-center lg:w-56">
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Nome</h1>
-                                <h2 className="text-fontTitle dark:text-fontTitleDark md:text-lg">{name}</h2>
+                                <h2 className="text-fontTitle dark:text-fontTextDark md:text-lg">{name}</h2>
                             </div>
                             <div className="flex flex-col justify-center lg:w-56">
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Email</h1>
-                                <h2 className="text-fontTitle dark:text-fontTitleDark md:text-lg">{email}</h2>
+                                <h2 className="text-fontTitle dark:text-fontTextDark md:text-lg">{email}</h2>
                             </div>
                             
                         </div>
@@ -100,11 +161,11 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin, i
                         <div className="flex flex-col w-full px-5 justify-center">
                             <div className="flex flex-col justify-center lg:w-56">
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">EDV</h1>
-                                <h2 className="text-fontTitle dark:text-fontTitleDark md:text-lg">{edv}</h2>
+                                <h2 className="text-fontTitle dark:text-fontTextDark md:text-lg">{edv}</h2>
                             </div>
                             <div className="flex flex-col justify-center lg:w-56">
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Telefone</h1>
-                                <h2 className="text-fontTitle dark:text-fontTitleDark md:text-lg">{telefone}</h2>
+                                <h2 className="text-fontTitle dark:text-fontTextDark md:text-lg">{telefone}</h2>
                             </div>
                         </div>
 
@@ -118,6 +179,8 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin, i
             {/* Modal de editar perfil */}
             <Modal isOpen={isOpenEdit} onClose={toggleEdit} title="Editar perfil">
                 <div className="flex overflow-auto flex-col justify-center items-center">
+                {/* <input type="file" id="myFileField" onChange={(event) => {setImageSelected(event.target.files)}}/> */}
+                {/* <button onClick={() =>{if(imageSelected!==null){uploadImage(imageSelected)}}}>Upload image</button> */}
                     <Image src={image || pessoa} alt="profile" width={100} height={100} className="rounded-full w-52 p-3" priority />
 
                     <div className="flex justify-center items-center text-fontText dark:text-fontTextDark">
@@ -127,8 +190,9 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin, i
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Nome</h1>
                                 <input
                                     type="text"
-                                    value={name}
-                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12"
+                                    value={nameUse}
+                                    onChange={(e) => {setName(e.target.value)}}
+                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />
                             </div>
 
@@ -136,8 +200,9 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin, i
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Email</h1>
                                 <input
                                     type="text"
-                                    value={email}
-                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12"
+                                    value={emailUse}
+                                    onChange={(e) => {setEmail(e.target.value)}}
+                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />
                             </div>
 
@@ -145,8 +210,9 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin, i
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">EDV</h1>
                                 <input
                                     type="text"
-                                    value={edv}
-                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12"
+                                    value={edvUse}
+                                    onChange={(e) => {setEdv(e.target.value)}}
+                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />
                             </div>
 
@@ -154,13 +220,14 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin, i
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Telefone</h1>
                                 <input
                                     type="text"
-                                    value={telefone}
-                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12"
+                                    value={telefoneUse}
+                                    onChange={(e) => {setTel(e.target.value)}}
+                                    className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />
                             </div>
 
                             <div className="flex flex-row gap-3">
-                                <label htmlFor="">Atualmente Aprendiz</label>
+                                <label htmlFor="" className="dark:text-fontTextDark">Atualmente Aprendiz</label>
                                 <input type="checkbox" />
                             </div>
 
@@ -170,7 +237,7 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin, i
 
                             <div className="flex justify-between md:gap-44">
                                 <button className="bg-buttonDesabled dark:bg-buttonDesabledDark rounded py-2 px-3 text-fontButton self-end">Cancelar</button>
-                                <button className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-5 text-fontButton self-end">Salvar</button>
+                                <button className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-5 text-fontButton self-end" onClick={editProfile}>Salvar</button>
                             </div>
 
                         </div>
