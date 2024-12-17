@@ -28,7 +28,7 @@ interface IUserOne {
         id: number;
         name: string;
         email: string;
-        image?: string;
+        image: string;
         telefone: string;
         student: boolean;
         edv: string;
@@ -52,6 +52,7 @@ export default function Users() {
     const [userArray, setUserArray] = useState<IUser[]>([]);
     const [userOne, setUserOne] = useState<IUserOne>();
     const [abilityArray, setAbilityArray] = useState<IAbility[]>([]);
+    const [isAdmin, setIsAdmin] = useState(false);
     
 
     const toggleModalEdit = () => {
@@ -201,6 +202,28 @@ export default function Users() {
         }
     }
 
+    const toggleAdmin = async (id: number) => {
+        const jwt = sessionStorage.getItem('Token');
+
+        try {
+            const response = await fetch(`http://localhost:8080/admin/user/${id}` , {
+                method: 'PUT',
+                headers: {
+                    Authorization: `${jwt}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: `${newSkill}`
+                }),
+            });
+            console.log(response);
+            toggleModalSkill();
+            getSkills();
+        } catch (error) {
+            console.log("Error: ", error);
+        }
+    }
+
     useEffect (() => {
         getSkills();
         getUsers();
@@ -254,7 +277,7 @@ export default function Users() {
                         <div className="flex w-full flex-wrap gap-4 items-center justify-center">
                             {Array.isArray(userArray) && userArray.length > 0 ? (
                                 userArray.map((user: IUser) => (
-                                    <Card key={user.id} redirect={`/profile/${user.name}`} image="" width="80%" height="60px" title={`${user.name}`} editButton={true} deleteButton={true} editFunction={() => {getOneUser(user.id); toggleModalEdit();}} deleteFunction={() => deleteUser(user.id)}></Card>
+                                    <Card key={user.id} redirect={`/profile/${user.name}`} image={user.image} width="80%" height="60px" title={`${user.name}`} editButton={true} deleteButton={true} editFunction={() => {getOneUser(user.id); toggleModalEdit();}} deleteFunction={() => deleteUser(user.id)}></Card>
                                 ))
                             ) : (
                                 <p className="text-fontGrey text-lg dark:text-fontGreyDark md:text-lg">Nenhum usuário encontrado!</p>
@@ -297,12 +320,12 @@ export default function Users() {
             <ChatPrivate />
 
             <Modal isOpen={isOpen} onClose={toggleModalEdit} title="Editar perfil">
+            {userOne ? (
             <div className="flex overflow-auto flex-col justify-center items-center">
-                    <Image src={pessoa} alt="profile" width={100} height={100} className="rounded-full w-52 p-3" priority />
+                    <Image src={userOne.user.image} alt="profile" width={100} height={100} className="rounded-full w-52 p-3" priority />
 
                     <div className="flex justify-center items-center">
                         <div className="flex flex-col w-full px-4 justify-center md:items-center md:flex-col gap-3 overflow-x-hidden text-fontText dark:text-fontTextDark">
-                            {userOne ? (
                                 <>
                                     <div className="flex flex-col justify-center gap-2 lg:w-96">
                                         <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Nome</h1>
@@ -345,22 +368,22 @@ export default function Users() {
                                     </div>
 
                                     <div className="flex flex-row gap-3">
-                                        <label htmlFor="">Instrutor</label>
-                                        <input type="checkbox" />
+                                        <label htmlFor="" >Instrutor</label>
+                                        <input type="checkbox" checked={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} />
                                     </div>
                                 
                                 </>
 
-                            ) : null}
 
                             <div className="flex justify-between md:gap-44">
                                 <button onClick={toggleModalEdit} className="bg-buttonDesabled dark:bg-buttonDesabledDark rounded py-2 px-3 text-fontButton self-end">Cancelar</button>
-                                <button className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-5 text-fontButton self-end">Salvar</button>
+                                <button onClick={() => toggleAdmin(userOne.user.id)} className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-5 text-fontButton self-end">Salvar</button>
                             </div>
 
                         </div>
                     </div>
                 </div>
+                ) : null}
             </Modal>
 
 
