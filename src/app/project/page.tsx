@@ -160,7 +160,7 @@ export default function Projeto(){
             console.log(res)
             if(res.status>=400 && res.status<=500){
                 alert("Erro ao Criar Projeto");
-                return;
+                return
             }
             res.json().then((resJson)=>{
                let idProject = resJson.message
@@ -168,10 +168,10 @@ export default function Projeto(){
                  await addUser(idProject,item.id.toString(),item.name);
                })
                
+               alert("Crirado com sucesso!!")
             })
         })
 
-        alert("Crirado com sucesso!!")
         router.push(ROUTES.project)
     }
 
