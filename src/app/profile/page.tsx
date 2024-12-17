@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ProfileComponent } from "@/components/profile";
 import { ROUTES } from "@/constants/routes"
 import Link from "next/link";
+import { ChatPrivate } from "@/components/chatPrivate";
 
 interface IUser{
     isOwner   : boolean,
@@ -148,7 +149,7 @@ export default function Profile() {
     return (
         <>
             <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-            <ProfileComponent isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
+            <ProfileComponent isAdmin={isAdmin} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} isStudent={false} isOnwer={false} ></ProfileComponent >
 
             <div className="flex flex-col w-full p-3 items-center gap-5">
                 <div className="flex flex-col w-10/12 border items-center rounded p-2 gap-4">
