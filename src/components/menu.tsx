@@ -9,6 +9,7 @@ import pessoa from "../../public/pessoa.jpeg";
 import coloridinho from "../../public/coloridinho.jpg";
 import Modal from "./modal";
 import { Card } from "./card";
+import { useRouter } from "next/navigation";
 
 interface IMenu {
     op1: string;
@@ -17,7 +18,42 @@ interface IMenu {
     isAdmin: boolean;
 }
 
+interface IUser{
+    id:Number,
+    name:string,
+    edv:string,
+    email:string,
+    telefone:string,
+    image:string,
+    student:boolean
+}
+
 export const Menu = ({ op1, op2, op3, isAdmin }: IMenu) => {
+
+    const router = useRouter();
+    const [data,setData] = useState<IUser>();
+
+    const loadProfile = async()=>{
+        await fetch(`http://localhost:8080/user/0`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string
+            }
+        })
+        .then((res)=>{
+            if(res.status === 403){
+                router.push(ROUTES.login)
+            }
+            
+            res.json().then((data)=>{
+                console.log(data)
+
+                setData(data.user);
+            })
+        })
+    }
+
+
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenSearch, setIsOpenSearch] = useState(false);
     const [isOpenNotification, setIsOpenNotification] = useState(false);
@@ -44,6 +80,7 @@ export const Menu = ({ op1, op2, op3, isAdmin }: IMenu) => {
 
         const tema = localStorage.getItem("theme");
         console.log(tema);
+        loadProfile();
 
     }, [isDark]);
 
@@ -94,7 +131,11 @@ export const Menu = ({ op1, op2, op3, isAdmin }: IMenu) => {
                         <svg className="w-9 text-fontTitle dark:text-fontTitleDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
                     </button>
                     <Link href={ROUTES.profile} className="flex items-center gap-2">
-                        <Image src={pessoa} alt="logo" width={50} height={30} className="rounded-full"/>
+                        {data?.image ? (
+                            <Image src={data?.image} loader={()=>data?.image} alt="logo" width={50} height={30} className="rounded-full"/>
+                        ) : (
+                            <Image src={pessoa} alt="logo" width={50} height={30} className="rounded-full"/>
+                        )}
                     </Link>
                     <button onClick={setLocalStorage}>
                         <svg className="w-11 text-fontTitle dark:text-fontTitleDark" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
