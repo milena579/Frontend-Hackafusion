@@ -16,6 +16,23 @@ interface ITopic{
     description:string
 }
 
+interface IUser{
+    id:Number,
+    name:string,
+    edv:string,
+    email:string,
+    telefone:string,
+    image:string,
+    student:boolean
+}
+
+interface Imessage{
+    id:Number,
+    description:string,
+    timestamp:string,
+    user:IUser
+}
+
 
 export default function ChatDiscussoes(){
 
@@ -23,7 +40,9 @@ export default function ChatDiscussoes(){
 
     const params = useParams<{redirect:string}>()
     
-    const [project,setProject] = useState<ITopic>();
+    const [topic,setTopic] = useState<ITopic>();
+
+    const [messages,setMessages] = useState<Imessage[]>([]);
 
 
     const load = async()=>{
@@ -39,17 +58,54 @@ export default function ChatDiscussoes(){
             }
             console.log(res);
             res.json().then((data)=>{
-                setProject(data)
+                setTopic(data)
+            })
+        })
+    }
+
+    const loadChat = async()=>{
+        await fetch(`http://localhost:8080/topic/${params.redirect}/message`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string
+            }
+        })
+        .then((res)=>{     
+            if(res.status===400){
+                router.push(ROUTES.discosion)
+            }       
+            res.json().then((data)=>{
+                console.log(data)
+                setMessages(data.listObject)
             })
         })
     }
 
     useEffect(()=>{
         load()
+        loadChat()
     },[])
 
-    const sendMessage = () => {
-        console.log('Mensagem enviada!');
+    const sendMessage = async (message:string) => {
+        await fetch(`http://localhost:8080/topic/message`,{
+            method:"POST",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                idTopic:topic?.id,
+                description:message
+            })
+        }).then((res)=>{
+            if(res.status==400){
+                router.push(ROUTES.login)
+                return
+            }
+
+            loadChat()
+            
+        })
     }
 
     const sendFile = () => {
@@ -67,25 +123,20 @@ export default function ChatDiscussoes(){
 
                     <h1>&gt;</h1>
 
-                    <h1>{project?.name}</h1>
+                    <h1>{topic?.name}</h1>
                 </div>
 
-                <h1 className="flex text-fontGrey md:hidden dark:text-fontGreyDark font-semibold mb-3 text-lg">{project?.name}</h1>
+                <h1 className="flex text-fontGrey md:hidden dark:text-fontGreyDark font-semibold mb-3 text-lg">{topic?.name}</h1>
 
 
                 <div className="flex w-full justify-center">
                     <ChatPublico sendFile={sendFile} sendMessage={sendMessage}>
                         <div className="flex gap-2 flex-col">
-                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                            <Message author={"Latonildo de redbull"} text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi, consectetur! Ullam ad quae odit et vitae nobis distinctio atque officiis est? Magni, harum ducimus numquam eligendi libero debitis natus culpa?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi, consectetur! Ullam ad quae odit et vitae nobis distinctio atque officiis est? Magni, harum ducimus numquam eligendi libero debitis natus culpa?"/>
-                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                            <Message author={"Latonildo de redbull"} text="olá, como vai?"/>
-                            <Message author={"Latonildo de redbull"} file="a"/>
-
+                            {messages.map((item)=>{
+                                return(
+                                    <Message imagePerson={item.user.image} author={item.user.name} text={item.description}/>
+                                )
+                            })}
                         </div>
                     </ChatPublico>
                 </div>
