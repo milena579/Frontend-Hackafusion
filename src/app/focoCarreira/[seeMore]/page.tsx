@@ -1,5 +1,4 @@
 "use client"
-import { ChatPrivate } from "@/components/chatPrivate";
 import { Menu } from "@/components/menu";
 import Modal from "@/components/modal";
 import { ProfileComponent } from "@/components/profile";
@@ -251,15 +250,15 @@ export default function focoCarreira() {
 
     return (
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
-            <ProfileComponent isAdmin={true} name={"Creuza sla oq souza"} email={"creuzasoq@gmail.com"} edv={"92901234"} telefone={"(41) 995211234"} ></ProfileComponent >
-            <SeeMore title="Foco de Carreira" toggleAdd={toggleAdd} button="Adicionar mais" isAdmin={true}>
-                <div className="flex gap-3 max-w-[90%] flex-wrap justify-center mt-3">
-                        <Skill button={() => apagarSkill(1)} cor={"blueLight"} title={"Design wed sla oq os krl a 4"} ></Skill>
-                        <Skill button={() => apagarSkill(2)} cor={"blueLight"} title={"Design"} ></Skill>
-                        <Skill button={() => apagarSkill(3)} cor={"blueLight"} title={"Design"} ></Skill>
-                        <Skill button={() => apagarSkill(4)} cor={"blueLight"} title={"Design"} ></Skill>
-                        <Skill button={() => apagarSkill(5)} cor={"blueLight"} title={"Design"} ></Skill>
+            <Menu op1="Fóruns" op2="Projetos" op3="Discussões" isAdmin={false}></Menu>
+            {loadData && <ProfileComponent isAdmin={isAdmin} name={userData.user.name} email={userData.user.email} edv={userData.user.edv} telefone={userData.user.telefone} isStudent={false} isOnwer={false}  ></ProfileComponent >}
+            <SeeMore title="Foco de Carreira" toggleAdd={toggleAdd} button="Adicionar mais" isAdmin={true} redirect={""}>
+                <div className="flex gap-3 max-w-[90%] flex-wrap justify-center mt-3 flex-row">
+                {loadCarrer && carrerData.listObject.map((item) => {
+                    return(
+                        <Skill key={item.id}  button={() => apagarCarreira(item.id)} cor={"blueLight"} title={item.name} ></Skill>
+                    )
+                })}
                 </div>
             </SeeMore>
 
@@ -280,7 +279,7 @@ export default function focoCarreira() {
                     </div>
                 </div>
             </Modal>
-        
+
         </>
     )
 }
