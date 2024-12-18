@@ -103,7 +103,7 @@ export default function Forum() {
                     </button>
 
                     {isAdmin ? (
-                        <button onClick={addForum} className="bg-buttonActivated rounded dark:bg-buttonActivatedDark py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200">
+                        <button onClick={toggleModal} className="bg-buttonActivated rounded dark:bg-buttonActivatedDark py-1 px-5 w-28 hover:bg-buttonActivatedHoverDark transition-colors duration-200">
                             <h2 className="text-fontButton">Criar Fórum</h2>
                         </button>
                     ):null}
