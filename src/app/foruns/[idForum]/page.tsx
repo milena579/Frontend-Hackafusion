@@ -41,6 +41,11 @@ const ForumId = () => {
     const params = useParams<{idForum:string}>()
     const [page,setPage] = useState<string>("1");
     const [maxPage,setMaxPage] = useState<boolean>(false);
+    const [isOpen, setIsOpen] = useState(false);
+    
+    const toggleModal = () => {
+        setIsOpen(!isOpen)
+    }
 
 
     const loadForum = async()=>{
