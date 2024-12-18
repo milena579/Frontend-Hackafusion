@@ -10,6 +10,7 @@ import coloridinho from "../../public/coloridinho.jpg";
 import Modal from "./modal";
 import { Card } from "./card";
 import { useRouter } from "next/navigation";
+import { it } from "node:test";
 
 interface IMenu {
     op1: string;
@@ -17,15 +18,6 @@ interface IMenu {
     op3: string;
 }
 
-interface IUser{
-    id:Number,
-    name:string,
-    edv:string,
-    email:string,
-    telefone:string,
-    image:string,
-    student:boolean
-}
 
 interface IUser{
     id:Number,
@@ -41,6 +33,8 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
 
     const router = useRouter();
     const [data,setData] = useState<IUser>();
+    const [searchTerm, setSearchTerm] = useState('');
+    const [users,setUsers] = useState<IUser[]>([])
 
     const loadProfile = async()=>{
         await fetch(`http://localhost:8080/user/0`,{
@@ -61,6 +55,22 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
             })
         })
     }
+
+    const handleSearchChange = async () => {
+        if(searchTerm===""){
+            return
+        }
+        await fetch(`http://localhost:8080/user?query=${searchTerm}`,{
+            method:"GET",
+            headers: {
+                'Authorization': sessionStorage.getItem("Token") as string
+            }
+        }).then((res)=>{
+            res.json().then((userData)=>{
+                setUsers(userData.listObject)
+            })
+        })
+    };
 
 
     const [isOpen, setIsOpen] = useState(false);
@@ -221,39 +231,18 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
             <Modal title="Pesquisa de usuário" isOpen={isOpenSearch} onClose={toggleSearch}>
                 <div className="flex items-center w-full justify-center flex-col">
                     <div className="flex h-8 items-center w-full justify-center">
-                        <input type="text" placeholder="Pesquise um usuário" className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 h-9"/>
-                        <button>
+                        <input value={searchTerm} onChange={(e)=>{setSearchTerm(e.target.value)}} type="text" placeholder="Pesquise um usuário" className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 h-9"/>
+                        <button onClick={()=>{handleSearchChange()}}>
                             <svg className="w-9 text-fontGrey dark:text-fontGreyDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
                         </button>
                     </div>
 
                     <div className="flex flex-wrap gap-2 items-center justify-center mt-3 p-1">
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
-                        <Card classTitle="font-semibold" height="60%" width="100%" title="Joana Joaninha" redirect={`profile/juremaLinda`} image=""></Card>
+                        {users?.map((item)=>{
+                            return(
+                                <Card classTitle="font-semibold" height="60%" width="100%" title={item.name} redirect={`profile/${item.id}`} image={item.image}></Card>
+                            )
+                        })}
                     </div>
                 </div>
             </Modal>
