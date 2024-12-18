@@ -91,6 +91,7 @@ export default function interactions() {
             },
         }).then((res) => {
             res.json().then((item) => {
+                console.log(item)
                 setQuestion(item.listObject)
             })
         })
@@ -105,6 +106,7 @@ export default function interactions() {
         }).then((res) => {
             console.log(res)
             res.json().then((item) => {
+                console.log(item)
                 setAnswers(item.listObject)
             })
         })
@@ -120,6 +122,7 @@ export default function interactions() {
         }).then((res) => {
             console.log(res)
             res.json().then((item) => {
+                console.log(item)
                 setTopics(item.listObject)
             })
         })
