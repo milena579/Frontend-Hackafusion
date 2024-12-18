@@ -9,7 +9,6 @@ import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import router from "next/router"
 import { useEffect, useState } from "react"
-import Modal from "@/components/modal"
 
 interface IForum {
     id: number,
@@ -74,8 +73,8 @@ const ForumId = () => {
                 router.push(ROUTES.login)
             }
         })
-        loasQuestions()
-        toggleModal()
+        loasQuestions();
+        toggleModal();
     }
 
     const loadForum = async()=>{
@@ -150,8 +149,8 @@ const ForumId = () => {
                         <h1>{forum?.name}</h1>
                 </div>
                 <div>
-                    <button onClick={toggleModal} className="bg-buttonActivated py-1 px-5 hover:bg-buttonActivatedHoverDark transition-colors duration-200 rounded shadow">
-                        <h2 className="text-fontButton">Fazer pergunta</h2>
+                    <button onClick={toggleModal} className="bg-buttonActivated py-1 mb-5 px-5 hover:bg-buttonActivatedHoverDark transition-colors duration-200 rounded shadow">
+                        <h2 className="text-fontButton ">Fazer pergunta</h2>
                     </button>
                 </div>
                 <div className="flex items-center">
