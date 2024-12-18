@@ -3,6 +3,7 @@
 import { Card } from "@/components/card"
 import { ChatPrivate } from "@/components/chatPrivate"
 import { Menu } from "@/components/menu"
+import Modal from "@/components/modal"
 import { ROUTES } from "@/constants/routes"
 import Link from "next/link"
 import { useParams } from "next/navigation"

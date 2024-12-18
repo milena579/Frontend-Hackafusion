@@ -115,7 +115,7 @@ export default function Discussoes (){
                         {data.map((item)=>{
                                 let mod = Number(item.id) % 3;
                                 if(mod === 0){
-                                    return(<Card key={Number(item.id)} redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-purpleCard" title={item.name} description={item.description}></Card>)
+                                    return(<Card key={`${Number(item.id)}`} redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-purpleCard" title={item.name} description={item.description}></Card>)
                                 }else if(mod === 1){
                                     return(<Card key={Number(item.id)} redirect={"/discussoes/"+item.id} width="250px" height="80px" cor="bg-pinkCard" title={item.name} description={item.description}></Card>)
                                 }

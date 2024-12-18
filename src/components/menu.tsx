@@ -231,7 +231,7 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
             <Modal title="Pesquisa de usuário" isOpen={isOpenSearch} onClose={toggleSearch}>
                 <div className="flex items-center w-full justify-center flex-col">
                     <div className="flex h-8 items-center w-full justify-center">
-                        <input value={searchTerm} onChange={(e)=>{setSearchTerm(e.target.value)}} type="text" placeholder="Pesquise um usuário" className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 h-9"/>
+                        <input value={searchTerm} onChange={(e)=>{setSearchTerm(e.target.value)}} type="text" placeholder="Pesquise um usuário" className="dark:text-fontTextDark border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 h-9"/>
                         <button onClick={()=>{handleSearchChange()}}>
                             <svg className="w-9 text-fontGrey dark:text-fontGreyDark" fill="currentColor" viewBox="-2 0 19 19" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M14.147 15.488a1.112 1.112 0 0 1-1.567 0l-3.395-3.395a5.575 5.575 0 1 1 1.568-1.568l3.394 3.395a1.112 1.112 0 0 1 0 1.568zm-6.361-3.903a4.488 4.488 0 1 0-1.681.327 4.443 4.443 0 0 0 1.68-.327z"></path></g></svg>
                         </button>
@@ -240,7 +240,7 @@ export const Menu = ({ op1, op2, op3 }: IMenu) => {
                     <div className="flex flex-wrap gap-2 items-center justify-center mt-3 p-1">
                         {users?.map((item)=>{
                             return(
-                                <Card classTitle="font-semibold" height="60%" width="100%" title={item.name} redirect={`profile/${item.id}`} image={item.image}></Card>
+                                <Card key={Number(item.edv)} classTitle="font-semibold" height="60%" width="100%" title={item.name} id={Number(item.id)} redirect={`profile/${item.id}`} image={item.image}></Card>
                             )
                         })}
                     </div>
