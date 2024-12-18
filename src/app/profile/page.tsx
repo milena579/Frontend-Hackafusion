@@ -270,6 +270,8 @@ export default function Profile() {
                 setMaxPage(false)
             })
         })
+
+        console.log(feedback)
     }
     useEffect(()=>{
         loadProject(),
@@ -339,11 +341,10 @@ export default function Profile() {
 
                 <div className="flex flex-col w-10/12 border items-center rounded p-2 gap-4">
                     <h1 className="text-fontTitle dark:text-fontTitleDark font-semibold text-xl md:text-2xl">Feedbacks em destaque</h1>
-                    {feedback.listObject.map((item) => {
+                    {feedback?.listObject?.map((item) => {
                             return(
                                 <Card key={item.id} star={true} title={item.userSender.user.name} height="130px" width="40vw" cor="bg-blueLight" description={item.description}></Card>
                             );
-
                     })}
                     <Link href={'/feedbacks/creuza sla oq souza'} className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300">Ver mais</Link>
 
