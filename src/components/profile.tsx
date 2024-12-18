@@ -27,7 +27,6 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin,is
     const [adminUse, setAdm] = useState<boolean>(isAdmin);
     const [imageUse, setImage] = useState<File>();
  
-
     const [isOpenEdit, setIsOpenEdit] = useState(false);
     const [position, setPosition] = useState(1);
     
@@ -67,8 +66,6 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin,is
             //     formData.append("file", imageUse);
             // }
 
-            console.log(imageUse)
-
             const response =  await fetch("http://localhost:8080/user", {
                 method: "PUT",
                 headers:{
@@ -102,6 +99,7 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin,is
             alert("Erro ao atualizar os dados.");
             setError(true);
         }
+    
     } 
     return (
         <>
@@ -190,7 +188,7 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin,is
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Nome</h1>
                                 <input
                                     type="text"
-                                    value={nameUse}
+                                    value={name}
                                     onChange={(e) => {setName(e.target.value)}}
                                     className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />
@@ -200,7 +198,7 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin,is
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Email</h1>
                                 <input
                                     type="text"
-                                    value={emailUse}
+                                    value={email}
                                     onChange={(e) => {setEmail(e.target.value)}}
                                     className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />
@@ -210,7 +208,7 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin,is
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">EDV</h1>
                                 <input
                                     type="text"
-                                    value={edvUse}
+                                    value={edv}
                                     onChange={(e) => {setEdv(e.target.value)}}
                                     className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />
@@ -220,7 +218,7 @@ export const ProfileComponent = ({ image, name, email, edv, telefone, isAdmin,is
                                 <h1 className="text-fontTitle dark:text-fontTitleDark text-xl font-semibold md:text-2xl">Telefone</h1>
                                 <input
                                     type="text"
-                                    value={telefoneUse}
+                                    value={telefone}
                                     onChange={(e) => {setTel(e.target.value)}}
                                     className="border-b-2 border-b-fontGreyDark focus:border-b-fontGrey focus:outline-none transition-colors duration-300 bg-background dark:bg-backgroundDark w-11/12 dark:text-fontTextDark"
                                 />

@@ -246,8 +246,9 @@ export default function Profile() {
                         Authorization: token
                     },
                 });
-    
+                
                 const data: ICareersSkills = await response.json();
+                console.log(data)
                 setSkillData(data);
                 setError(false)
                 
@@ -259,7 +260,6 @@ export default function Profile() {
             setLoadCareer(true);
         }
         dataSkills();
-        console.log(userData.isOwner)
     }, [])
 
     const loadProject = async()=>{
