@@ -220,7 +220,7 @@ export default function Projeto(){
                         <div className="flex flex-col w-9/12 items-center md:px-14 gap-3">
                             {data.map((item)=>{
                                     return(
-                                        <Card title={item.name} width={"90%"} height={"60px"} cor="bg-blueLight" redirect={"/project/"+item.id} description={item.category}></Card>
+                                        <Card key={Number(item.id)} title={item.name} width={"90%"} height={"60px"} cor="bg-blueLight" redirect={"/project/"+item.id} description={item.category}></Card>
                                     )
                             })}
                         </div>
@@ -238,7 +238,7 @@ export default function Projeto(){
                         <div className="flex flex-col w-9/12 items-center md:px-14 gap-3">
                             {data.map((item)=>{
                                     return(
-                                        <Card title={item.name} width={"90%"} height={"60px"} cor="bg-blueLight" redirect={"/project/"+item.id} description={item.category}></Card>
+                                        <Card key={Number(item.id)} title={item.name} width={"90%"} height={"60px"} cor="bg-blueLight" redirect={"/project/"+item.id} description={item.category}></Card>
                                     )
                             })}
                         </div>
@@ -327,7 +327,7 @@ export default function Projeto(){
                         <div className="flex gap-2 lg:flex-row flex-wrap items-center justify-center">
                             {selectUsers.map((item)=>{
                                 return(
-                                    <Skill cor={"blueLight"} title={item.name} />
+                                    <Skill key={Number(item.id)} cor={"blueLight"} title={item.name} />
                                 )
                             })}
                         </div>

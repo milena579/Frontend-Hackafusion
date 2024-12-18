@@ -45,9 +45,7 @@ export default function Profile() {
         }
     }, [])
 
-    const editProfile = async () => {
 
-    }
     return (
         <>
             <Menu  op1="Fóruns" op2="Projetos" op3="Discussões"></Menu>
