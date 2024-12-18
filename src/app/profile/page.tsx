@@ -394,9 +394,13 @@ export default function Profile() {
 
                 <div className="flex flex-col w-10/12 border items-center rounded p-2 gap-4">
                     <h1 className="text-fontTitle dark:text-fontTitleDark font-semibold text-xl md:text-2xl">Interações recentes</h1>
-                    <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title="Latonildo de Monster" description="Comentou: Esse projeto é muito legal, adoro ele, poderiam ter mais como esse!" height="65px" width="75vw"></Card> {/* Colocar o caminho baseado no nome do forum */}
+                    {question?.map((item)=>{
+                        return (
+                            <Card classExtra="cursor-default" cor="bg-blueLight" classTitle="font-semibold text-lg" title={item.title} description={item.description} height="65px" width="75vw"></Card>
+                        )
+                    })}
 
-                    <Link href={'/interactions/creuza sla oq souza'} className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300">Ver mais</Link>
+                    <Link href={`/interactions/0`} className="bg-buttonActivated dark:bg-buttonActivatedDark hover:bg-buttonActivatedHover rounded py-2 px-4 text-fontButton dark:hover:bg-buttonActivatedHoverDark transition-colors duration-300">Ver mais</Link>
 
                 </div>
             </div>
