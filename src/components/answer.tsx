@@ -38,8 +38,8 @@ export const Answer = ({ name, image, answer, breakLine, upVote, downVote, redir
                     <p className="text-fontText dark:text-fontTextDark">{answer}</p>
                 </div>
                 <div>
-                    <p className="text-fontText dark:text-fontTextDark">Up: {upVote}</p>
-                    <p className="text-fontText dark:text-fontTextDark">Down: {downVote}</p>
+                    {/* <p className="text-fontText dark:text-fontTextDark">Up: {upVote}</p>
+                    <p className="text-fontText dark:text-fontTextDark">Down: {downVote}</p> */}
                 </div>
                 {breakLine ? <hr /> : <></>}
             </div>
