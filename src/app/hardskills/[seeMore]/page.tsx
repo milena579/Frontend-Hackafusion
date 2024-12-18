@@ -249,8 +249,8 @@ export default function hardskills() {
 
     return (
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões" isAdmin={false}></Menu>
-            {loadData && <ProfileComponent isAdmin={isAdmin} name={userData.user.name} email={userData.user.email} edv={userData.user.edv} telefone={userData.user.telefone} isStudent={false} isOnwer={false}  ></ProfileComponent >}
+            <Menu op1="Fóruns" op2="Projetos" op3="Discussões" ></Menu>
+            {loadData && <ProfileComponent isAdmin={isAdmin} name={userData.user.name} email={userData.user.email} edv={userData.user.edv} telefone={userData.user.telefone} isStudent={userData.user.student} isOnwer={userData.isOwner}  ></ProfileComponent >}
             <SeeMore title="HardSkills" toggleAdd={toggleAdd} button="Adicionar skill" isAdmin={true} redirect={""}>
                 <div className="flex gap-3 w-full flex-wrap justify-center mt-3">
                     {loadSkill  && skillData.listObject.map((item) => {

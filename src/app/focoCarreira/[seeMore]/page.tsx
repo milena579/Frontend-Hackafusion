@@ -250,8 +250,8 @@ export default function focoCarreira() {
 
     return (
         <>
-            <Menu op1="Fóruns" op2="Projetos" op3="Discussões" isAdmin={false}></Menu>
-            {loadData && <ProfileComponent isAdmin={isAdmin} name={userData.user.name} email={userData.user.email} edv={userData.user.edv} telefone={userData.user.telefone} isStudent={false} isOnwer={false}  ></ProfileComponent >}
+            <Menu op1="Fóruns" op2="Projetos" op3="Discussões" ></Menu>
+            {loadData && <ProfileComponent isAdmin={isAdmin} name={userData.user.name} email={userData.user.email} edv={userData.user.edv} telefone={userData.user.telefone} isStudent={userData.user.student} isOnwer={userData.isOwner}  ></ProfileComponent >}
             <SeeMore title="Foco de Carreira" toggleAdd={toggleAdd} button="Adicionar mais" isAdmin={true} redirect={""}>
                 <div className="flex gap-3 max-w-[90%] flex-wrap justify-center mt-3 flex-row">
                 {loadCarrer && carrerData.listObject.map((item) => {
